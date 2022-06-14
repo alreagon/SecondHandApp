@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home_activity.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
       </map>
     </option>

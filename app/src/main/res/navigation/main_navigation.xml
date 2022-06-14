@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_home2_to_daftarJual"
+            app:destination="@id/daftarJual" />
+        <action
+            android:id="@+id/action_home2_to_seller_Notification"
+            app:destination="@id/seller_Notification" />
+        <action
+            android:id="@+id/action_home2_to_buyer_Notification"
+            app:destination="@id/buyer_Notification" />
+        <action
+            android:id="@+id/action_home2_to_buyer_DetailProduk"
+            app:destination="@id/buyer_DetailProduk" />
+        <action
+            android:id="@+id/action_home2_to_seller_DetailProduk"
+            app:destination="@id/seller_DetailProduk" />
+        <action
+            android:id="@+id/action_home2_to_editProfile"
+            app:destination="@id/editProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.EditProfile"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfile_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_editProfile"
+            app:destination="@id/editProfile" />
+        <action
+            android:id="@+id/action_profile_to_register"
+            app:destination="@id/register" />
+    </fragment>
+    <fragment
+        android:id="@+id/daftarJual"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.DaftarJual"
+        android:label="fragment_daftar_jual"
+        tools:layout="@layout/fragment_daftar_jual" />
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Register"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_register_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyer_Notification"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Buyer_Notification"
+        android:label="fragment_buyer__notification"
+        tools:layout="@layout/fragment_buyer__notification" />
+    <fragment
+        android:id="@+id/seller_Notification"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Seller_Notification"
+        android:label="fragment_seller__notification"
+        tools:layout="@layout/fragment_seller__notification" />
+    <fragment
+        android:id="@+id/buyer_DetailProduk"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Buyer_DetailProduk"
+        android:label="fragment_buyer__detail_produk"
+        tools:layout="@layout/fragment_buyer__detail_produk" />
+    <fragment
+        android:id="@+id/seller_DetailProduk"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Seller_DetailProduk"
+        android:label="fragment_seller__detail_produk"
+        tools:layout="@layout/fragment_seller__detail_produk" >
+        <action
+            android:id="@+id/action_seller_DetailProduk_to_daftarJual"
+            app:destination="@id/daftarJual" />
+    </fragment>
+</navigation>
