@@ -1,4 +1,4 @@
-package com.example.finalprojectbinaracademy_secondhandapp.view.fragment
+package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
