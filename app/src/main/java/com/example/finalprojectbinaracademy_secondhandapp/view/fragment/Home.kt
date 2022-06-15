@@ -23,7 +23,6 @@ class Home : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }
 
 
