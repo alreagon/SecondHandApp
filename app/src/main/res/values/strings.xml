@@ -2,4 +2,13 @@
     <string name="app_name">Final Project Binar Academy - SecondHandApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back_button">back button</string>
+    <string name="tv_title_daftar_register">Daftar</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="password">Password</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="masuk_di_sini">Masuk di sini</string>
 </resources>

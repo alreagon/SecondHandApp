@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.finalprojectbinaracademy_secondhandapp">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -17,16 +16,12 @@
         android:theme="@style/Theme.FinalProjectBinarAcademySecondHandApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ExampleActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.activity.AuthActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.FinalProjectBinarAcademySecondHandApp">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

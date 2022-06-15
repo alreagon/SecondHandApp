@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.SplashScreen"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.SplashScreen"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/home2"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Home"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.EditProfile"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.EditProfile"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Profile"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -64,17 +64,17 @@
     </fragment>
     <fragment
         android:id="@+id/daftarJual"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.DaftarJual"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.DaftarJual"
         android:label="fragment_daftar_jual"
         tools:layout="@layout/fragment_daftar_jual" />
     <fragment
         android:id="@+id/login"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Login"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/register"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Register"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -83,22 +83,22 @@
     </fragment>
     <fragment
         android:id="@+id/buyer_Notification"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Buyer_Notification"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Buyer_Notification"
         android:label="fragment_buyer__notification"
         tools:layout="@layout/fragment_buyer__notification" />
     <fragment
         android:id="@+id/seller_Notification"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Seller_Notification"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Seller_Notification"
         android:label="fragment_seller__notification"
         tools:layout="@layout/fragment_seller__notification" />
     <fragment
         android:id="@+id/buyer_DetailProduk"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Buyer_DetailProduk"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Buyer_DetailProduk"
         android:label="fragment_buyer__detail_produk"
         tools:layout="@layout/fragment_buyer__detail_produk" />
     <fragment
         android:id="@+id/seller_DetailProduk"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.view.fragment.Seller_DetailProduk"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Seller_DetailProduk"
         android:label="fragment_seller__detail_produk"
         tools:layout="@layout/fragment_seller__detail_produk" >
         <action

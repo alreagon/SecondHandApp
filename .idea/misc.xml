@@ -6,7 +6,10 @@
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home_activity.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.22447916666666667" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
       </map>
     </option>
   </component>
