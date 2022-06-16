@@ -1,16 +1,8 @@
-package com.example.finalprojectbinaracademy_secondhandapp.view.fragment
+package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.UserManager
-import android.renderscript.ScriptGroup
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.window.SplashScreen
-import androidx.navigation.fragment.findNavController
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentSplashScreenBinding
 
