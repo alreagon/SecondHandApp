@@ -2,9 +2,7 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 
 class DataStoreManager(private val context: Context) {
@@ -16,5 +14,19 @@ class DataStoreManager(private val context: Context) {
         private val USERID_KEY = intPreferencesKey("user_id")
 
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
+
+        val EMAIL = stringPreferencesKey("KEY_EMAIL")
+        val PASSWORD = stringPreferencesKey()("KEY_PASSWORD")
+    }
+
+    suspend fun loginUserData(
+        email : String,
+        password: String
+    )
+    {
+        context.dataStore.edit {
+            it[EMAIL] = email
+            it[PASSWORD] = password
+        }
     }
 }
