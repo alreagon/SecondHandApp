@@ -15,8 +15,8 @@ class DataStoreManager(private val context: Context) {
 
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
 
-        val EMAIL = stringPreferencesKey("KEY_EMAIL")
-        val PASSWORD = stringPreferencesKey()("KEY_PASSWORD")
+        private val EMAIL = stringPreferencesKey("KEY_EMAIL")
+        private val PASSWORD = stringPreferencesKey()("KEY_PASSWORD")
     }
 
     suspend fun loginUserData(
