@@ -11,4 +11,14 @@
     <string name="password">Password</string>
     <string name="sudah_punya_akun">Sudah punya akun?</string>
     <string name="masuk_di_sini">Masuk di sini</string>
+    <string name="home">Home</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="jual">Jual</string>
+    <string name="daftar_jual">Daftar Jual</string>
+    <string name="user">User</string>
+    <string name="title_info_akun">title info akun</string>
+    <string name="lengkapi_info_akun">Lengkapi Info Akun</string>
+    <string name="profile_picture">profile picture</string>
+    <string name="camera_icon">camera icon</string>
+    <string name="save">Simpan</string>
 </resources>

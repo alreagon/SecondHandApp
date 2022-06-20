@@ -2,13 +2,13 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.repositor
 
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
-import com.example.koinapp.data.api.ApiHelper
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
 import retrofit2.Response
 
-class AuthRepository(private val apiHelper: ApiHelper) {
+class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
 
     suspend fun registerUser(request: RegisterRequest): Response<RegisterResponse>{
-        return apiHelper.registerUser(request)
+        return apiHelperImpl.registerUser(request)
     }
 
 }

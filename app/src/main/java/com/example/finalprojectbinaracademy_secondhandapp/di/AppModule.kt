@@ -2,10 +2,9 @@ package com.example.finalprojectbinaracademy_secondhandapp.di
 
 import android.content.Context
 import com.example.finalprojectbinaracademy_secondhandapp.BuildConfig
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiService
 import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
-import com.example.koinapp.data.api.ApiHelper
-import com.example.koinapp.data.api.ApiHelperImpl
-import com.example.koinapp.data.api.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -18,10 +17,7 @@ val appModule = module {
     single { provideOkHttpClient() }
     single { provideRetrofit(get(),BuildConfig.BASE_URL) }
     single { provideApiService(get()) }
-
-    single<ApiHelper> {
-        return@single ApiHelperImpl(get())
-    }
+    single { ApiHelperImpl(get()) }
 }
 
 private fun provideNetworkHelper(context: Context) = NetworkHelper(context)
@@ -47,5 +43,3 @@ private fun provideRetrofit (
         .build()
 
 private fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-
-private fun provideApiHelper(apiHelper: ApiHelper): ApiHelper = apiHelper
