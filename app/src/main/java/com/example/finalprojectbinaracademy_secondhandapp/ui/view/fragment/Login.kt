@@ -11,15 +11,18 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.api.ApiClient
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginResponse
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentLoginBinding
-import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.LoginViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +57,9 @@ class Login : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // get datastore
+        dataStoreManager = DataStoreManager(requireContext())
+
         binding.btnShowPwd.setOnClickListener{
             showPassword(binding.etPassword, binding.btnShowPwd)
         }
@@ -61,9 +67,9 @@ class Login : Fragment() {
         binding.btnLogin.setOnClickListener{
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            val loginkey : String
+//            val loginkey : String
             if (email != "" && password != ""){
-                TODO()
+                loginUser(email,password)
             }else if (email == ""){
                 Toast.makeText(requireContext(), "Please imput your email", Toast.LENGTH_LONG).show()
             }else if (password == ""){
@@ -80,8 +86,53 @@ class Login : Fragment() {
     }
 
 
-    private fun loginUser(){
-        TODO()
+    private fun loginUser(email : String, password : String){
+        ApiClient.instance.postUser(email,password)
+            .enqueue(object : retrofit2.Callback<LoginResponse>{
+
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if (response.isSuccessful){
+                        when(response.code()){
+                            201 -> {
+                                GlobalScope.launch {
+                                    dataStoreManager.loginUserData(
+                                        response.body()!!.email,
+                                        password,
+                                        response.body()!!.accessToken
+                                    )
+                                }
+                                Navigation.findNavController(view!!).navigate(R.id.action_login_to_home2)
+                            }
+
+                            401 -> {
+                                Toast.makeText(requireContext(), response.message(), Toast.LENGTH_LONG).show()
+                            }
+
+                            500 -> {
+                                Toast.makeText(requireContext(), response.message(), Toast.LENGTH_LONG).show()
+                            }
+
+                            else -> {
+                                Toast.makeText(requireContext(), "Uknown Error", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                    }else{
+                        Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), "No response", Toast.LENGTH_LONG).show()
+                }
+
+            })
+
+
     }
 
     fun showPassword(editText: EditText, imageView: ImageView) {
