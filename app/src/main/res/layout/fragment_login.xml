@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="Register"
                 android:textAlignment="center"
-                android:textColor="@color/purple_500" />
+                android:textColor="@color/primary" />
 
         </LinearLayout>
 

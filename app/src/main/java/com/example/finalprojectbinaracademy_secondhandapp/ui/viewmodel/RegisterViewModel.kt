@@ -1,18 +1,18 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.AuthRepository
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
 import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
-import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val authRepository: AuthRepository,
+    private val remoteRepository: RemoteRepository,
     private val networkHelper: NetworkHelper
 ): ViewModel() {
 
@@ -22,9 +22,11 @@ class RegisterViewModel(
 
     fun userRegister(request: RegisterRequest) {
         viewModelScope.launch {
-            val register = authRepository.registerUser(request)
-            register.let {
-                _userRegis.postValue(it.body())
+            val register = remoteRepository.registerUser(request)
+            if (register.code() == 201) {
+                _userRegis.postValue(register.body())
+            } else {
+                Log.d("response error", "user register error")
             }
         }
     }

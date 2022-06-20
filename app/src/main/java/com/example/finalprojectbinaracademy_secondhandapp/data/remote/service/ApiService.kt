@@ -1,4 +1,4 @@
-package com.example.koinapp.data.api
+package com.example.finalprojectbinaracademy_secondhandapp.data.remote.service
 
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginResponse

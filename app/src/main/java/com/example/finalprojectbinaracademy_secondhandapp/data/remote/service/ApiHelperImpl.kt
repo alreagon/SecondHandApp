@@ -1,4 +1,4 @@
-package com.example.koinapp.data.api
+package com.example.finalprojectbinaracademy_secondhandapp.data.remote.service
 
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginResponse
@@ -6,13 +6,13 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Regi
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
 import retrofit2.Response
 
-class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
+class ApiHelperImpl(private val apiService: ApiService){
 
-    override suspend fun registerUser(request: RegisterRequest): Response<RegisterResponse> {
+    suspend fun registerUser(request: RegisterRequest): Response<RegisterResponse> {
         return apiService.registerUser(request)
     }
 
-    override suspend fun loginUser(request: LoginRequest): Response<LoginResponse> {
+    suspend fun loginUser(request: LoginRequest): Response<LoginResponse> {
         return apiService.loginUser(request)
     }
 
