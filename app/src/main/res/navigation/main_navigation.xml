@@ -71,7 +71,14 @@
         android:id="@+id/login"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Login"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/register" />
+        <action
+            android:id="@+id/action_login_to_home2"
+            app:destination="@id/home2" />
+    </fragment>
     <fragment
         android:id="@+id/register"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.RegisterFragment"
