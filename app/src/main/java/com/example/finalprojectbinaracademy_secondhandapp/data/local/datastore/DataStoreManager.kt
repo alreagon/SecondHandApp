@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DataStoreManager(private val context: Context) {
-
+// apa lah
     companion object {
         private const val DATASTORE_NAME = "data_store"
 
