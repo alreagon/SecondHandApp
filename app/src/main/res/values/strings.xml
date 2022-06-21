@@ -21,4 +21,14 @@
     <string name="profile_picture">profile picture</string>
     <string name="camera_icon">camera icon</string>
     <string name="save">Simpan</string>
+    <string name="masuk">Masuk</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar_di_sini">Daftar di sini</string>
+    <string name="city">City</string>
+    <string name="akun_saya">Akun Saya</string>
+    <string name="edit">edit</string>
+    <string name="ubah_akun">Ubah Akun</string>
+    <string name="pengaturan">Pengaturan</string>
+    <string name="keluar">Keluar</string>
+    <string name="version">Version 1.0.0</string>
 </resources>

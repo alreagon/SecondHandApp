@@ -2,6 +2,7 @@ package com.example.finalprojectbinaracademy_secondhandapp.di
 
 import android.content.Context
 import com.example.finalprojectbinaracademy_secondhandapp.BuildConfig
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiService
 import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
@@ -18,6 +19,7 @@ val appModule = module {
     single { provideRetrofit(get(),BuildConfig.BASE_URL) }
     single { provideApiService(get()) }
     single { ApiHelperImpl(get()) }
+    single { DataStoreManager(androidContext()) }
 }
 
 private fun provideNetworkHelper(context: Context) = NetworkHelper(context)

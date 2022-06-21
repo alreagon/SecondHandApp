@@ -1,9 +1,12 @@
 package com.example.finalprojectbinaracademy_secondhandapp.di
 
-import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.RegisterViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.EditProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { RegisterViewModel(get(),get()) }
+    viewModel { AuthViewModel(get(),get()) }
+    viewModel { EditProfileViewModel(get(),get()) }
 }

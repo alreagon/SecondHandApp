@@ -9,17 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.example.finalprojectbinaracademy_secondhandapp.R
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterRequest
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentRegisterBinding
-import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.RegisterViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
-    private val registerViewModel: RegisterViewModel by viewModel()
+    private val registerViewModel: AuthViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,11 @@ class RegisterFragment : Fragment() {
         binding.button.setOnClickListener {
             registerUser()
         }
+
+        binding.tvGoToLogin.setOnClickListener {
+            val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun registerUser() {
@@ -47,17 +53,21 @@ class RegisterFragment : Fragment() {
         val pass = binding.etPassword.text.toString()
 
         if (inputCheck(name,email,phoneNumber,address,pass)) {
-            val request = RegisterRequest(address,email,name,null,pass,phoneNumber.toLong())
+            val request = RegisterRequest(address,"jakarta",email,name,null,pass,phoneNumber.toLong())
 
             registerViewModel.userRegister(request)
 
             registerViewModel.userRegis.observe(requireActivity(), Observer { user ->
-                user?.let {
-                    Toast.makeText(requireContext(),"${it.email}, ${it.id}, ${it.fullName}",Toast.LENGTH_SHORT).show()
+
+                if (user != null) {
+                    val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
+                    findNavController().navigate(action)
+                    Toast.makeText(requireContext(),"register successfully",Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(),"register failed", Toast.LENGTH_SHORT).show()
                 }
             })
 
-            Toast.makeText(requireContext(),"register....", Toast.LENGTH_SHORT).show()
         } else {
             validateErrorInput(name,email,phoneNumber,address,pass)
         }
