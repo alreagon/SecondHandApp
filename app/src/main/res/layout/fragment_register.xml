@@ -21,7 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RedundantDescriptionCheck" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -35,139 +34,159 @@
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/wrap_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="32dp"
-            android:hint="@string/nama_lengkap"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/sv"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:ignore="MissingConstraints">
+            android:foregroundGravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_name"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:singleLine="true"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:layout_gravity="center">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/wrap_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="32dp"
+                    android:hint="@string/nama_lengkap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="MissingConstraints">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/wrap_email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/email"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/wrap_name"
-            app:layout_constraintTop_toBottomOf="@+id/wrap_name"
-            tools:ignore="MissingConstraints">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="344dp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:singleLine="true"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/wrap_email"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@string/email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/wrap_name"
+                    app:layout_constraintTop_toBottomOf="@+id/wrap_name"
+                    tools:ignore="MissingConstraints">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/wrap_phone"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="12dp"
-            android:hint="@string/phone_number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/wrap_email"
-            app:layout_constraintTop_toBottomOf="@+id/wrap_email"
-            tools:ignore="MissingConstraints">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:inputType="number"
-                android:singleLine="true"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/wrap_phone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/phone_number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/wrap_email"
+                    app:layout_constraintTop_toBottomOf="@+id/wrap_email"
+                    tools:ignore="MissingConstraints">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/wrap_address"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="12dp"
-            android:hint="@string/address"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/wrap_phone"
-            app:layout_constraintTop_toBottomOf="@+id/wrap_phone"
-            tools:ignore="MissingConstraints">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:singleLine="true"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/wrap_address"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/wrap_phone"
+                    app:layout_constraintTop_toBottomOf="@+id/wrap_phone"
+                    tools:ignore="MissingConstraints">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/wrap_password"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="12dp"
-            android:hint="@string/password"
-            app:endIconMode="password_toggle"
-            app:errorIconDrawable="@null"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/wrap_address"
-            app:layout_constraintTop_toBottomOf="@+id/wrap_address"
-            tools:ignore="MissingConstraints">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true"
-                tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/wrap_password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/password"
+                    app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/wrap_address"
+                    app:layout_constraintTop_toBottomOf="@+id/wrap_address"
+                    tools:ignore="MissingConstraints">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
 
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/tv_title_daftar_register"
-            app:layout_constraintEnd_toEndOf="@+id/wrap_password"
-            app:layout_constraintStart_toStartOf="@+id/wrap_password"
-            app:layout_constraintTop_toBottomOf="@+id/wrap_password"
+            app:layout_constraintEnd_toEndOf="@+id/sv"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/sv"
+            app:layout_constraintTop_toBottomOf="@+id/sv"
             tools:ignore="DuplicateSpeakableTextCheck" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
