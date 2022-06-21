@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class RegisterResponse(
     @SerializedName("address")
     val address: String,
+    @SerializedName("city")
+    val city: String,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("email")
@@ -15,7 +17,7 @@ data class RegisterResponse(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image_url")
-    val imageUrl: Any,
+    val imageUrl: Any?,
     @SerializedName("password")
     val password: String,
     @SerializedName("phone_number")
