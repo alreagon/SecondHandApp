@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DataStoreManager(private val context: Context) {
-// apa lah
+    // apa lah
     companion object {
         private const val DATASTORE_NAME = "data_store"
 
@@ -22,14 +22,16 @@ class DataStoreManager(private val context: Context) {
         private val EMAIL = stringPreferencesKey("KEY_EMAIL")
         private val PASSWORD = stringPreferencesKey("KEY_PASSWORD")
         private val ACCESS_TOKEN = stringPreferencesKey("KEY_ACCESS_TOKEN")
+
+        private val LOGIN_STATUS_KEY = booleanPreferencesKey("login_status_key")
+        private val ID_KEY = intPreferencesKey("username_key")
     }
 
     suspend fun loginUserData(
-        email : String,
-        password : String,
-        access_token : String
-    )
-    {
+        email: String,
+        password: String,
+        access_token: String
+    ) {
         context.dataStore.edit {
             it[EMAIL] = email
             it[PASSWORD] = password
@@ -37,19 +39,39 @@ class DataStoreManager(private val context: Context) {
         }
     }
 
-    val email : Flow<String> = context.dataStore.data.map {
+    val email: Flow<String> = context.dataStore.data.map {
         it[EMAIL] ?: ""
     }
 
-    val password : Flow<String> = context.dataStore.data.map {
+    val password: Flow<String> = context.dataStore.data.map {
         it[PASSWORD] ?: ""
     }
 
-    val access_token : Flow<String> = context.dataStore.data.map {
+    val access_token: Flow<String> = context.dataStore.data.map {
         it[ACCESS_TOKEN] ?: ""
     }
 
-    suspend fun logoutUserData(){
+
+    suspend fun saveUser(id: Int, status: Boolean) {
+        context.dataStore.edit {
+            it[ID_KEY] = id
+            it[LOGIN_STATUS_KEY] = status
+        }
+    }
+
+    fun getId(): Flow<Int> {
+        return context.dataStore.data.map {
+            it[ID_KEY] ?: 0
+        }
+    }
+
+    fun getLoginStatus(): Flow<Boolean> {
+        return context.dataStore.data.map {
+            it[LOGIN_STATUS_KEY] ?: false
+        }
+    }
+
+    suspend fun logoutUserData() {
         GlobalScope.launch {
             context.dataStore.edit {
                 it.clear()

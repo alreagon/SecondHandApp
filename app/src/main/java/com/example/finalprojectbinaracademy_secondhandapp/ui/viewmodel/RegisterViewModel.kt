@@ -1,10 +1,8 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
@@ -13,7 +11,10 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel(
     private val remoteRepository: RemoteRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+
+    private val pref: DataStoreManager
+
 ): ViewModel() {
 
     private val _userRegis = MutableLiveData<RegisterResponse>()
@@ -29,6 +30,17 @@ class RegisterViewModel(
                 Log.d("response error", "user register error")
             }
         }
+    }
+
+
+    fun saveUserDataStore(id: Int, status: Boolean) {
+        viewModelScope.launch {
+            pref.saveUser(id, status)
+        }
+    }
+
+    fun getLoginStatus(): LiveData<Boolean> {
+        return pref.getLoginStatus().asLiveData()
     }
 
 

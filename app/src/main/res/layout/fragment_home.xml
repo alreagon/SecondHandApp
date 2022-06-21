@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/abuabuabu"
     tools:context=".ui.view.fragment.Home">
 
-    <com.google.android.material.textfield.TextInputEditText
+    <TextView
+        android:id="@+id/haha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:hint="HAHAHAHAHA"
-        android:textSize="40dp"
         android:singleLine="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_button"
@@ -36,7 +39,7 @@
             android:layout_height="wrap_content"
             android:hint="Cari di second change"
             android:singleLine="true"
-            android:textColor="@color/secondary"/>
+            android:textColor="@color/secondary" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

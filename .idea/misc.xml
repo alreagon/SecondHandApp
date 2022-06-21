@@ -3,30 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/dialog_bg.xml" value="0.1425" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/bottomsheet.xml" value="0.2234375" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home_activity.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.22447916666666667" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/ic_eye.xml" value="0.1" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/ic_eye_off.xml" value="0.194" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home.xml" value="0.371875" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_login.xml" value="0.25" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_register.xml" value="0.3578125" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
-        <entry key="app/src/main/res/drawable/ic_fi_notification.xml" value="0.2905" />
-        <entry key="app/src/main/res/drawable/ic_fi_user.xml" value="0.129" />
-        <entry key="app/src/main/res/drawable/ic_outline_photo_camera_24.xml" value="0.1845" />
-        <entry key="app/src/main/res/drawable/kotakputih.xml" value="0.2385" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.3729166666666667" />
-        <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_buyer__detail_produk.xml" value="0.26614583333333336" />
-        <entry key="app/src/main/res/layout/fragment_edit_detail_produk.xml" value="0.32395833333333335" />
-        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3729166666666667" />
-        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.23229166666666667" />
-        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.30364583333333334" />
       </map>
     </option>
   </component>
