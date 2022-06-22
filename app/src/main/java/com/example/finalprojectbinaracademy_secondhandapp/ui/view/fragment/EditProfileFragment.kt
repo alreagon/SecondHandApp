@@ -244,16 +244,19 @@ class EditProfileFragment : Fragment() {
         val phone = binding.etPhone.text.toString()
 
         if (inputCheck(name,city, address, phone)) {
+            if (!::imageProfile.isInitialized) {
+                Toast.makeText(requireContext(),"Photo profile tidak boleh kosong",Toast.LENGTH_SHORT).show()
+            } else {
+                editProfileViewModel.getAccessToken().observe(viewLifecycleOwner, Observer {
+                    editProfileViewModel.updateProfile(it,imageProfile,name,phone, address, city)
+                })
 
-            editProfileViewModel.getAccessToken().observe(viewLifecycleOwner, Observer {
-                editProfileViewModel.updateProfile(it,imageProfile,name,phone, address, city)
-            })
-
-            editProfileViewModel.updateProfile.observe(viewLifecycleOwner, Observer {
-                it?.let {
-                    Toast.makeText(requireContext(),"update profile successfully..",Toast.LENGTH_SHORT).show()
-                }
-            })
+                editProfileViewModel.updateProfile.observe(viewLifecycleOwner, Observer {
+                    it?.let {
+                        Toast.makeText(requireContext(),"update profile successfully..",Toast.LENGTH_SHORT).show()
+                    }
+                })
+            }
         } else {
             validateErrorInput(name, address, city, phone)
         }
@@ -284,13 +287,9 @@ class EditProfileFragment : Fragment() {
         } else {
             binding.wrapPhone.error = null
         }
-
-        if (imageProfile == null) {
-            Toast.makeText(requireContext(),"Photo profile tidak boleh kosong",Toast.LENGTH_SHORT).show()
-        }
     }
 
-    private fun inputCheck(name:String,city: String,address:String,phone:String): Boolean {
+    private fun inputCheck(name:String,city: String,address:String,phone:String,): Boolean {
         return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(city) || TextUtils.isEmpty(address)
                 || TextUtils.isEmpty(phone))
     }
