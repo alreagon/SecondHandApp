@@ -1,10 +1,10 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.service
 
-import android.media.Image
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
-import java.io.File
 
 interface ApiService {
 
@@ -23,7 +23,11 @@ interface ApiService {
     @PUT("auth/user")
     suspend fun updateUserProfile(
         @Header("access_token") accessToken: String,
-        @Body request: UpdateProfileRequest
+        @Part imageProfile : MultipartBody.Part,
+        @Part("full_name") name: RequestBody,
+        @Part("phone_number") phone: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("city") city: RequestBody
     ) : Response<RegisterResponse>
 
 }

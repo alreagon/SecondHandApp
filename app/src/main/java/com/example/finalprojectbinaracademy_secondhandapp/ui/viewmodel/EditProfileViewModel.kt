@@ -7,6 +7,12 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Regi
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.UpdateProfileRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.parse
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 class EditProfileViewModel(
     private val remoteRepository: RemoteRepository,
@@ -38,9 +44,16 @@ class EditProfileViewModel(
         }
     }
 
-    fun updateProfile(accessToken: String,request: UpdateProfileRequest) {
+    fun updateProfile(accessToken: String,image:File,name: String,phone: String,address: String,city: String) {
         viewModelScope.launch {
-            val updateProfile = remoteRepository.updateProfile(accessToken,request)
+            val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),image)
+            val imageUpload = MultipartBody.Part.createFormData("image",image.name,requestFile)
+            val name = RequestBody.create("text/plain".toMediaTypeOrNull(),name)
+            val address = RequestBody.create("text/plain".toMediaTypeOrNull(),address)
+            val phone = RequestBody.create("text/plain".toMediaTypeOrNull(),phone)
+            val city = RequestBody.create("text/plain".toMediaTypeOrNull(),city)
+
+            val updateProfile = remoteRepository.updateProfile(accessToken,name,phone,address,city,imageUpload)
             val code = updateProfile.code()
             val body = updateProfile.body()
 
