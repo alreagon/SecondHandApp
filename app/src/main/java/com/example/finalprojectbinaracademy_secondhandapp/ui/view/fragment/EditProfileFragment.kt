@@ -33,7 +33,7 @@ class EditProfileFragment : Fragment() {
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
     private val editProfileViewModel: EditProfileViewModel by viewModel()
-    private var imageProfile: File? = null
+    private lateinit var imageProfile: File
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -145,10 +145,14 @@ class EditProfileFragment : Fragment() {
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             val toBitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, Uri.parse(result.toString()))
+//            val file = File(Environment.getExternalStorageDirectory().toString() + File.separator + result?.path)
 //            val bitmapToString = bitmapToString(toBitmap)
 //            imageProfile = toBitmap
             editProfileViewModel.detailUser.observe(viewLifecycleOwner, Observer {
-                imageProfile = bitmapToFile(toBitmap,"profile-pict-${it.id}.png")
+                val bitmapToFile = bitmapToFile(toBitmap,"profile-pict-${it.id}.png")
+                bitmapToFile?.let {
+                    imageProfile = bitmapToFile
+                }
             })
 
             binding.ivProfilePict.alpha = 1F
@@ -162,7 +166,7 @@ class EditProfileFragment : Fragment() {
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        galleryResult.launch("image/*")
+        galleryResult.launch(intent.type)
     }
 
     private val cameraResult =
@@ -175,9 +179,6 @@ class EditProfileFragment : Fragment() {
     private fun handleCameraImage(intent: Intent?) {
         val bitmap = intent?.extras?.get("data") as Bitmap
 //        imageProfile = bitmapToString(bitmap)
-        editProfileViewModel.detailUser.observe(viewLifecycleOwner, Observer {
-            imageProfile = bitmapToFile(bitmap,"profile-pict-${it.id}.png")
-        })
 
         binding.ivProfilePict.alpha = 1F
 
@@ -185,6 +186,15 @@ class EditProfileFragment : Fragment() {
             .load(bitmap)
             .centerCrop()
             .into(binding.ivProfilePict)
+
+        editProfileViewModel.detailUser.observe(viewLifecycleOwner, Observer {
+            val bitmapToFile = bitmapToFile(bitmap,"profile-pict-${it.id}.png")
+            bitmapToFile?.let {
+                imageProfile = bitmapToFile
+            }
+        })
+
+
     }
 
     private fun openCamera() {
@@ -205,7 +215,8 @@ class EditProfileFragment : Fragment() {
         //create a file to write bitmap data
         var file: File? = null
         return try {
-            file = File(Environment.getExternalStorageDirectory().toString() + File.separator + fileNameToSave)
+//            Toast.makeText(requireContext(),requireActivity().filesDir.toString(),Toast.LENGTH_SHORT).show()
+            file = File(requireActivity().filesDir.toString() + File.separator + fileNameToSave)
             file.createNewFile()
 
             //Convert bitmap to byte array
@@ -221,6 +232,7 @@ class EditProfileFragment : Fragment() {
             file
         } catch (e: Exception) {
             e.printStackTrace()
+            Toast.makeText(requireContext(),"gagalllll",Toast.LENGTH_SHORT).show()
             file // it will return null
         }
     }
@@ -232,15 +244,14 @@ class EditProfileFragment : Fragment() {
         val phone = binding.etPhone.text.toString()
 
         if (inputCheck(name,city, address, phone)) {
-            val request = UpdateProfileRequest(address,city,name,imageProfile,phone.toLong())
 
             editProfileViewModel.getAccessToken().observe(viewLifecycleOwner, Observer {
-                editProfileViewModel.updateProfile(it,request)
+                editProfileViewModel.updateProfile(it,imageProfile,name,phone, address, city)
             })
 
             editProfileViewModel.updateProfile.observe(viewLifecycleOwner, Observer {
                 it?.let {
-                    Toast.makeText(requireContext(),it.city,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),"update profile successfully..",Toast.LENGTH_SHORT).show()
                 }
             })
         } else {
