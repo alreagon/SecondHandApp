@@ -5,7 +5,10 @@ import android.app.ProgressDialog.show
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,9 +25,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class Home : Fragment(R.layout.fragment_home) {
 
+
     private lateinit var adapter: imageSliderAdapter
     private val list = ArrayList<imageData>()
     private lateinit var dots: ArrayList<TextView>
+    private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
+
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -53,37 +61,68 @@ class Home : Fragment(R.layout.fragment_home) {
             }
         }
 
+        imageSlider()
+
+    }
+
+    private fun imageSlider() {
+
+        handler = Handler(Looper.getMainLooper())
+        runnable = object : Runnable {
+            var index = 0
+            override fun run() {
+                if (index == list.size)
+                    index = 0
+                Log.e("Ini Runnable,", "$index")
+                binding.viewPager.setCurrentItem(index)
+                index++
+                handler.postDelayed(this, 3000)
+            }
+
+        }
+
 
         list.add(
             imageData(
-                R.drawable.shopeebanner
+                R.drawable.aamiin
+//                R.layout.fragment_info_penawar
             )
         )
         list.add(
             imageData(
-                R.drawable.shopeebanner1
+                R.drawable.aamiin
             )
         )
         list.add(
             imageData(
-                R.drawable.shopeebanner2
+                R.drawable.aamiin
             )
         )
         list.add(
             imageData(
-                R.drawable.shopeebanner3
+                R.drawable.aamiin
             )
         )
         adapter = imageSliderAdapter(list)
         binding.viewPager.adapter = adapter
-        dots = ArrayList()
 
-        binding.viewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-            }
-        })
+        binding.viewPager.registerOnPageChangeCallback(
+            object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                }
+            })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        handler.post(runnable)
+
+    }
+    override fun onStop() {
+        super.onStop()
+        handler.removeCallbacks(runnable)
     }
 
 }

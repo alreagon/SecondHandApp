@@ -13,7 +13,6 @@ class RegisterViewModel(
     private val remoteRepository: RemoteRepository,
     private val networkHelper: NetworkHelper,
 
-    private val pref: DataStoreManager
 
 ): ViewModel() {
 
@@ -30,17 +29,6 @@ class RegisterViewModel(
                 Log.d("response error", "user register error")
             }
         }
-    }
-
-
-    fun saveUserDataStore(id: Int, status: Boolean) {
-        viewModelScope.launch {
-            pref.saveUser(id, status)
-        }
-    }
-
-    fun getLoginStatus(): LiveData<Boolean> {
-        return pref.getLoginStatus().asLiveData()
     }
 
 

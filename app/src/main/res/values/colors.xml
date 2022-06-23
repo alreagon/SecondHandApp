@@ -16,4 +16,13 @@
     <color name="birubiru">#317CEC</color>
     <color name="ungu">#CA31EC</color>
     <!--    4fcca3, 4fcca3, 009a74, 85ffd4-->
+
+
+    <color name="light_white">#f2f5f8</color>
+    <color name="IjoGojek">#00880C</color>
+    <color name="Abu">#474747</color>
+    <color name="BiruGojek">#0081A0</color>
+    <color name="putihan">#FAFAFA</color>
+    <color name="orensopi">#FF6600 </color>
+    <color name="abuabu">#B6B3B1</color>
 </resources>
