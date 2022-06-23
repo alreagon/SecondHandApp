@@ -9,15 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterRequest
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentRegisterBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(R.layout.fragment_register) {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val registerViewModel: AuthViewModel by viewModel()

@@ -1,43 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/abuabuabu"
+    android:orientation="vertical"
     tools:context=".ui.view.fragment.Home">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="HAHAHAHAHA"
-        android:textSize="40dp"
-        android:singleLine="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_button"
-        style="@style/TextInputLayoutPrimary"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:errorIconDrawable="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical"
+        android:scrollbars="none">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_email"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cari di second change"
-            android:singleLine="true"
-            android:textColor="@color/secondary"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/Header"
+                android:layout_width="match_parent"
+                android:layout_height="398dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/aamiin" />
+
+                <TextView
+                    android:id="@+id/testes"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/custom_input"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:hint="Cari di second change.."
+                    android:paddingHorizontal="16sp"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    app:drawableEndCompat="@drawable/fi_search1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="113dp"
+                    android:layout_marginTop="286dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="16dp"
+                        android:text="Telusuri Kategori"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/Header" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="16dp"
+                        android:scrollbars="none">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical">
+
+                            // button pertama
+
+                            <RelativeLayout
+                                android:id="@+id/butonpertamahome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="44dp"
+                                    android:background="@drawable/kotakbiru"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center"
+                                    android:paddingStart="12dp"
+                                    android:paddingEnd="12dp"
+                                    android:text="Semua"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    app:drawableStartCompat="@drawable/fi_search_putih" />
+
+                            </RelativeLayout>
+
+                            // button kedua
+
+                            <RelativeLayout
+                                android:id="@+id/butonkeduahome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_toEndOf="@id/butonpertamahome"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="44dp"
+                                    android:background="@drawable/kotakbiru"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center"
+                                    android:paddingStart="12dp"
+                                    android:paddingEnd="12dp"
+                                    android:text="Semua"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    app:drawableStartCompat="@drawable/fi_search_putih" />
+
+                            </RelativeLayout>
+
+                            // button ketiga
+
+                            <RelativeLayout
+                                android:id="@+id/butonketigahome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_toEndOf="@id/butonkeduahome"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="44dp"
+                                    android:background="@drawable/kotakbiru"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center"
+                                    android:paddingStart="12dp"
+                                    android:paddingEnd="12dp"
+                                    android:text="Semua"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    app:drawableStartCompat="@drawable/fi_search_putih" />
+
+                            </RelativeLayout>
+
+                            // button keempat
+
+                            <RelativeLayout
+                                android:id="@+id/butonkeempathome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_toEndOf="@id/butonketigahome"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="44dp"
+                                    android:background="@drawable/kotakbiru"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center"
+                                    android:paddingStart="12dp"
+                                    android:paddingEnd="12dp"
+                                    android:text="Semua"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp"
+                                    app:drawableStartCompat="@drawable/fi_search_putih" />
+
+                            </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                        </RelativeLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
+
+            <TextView
+                android:id="@+id/haha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:hint="HAHAHAHAHA"
+                android:singleLine="true"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+
+
