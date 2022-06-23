@@ -24,4 +24,7 @@ class ApiHelperImpl(private val apiService: ApiService){
         return apiService.updateUserProfile(accessToken, image, name, phone, address, city)
     }
 
+    suspend fun getNotification(accessToken: String) : Response<NotificationResponse> {
+        return apiService.getNotification(accessToken)
+    }
 }

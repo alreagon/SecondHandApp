@@ -8,17 +8,21 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    //register
     @POST("auth/register")
     suspend fun registerUser(@Body request: RegisterRequest) : Response<RegisterResponse>
 
+    //login
     @POST("auth/login")
     suspend fun loginUser(@Body request: LoginRequest) : Response<LoginResponse>
 
+    //get detail user
     @GET("auth/user")
     suspend fun getUser(
         @Header("access_token") accessToken: String,
     ) : Response<RegisterResponse>
 
+    //update profile
     @Multipart
     @PUT("auth/user")
     suspend fun updateUserProfile(
@@ -30,5 +34,10 @@ interface ApiService {
         @Part("city") city: RequestBody
     ) : Response<RegisterResponse>
 
+    //notification
+    @GET("notification")
+    suspend fun getNotification(
+        @Header("access_token") accessToken: String,
+    ) : Response<NotificationResponse>
 }
 
