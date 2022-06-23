@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.EditProfile"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -68,25 +68,13 @@
         android:label="fragment_daftar_jual"
         tools:layout="@layout/fragment_daftar_jual" />
     <fragment
-        android:id="@+id/login"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Login"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_login_to_register"
-            app:destination="@id/register" />
-        <action
-            android:id="@+id/action_login_to_home2"
-            app:destination="@id/home2" />
-    </fragment>
-    <fragment
         android:id="@+id/register"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_register_to_login"
-            app:destination="@id/login" />
+            android:id="@+id/action_register_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/buyer_Notification"
@@ -111,5 +99,20 @@
         <action
             android:id="@+id/action_seller_DetailProduk_to_daftarJual"
             app:destination="@id/daftarJual" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_home2"
+            app:destination="@id/home2" />
+        <action
+            android:id="@+id/action_loginFragment_to_register"
+            app:destination="@id/register" />
+        <action
+            android:id="@+id/action_loginFragment_to_editProfile"
+            app:destination="@id/editProfile" />
     </fragment>
 </navigation>

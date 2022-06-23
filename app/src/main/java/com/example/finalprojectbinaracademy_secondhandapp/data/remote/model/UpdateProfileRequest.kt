@@ -1,21 +1,19 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
-
+import android.provider.MediaStore
 import com.google.gson.annotations.SerializedName
+import okhttp3.MultipartBody
+import java.io.File
 
-data class RegisterRequest(
+data class UpdateProfileRequest(
     @SerializedName("address")
     val address: String,
     @SerializedName("city")
     val city: String,
-    @SerializedName("email")
-    val email: String,
     @SerializedName("full_name")
     val fullName: String,
     @SerializedName("image")
-    val image: String?,
-    @SerializedName("password")
-    val password: String,
+    val image: File?,
     @SerializedName("phone_number")
     val phoneNumber: Long
 )
