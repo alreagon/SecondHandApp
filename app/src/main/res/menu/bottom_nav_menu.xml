@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/bottom_nav_home"
+        android:id="@+id/home2"
         android:icon="@drawable/ic_fi_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/bottom_nav_notif"
+        android:id="@+id/buyer_Notification"
         android:icon="@drawable/ic_fi_notification"
         android:title="@string/notifikasi" />
     <item
-        android:id="@+id/bottom_nav_sell"
+        android:id="@+id/seller_DetailProduk"
         android:icon="@drawable/ic_fi_plus_circle"
         android:title="@string/jual" />
     <item
-        android:id="@+id/bottom_nav_listsell"
+        android:id="@+id/daftarJual"
         android:icon="@drawable/ic_fi_list"
         android:title="@string/daftar_jual" />
     <item
-        android:id="@+id/bottom_nav_user"
+        android:id="@+id/editProfile"
         android:icon="@drawable/ic_fi_user"
         android:title="@string/user" />
 </menu>

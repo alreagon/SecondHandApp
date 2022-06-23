@@ -113,51 +113,6 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.4.2'
     kapt 'androidx.room:room-compiler:2.4.2'
 
-    // DI
-    implementation 'io.insert-koin:koin-core:3.2.0'
-    implementation 'io.insert-koin:koin-android:3.2.0'
-//    implementation "io.insert-koin:koin-core:3.2.0"
-//    implementation "io.insert-koin:koin-core-ext:3.2.0"
-
-    // UI
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.github.bumptech.glide:glide:4.13.1'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    // Datastore
-    implementation 'androidx.datastore:datastore-preferences:1.0.0'
-
-    // Chucker
-    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
-
-    // OkHttp BOM
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
-
-    // ViewModel + LiveData
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
-
-    // OkHttp artifacts
-    implementation 'com.squareup.okhttp3:okhttp'
-//    implementation 'com.squareup.okhttp3:logging-interceptor'
-
-    //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-
-    // Networking
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6'
-
-    // Room
-    implementation 'androidx.room:room-runtime:2.4.2'
-    implementation 'androidx.room:room-ktx:2.4.2'
-    kapt 'androidx.room:room-compiler:2.4.2'
-
     // Mock
 //    testImplementation 'org.mockito:mockito-core:4.5.1'
 //    testImplementation 'io.mockk:mockk:2.28.2'

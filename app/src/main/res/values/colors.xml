@@ -13,5 +13,7 @@
     <color name="abuabuabu">#A1A3A6</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:ignore="PrivateResource">#e50914
     </color>
+    <color name="birubiru">#317CEC</color>
+    <color name="ungu">#CA31EC</color>
     <!--    4fcca3, 4fcca3, 009a74, 85ffd4-->
 </resources>

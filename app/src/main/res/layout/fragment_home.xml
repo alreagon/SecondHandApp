@@ -7,6 +7,39 @@
     android:background="@color/abuabuabu"
     tools:context=".ui.view.fragment.Home">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <EditText
+            android:id="@+id/testes"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/fi_search1"
+            android:ems="10"
+            android:fontFamily="@font/poppins"
+            android:hint="Cari di second change.."
+            android:paddingHorizontal="16sp"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/haha"
         android:layout_width="wrap_content"
@@ -15,32 +48,13 @@
         android:focusable="true"
         android:hint="HAHAHAHAHA"
         android:singleLine="true"
-        android:textSize="40dp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_button"
-        style="@style/TextInputLayoutPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:errorIconDrawable="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cari di second change"
-            android:singleLine="true"
-            android:textColor="@color/secondary" />
-    </com.google.android.material.textfield.TextInputLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
