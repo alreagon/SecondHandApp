@@ -24,4 +24,8 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.updateProfile(accessToken,name,phone,address,city,image)
     }
 
+    suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
+        return apiHelperImpl.getNotification(accessToken)
+    }
+
 }

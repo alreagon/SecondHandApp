@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.UpdateProfileRequest
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentEditProfileBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.EditProfileViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.utils.BitmapTo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -194,21 +195,11 @@ class EditProfileFragment : Fragment() {
             }
         })
 
-
     }
 
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraResult.launch(cameraIntent)
-    }
-
-    private fun bitmapToString(bitmap: Bitmap): String {
-        val byteArrayStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayStream)
-        Bitmap.createScaledBitmap(bitmap, 150,150,false)
-        val toByteArray = byteArrayStream.toByteArray()
-
-        return Base64.encodeToString(toByteArray, Base64.DEFAULT)
     }
 
     fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? { // File name like "image.png"
