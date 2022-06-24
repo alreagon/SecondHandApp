@@ -8,13 +8,9 @@
     android:orientation="vertical"
     tools:context=".ui.view.fragment.Home">
 
-
- master
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:scrollbars="none">
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
