@@ -70,7 +70,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     // swipe refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-
+    //lottie
+    def lottieVersion = "5.0.3"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
     // DI
     implementation 'io.insert-koin:koin-core:3.2.0'

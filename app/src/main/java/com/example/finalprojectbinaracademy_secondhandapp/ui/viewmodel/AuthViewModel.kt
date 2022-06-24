@@ -64,6 +64,10 @@ class AuthViewModel(
         }
     }
 
+    fun checkUserLogin() : LiveData<Boolean> {
+        return dataStore.getStatusLogin().asLiveData()
+    }
+
     fun getAccessToken(): LiveData<String> {
         return dataStore.getAccessToken().asLiveData()
     }

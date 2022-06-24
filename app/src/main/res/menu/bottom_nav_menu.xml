@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_fi_list"
         android:title="@string/daftar_jual" />
     <item
-        android:id="@+id/editProfile"
+        android:id="@+id/profile_user"
         android:icon="@drawable/ic_fi_user"
         android:title="@string/user" />
 </menu>

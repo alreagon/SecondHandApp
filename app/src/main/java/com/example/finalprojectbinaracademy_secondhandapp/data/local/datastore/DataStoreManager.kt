@@ -19,6 +19,7 @@ class DataStoreManager(private val context: Context) {
     suspend fun setLogoutStatus() {
         context.dataStore.edit { pref ->
             pref[LOGIN_KEY] = false
+            pref.clear()
         }
     }
 
@@ -36,7 +37,7 @@ class DataStoreManager(private val context: Context) {
 
     fun getAccessToken(): Flow<String> {
         return context.dataStore.data.map { pref ->
-            pref[ACCESS_TOKEN] ?: "accessToken null"
+            pref[ACCESS_TOKEN] ?: "null"
         }
     }
 
@@ -53,36 +54,30 @@ class DataStoreManager(private val context: Context) {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
     }
 
-
-
-
-    suspend fun saveUser(id: Int, status: Boolean) {
-        context.dataStore.edit {
-            it[ID_KEY] = id
-            it[LOGIN_STATUS_KEY] = status
-        }
-    }
-
-    fun getId(): Flow<Int> {
-        return context.dataStore.data.map {
-            it[ID_KEY] ?: 0
-        }
-    }
-
-    fun getLoginStatus(): Flow<Boolean> {
-        return context.dataStore.data.map {
-            it[LOGIN_STATUS_KEY] ?: false
-        }
-    }
-
-    suspend fun logoutUserData() {
-        GlobalScope.launch {
-            context.dataStore.edit {
-                it.clear()
-            }
-        }
-
-
-
-    }
+//    suspend fun saveUser(id: Int, status: Boolean) {
+//        context.dataStore.edit {
+//            it[ID_KEY] = id
+//            it[LOGIN_STATUS_KEY] = status
+//        }
+//    }
+//
+//    fun getId(): Flow<Int> {
+//        return context.dataStore.data.map {
+//            it[ID_KEY] ?: 0
+//        }
+//    }
+//
+//    fun getLoginStatus(): Flow<Boolean> {
+//        return context.dataStore.data.map {
+//            it[LOGIN_STATUS_KEY] ?: false
+//        }
+//    }
+//
+//    suspend fun logoutUserData() {
+//        GlobalScope.launch {
+//            context.dataStore.edit {
+//                it.clear()
+//            }
+//        }
+//    }
 }

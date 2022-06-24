@@ -27,8 +27,9 @@
     <string name="city">City</string>
     <string name="akun_saya">Akun Saya</string>
     <string name="edit">edit</string>
-    <string name="ubah_akun">Ubah Akun</string>
+    <string name="ubah_akun">Lengkapi Profile</string>
     <string name="pengaturan">Pengaturan</string>
     <string name="keluar">Keluar</string>
     <string name="version">Version 1.0.0</string>
+    <string name="confirmpass">Konfirmasi Password</string>
 </resources>

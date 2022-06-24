@@ -4,11 +4,8 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.UpdateProfileRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.parse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -62,7 +59,8 @@ class EditProfileViewModel(
                     _updateProfile.postValue(it)
                 }
             } else {
-                _updateProfile.postValue(RegisterResponse("null","null","null","null","null",0,"null","null","null","null"))
+                _updateProfile.postValue(RegisterResponse("null","null","null",
+                    "null","null",0,"null","null","null","null"))
             }
         }
     }
