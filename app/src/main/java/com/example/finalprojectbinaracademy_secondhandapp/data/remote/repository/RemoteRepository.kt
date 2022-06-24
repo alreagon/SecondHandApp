@@ -27,5 +27,8 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
     suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
         return apiHelperImpl.getNotification(accessToken)
     }
+    suspend fun getBuyerProduct(id : Int) : Response<GetProductResponseItem>{
+        return apiHelperImpl.getBuyerProduct(id)
+    }
 
 }

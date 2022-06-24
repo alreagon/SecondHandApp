@@ -1,30 +1,32 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog.show
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Html
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponse
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentHomeBinding
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
 import com.example.finalprojectbinaracademy_secondhandapp.utils.imageSliderAdapter
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Home : Fragment(R.layout.fragment_home) {
-
 
     private lateinit var adapter: imageSliderAdapter
     private val list = ArrayList<imageData>()
@@ -32,6 +34,7 @@ class Home : Fragment(R.layout.fragment_home) {
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
 
+    private val homeViewModel: HomeViewModel by viewModel()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -49,20 +52,46 @@ class Home : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.apply {
-            haha.setOnClickListener {
-
-                val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
-                val view1 = layoutInflater.inflate(R.layout.bottomsheet, null)
-                dialog.setCancelable(true)
-                dialog.setContentView(view1)
-                dialog.show()
-                dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-            }
-        }
+//        binding.apply {
+//            haha.setOnClickListener {
+//
+//                val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+//                val view1 = layoutInflater.inflate(R.layout.bottomsheet, null)
+//                dialog.setCancelable(true)
+//                dialog.setContentView(view1)
+//                dialog.show()
+//                dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
+//            }
+//        }
 
         imageSlider()
 
+        homeViewModel.productHome()
+        homeViewModel.getproduct.observe(viewLifecycleOwner) {
+            val data = arrayListOf<GetProductResponseItem>(it)
+            setBuyerProduct(data)
+            Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setBuyerProduct(product: List<GetProductResponseItem>) {
+        binding.apply {
+            val homeAdapter = HomeAdapter(product)
+            rvProductHome.setHasFixedSize(true)
+            rvProductHome.layoutManager = LinearLayoutManager(requireContext())
+//            rvProductHome.layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,true)
+//            rvProductHome.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            rvProductHome.adapter = homeAdapter
+            homeAdapter.setOnItemClickCallback(object :
+                HomeAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: GetProductResponseItem) {
+                    findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk())
+                }
+            })
+
+        }
     }
 
     private fun imageSlider() {
@@ -120,9 +149,15 @@ class Home : Fragment(R.layout.fragment_home) {
         handler.post(runnable)
 
     }
+
     override fun onStop() {
         super.onStop()
         handler.removeCallbacks(runnable)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
