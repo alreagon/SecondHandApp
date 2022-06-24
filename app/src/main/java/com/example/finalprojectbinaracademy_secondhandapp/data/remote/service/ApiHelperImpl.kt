@@ -27,4 +27,8 @@ class ApiHelperImpl(private val apiService: ApiService){
     suspend fun getNotification(accessToken: String) : Response<NotificationResponse> {
         return apiService.getNotification(accessToken)
     }
+
+    suspend fun getBuyerProduct(id : Int): Response<GetProductResponseItem> {
+        return apiService.getBuyerProduct(id)
+    }
 }

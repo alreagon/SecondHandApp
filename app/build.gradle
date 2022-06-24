@@ -115,6 +115,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.4.2'
     kapt 'androidx.room:room-compiler:2.4.2'
 
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // Mock
 //    testImplementation 'org.mockito:mockito-core:4.5.1'
 //    testImplementation 'io.mockk:mockk:2.28.2'

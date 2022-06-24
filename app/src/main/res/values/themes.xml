@@ -46,9 +46,15 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextTitle.VerySmall">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+
     <style name="RoundedImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">10dp</item>
     </style>
 
     <style name="RoundedBottomImageView">

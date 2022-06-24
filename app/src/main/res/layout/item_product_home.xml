@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/iv_cardView"
+    android:layout_width="156dp"
+    android:layout_height="206dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_gambar"
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:srcCompat="@drawable/aamiin" />
+
+        <TextView
+            android:id="@+id/iv_judul"
+            style="@style/TextTitle.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="center_horizontal"
+            android:hint="judulnya aamiin"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="@id/iv_gambar"
+            app:layout_constraintStart_toStartOf="@id/iv_gambar"
+            app:layout_constraintTop_toBottomOf="@id/iv_gambar" />
+
+        <TextView
+            android:id="@+id/iv_kategori"
+            style="@style/TextTitle.VerySmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:hint="kategori aamiin"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="@id/iv_gambar"
+            app:layout_constraintStart_toStartOf="@id/iv_gambar"
+            app:layout_constraintTop_toBottomOf="@id/iv_judul" />
+
+        <TextView
+            android:id="@+id/iv_basePrice"
+            style="@style/TextTitle.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:maxLines="2"
+            android:text="Rp. "
+            app:layout_constraintEnd_toEndOf="@id/iv_gambar"
+            app:layout_constraintStart_toStartOf="@id/iv_gambar"
+            app:layout_constraintTop_toBottomOf="@id/iv_kategori" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

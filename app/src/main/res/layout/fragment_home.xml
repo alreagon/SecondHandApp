@@ -193,23 +193,28 @@
                 </LinearLayout>
             </FrameLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="500dp" />
 
-            <TextView
-                android:id="@+id/haha"
-                android:layout_width="wrap_content"
+<!--            <TextView-->
+<!--                android:id="@+id/haha"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="100dp"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:hint="HAHAHAHAHA"-->
+<!--                android:singleLine="true"-->
+<!--                android:textSize="40sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent" />-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_productHome"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:hint="HAHAHAHAHA"
-                android:singleLine="true"
-                android:textSize="40sp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                tools:listitem="@layout/item_product_home" />
 
 
         </LinearLayout>
