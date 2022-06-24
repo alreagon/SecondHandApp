@@ -5,56 +5,65 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginResponse
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponse
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponseItem
+import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentBuyerNotificationBinding
+import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentEditProfileBinding
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.NotifAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.EditProfileViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.NotificationViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Buyer_Notification.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Buyer_Notification : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class BuyerNotification : Fragment() {
+    private var _binding: FragmentBuyerNotificationBinding? = null
+    private val binding get() = _binding!!
+    private val notificationViewModel: NotificationViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buyer__notification, container, false)
+//        return inflater.inflate(R.layout.fragment_buyer_notification, container, false)
+        _binding = FragmentBuyerNotificationBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Buyer_Notification.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Buyer_Notification().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        getNotification()
+
+        refreshNotif()
+    }
+
+    private fun getNotification() {
+        notificationViewModel.getAccessToken().observe(viewLifecycleOwner, Observer {
+            notificationViewModel.getNotif(it)
+        })
+
+        notificationViewModel.listNotif.observe(viewLifecycleOwner, Observer {
+            setupView(it)
+        })
+    }
+
+    private fun setupView(data: NotificationResponse) {
+        val adapter = NotifAdapter()
+        adapter.submitData(data)
+        val recyclerNotification = binding.recylcerView
+        recyclerNotification.layoutManager = LinearLayoutManager(requireContext())
+        recyclerNotification.adapter = adapter
+    }
+
+    private fun refreshNotif() {
+        binding.refreshLayout.setOnRefreshListener {
+            getNotification()
+
+            binding.refreshLayout.isRefreshing = false
+        }
     }
 }

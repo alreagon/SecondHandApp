@@ -83,7 +83,8 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(),"Login Failed..", Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.GONE
                 } else {
-                    val action = LoginFragmentDirections.actionLoginFragmentToEditProfile()
+//                    val action = LoginFragmentDirections.actionLoginFragmentToEditProfile()
+                    val action = LoginFragmentDirections.actionLoginFragmentToBuyerNotification()
                     findNavController().navigate(action)
                     Toast.makeText(requireContext(),"Login Successfully", Toast.LENGTH_SHORT).show()
                 }

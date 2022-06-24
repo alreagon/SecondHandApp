@@ -2,6 +2,8 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.repositor
 
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
@@ -18,8 +20,12 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.getUser(accessToken)
     }
 
-    suspend fun updateProfile(accessToken: String,request: UpdateProfileRequest) : Response<RegisterResponse> {
-        return apiHelperImpl.updateProfile(accessToken,request)
+    suspend fun updateProfile(accessToken: String, name: RequestBody, phone: RequestBody, address: RequestBody, city: RequestBody, image: MultipartBody.Part) : Response<RegisterResponse> {
+        return apiHelperImpl.updateProfile(accessToken,name,phone,address,city,image)
+    }
+
+    suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
+        return apiHelperImpl.getNotification(accessToken)
     }
 
 }
