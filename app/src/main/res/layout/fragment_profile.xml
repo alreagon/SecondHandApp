@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider">
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/iv_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_fi_settings"
@@ -126,7 +126,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView8"
+            app:layout_constraintStart_toEndOf="@+id/iv_4"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -164,7 +164,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider2">
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/iv_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_fi_log_out"
@@ -183,7 +183,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintStart_toEndOf="@+id/iv_5"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
