@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/btnBackToLogin"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="24dp"
@@ -31,23 +31,24 @@
             android:textColor="@color/black"
             android:textSize="36sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintStart_toStartOf="@+id/btnBackToLogin"
+            app:layout_constraintTop_toBottomOf="@+id/btnBackToLogin" />
 
         <ScrollView
+            android:id="@+id/sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/sv"
+            android:foregroundGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:foregroundGravity="center">
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                android:layout_gravity="center">
+                app:layout_constraintTop_toBottomOf="@+id/textView">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/wrap_name"
@@ -55,15 +56,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
-                    android:layout_marginTop="32dp"
                     android:hint="@string/nama_lengkap"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_name"
-                        android:layout_width="344dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
                         android:singleLine="true"
@@ -77,11 +80,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="24dp"
                     android:hint="@string/email"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/wrap_name"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/wrap_name"
                     tools:ignore="MissingConstraints">
 
@@ -96,48 +100,26 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/wrap_phone"
+                    android:id="@+id/wrap_password"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
-                    android:layout_marginEnd="24dp"
                     android:layout_marginTop="12dp"
-                    android:hint="@string/phone_number"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@string/password"
+                    app:endIconMode="password_toggle"
+                    app:errorIconDrawable="@null"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/wrap_email"
                     app:layout_constraintTop_toBottomOf="@+id/wrap_email"
                     tools:ignore="MissingConstraints">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_phone"
+                        android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:inputType="number"
-                        android:singleLine="true"
-                        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/wrap_address"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="32dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginTop="12dp"
-                    android:hint="@string/address"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/wrap_phone"
-                    app:layout_constraintTop_toBottomOf="@+id/wrap_phone"
-                    tools:ignore="MissingConstraints">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true"
                         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
@@ -145,23 +127,23 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/wrap_password"
+                    android:id="@+id/wrap_confirm_pass"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
-                    android:layout_marginEnd="24dp"
                     android:layout_marginTop="12dp"
-                    android:hint="@string/password"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@string/confirmpass"
                     app:endIconMode="password_toggle"
                     app:errorIconDrawable="@null"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/wrap_address"
-                    app:layout_constraintTop_toBottomOf="@+id/wrap_address"
+                    app:layout_constraintStart_toStartOf="@+id/wrap_password"
+                    app:layout_constraintTop_toBottomOf="@+id/wrap_password"
                     tools:ignore="MissingConstraints">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_password"
+                        android:id="@+id/et_confirm_pass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -180,12 +162,13 @@
             android:id="@+id/button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:text="@string/tv_title_daftar_register"
-            app:layout_constraintEnd_toEndOf="@+id/sv"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/sv"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sv"
             tools:ignore="DuplicateSpeakableTextCheck" />
 
@@ -203,7 +186,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sudah_punya_akun"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -214,9 +196,20 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/masuk_di_sini"
                 android:textColor="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sudah_punya_akun"
                 app:layout_constraintStart_toEndOf="@+id/tv_sudah_punya_akun"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pbRegister"
+                style="@android:style/Widget.Holo.Light.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sudah_punya_akun" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

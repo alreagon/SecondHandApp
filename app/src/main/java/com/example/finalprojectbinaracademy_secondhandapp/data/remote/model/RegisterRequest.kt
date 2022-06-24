@@ -1,6 +1,5 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class RegisterRequest(
@@ -17,5 +16,5 @@ data class RegisterRequest(
     @SerializedName("password")
     val password: String,
     @SerializedName("phone_number")
-    val phoneNumber: Long
+    val phoneNumber: String
 )

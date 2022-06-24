@@ -72,8 +72,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical">
 
-                            // button pertama
-
                             <RelativeLayout
                                 android:id="@+id/butonpertamahome"
                                 android:layout_width="wrap_content"

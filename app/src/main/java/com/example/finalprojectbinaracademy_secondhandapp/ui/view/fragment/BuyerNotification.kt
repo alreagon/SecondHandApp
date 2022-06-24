@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalprojectbinaracademy_secondhandapp.R
@@ -36,9 +37,19 @@ class BuyerNotification : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getNotification()
-
+        checkUserLogin()
         refreshNotif()
+    }
+
+    private fun checkUserLogin() {
+        notificationViewModel.getStatusLogin().observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.pbNotif.visibility = View.VISIBLE
+                getNotification()
+
+                binding.notLogin.visibility = View.GONE
+            }
+        })
     }
 
     private fun getNotification() {
@@ -52,8 +63,17 @@ class BuyerNotification : Fragment() {
     }
 
     private fun setupView(data: NotificationResponse) {
+        binding.pbNotif.visibility = View.GONE
         val adapter = NotifAdapter()
-        adapter.submitData(data)
+
+        notificationViewModel.getStatusLogin().observe(viewLifecycleOwner, Observer {
+            if (!it) {
+                adapter.clearData()
+            } else {
+                adapter.submitData(data)
+            }
+        })
+
         val recyclerNotification = binding.recylcerView
         recyclerNotification.layoutManager = LinearLayoutManager(requireContext())
         recyclerNotification.adapter = adapter
