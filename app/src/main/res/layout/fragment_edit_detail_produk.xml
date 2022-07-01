@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_preview"
             android:layout_width="188dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_4" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_post"
             android:layout_width="188dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
