@@ -17,16 +17,6 @@
             android:id="@+id/action_home2_to_daftarJual"
             app:destination="@id/daftarJual" />
         <action
-            android:id="@+id/action_home2_to_buyer_Notification"
-            app:destination="@id/buyer_Notification" />
-        <action
-            android:id="@+id/action_home2_to_buyer_DetailProduk"
-            app:destination="@id/buyer_DetailProduk"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_home2_to_seller_DetailProduk"
             app:destination="@id/seller_DetailProduk"
             app:enterAnim="@anim/slide_in_right"
@@ -36,6 +26,13 @@
         <action
             android:id="@+id/action_home2_to_editProfile"
             app:destination="@id/editProfile" />
+        <action
+            android:id="@+id/action_home2_to_buyerDetailProduk"
+            app:destination="@id/buyerDetailProduk"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/editProfile"
@@ -81,11 +78,6 @@
         android:label="fragment_buyer__notification"
         tools:layout="@layout/fragment_buyer_notification" />
     <fragment
-        android:id="@+id/buyer_DetailProduk"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Buyer_DetailProduk"
-        android:label="fragment_buyer__detail_produk"
-        tools:layout="@layout/fragment_buyer__detail_produk" />
-    <fragment
         android:id="@+id/seller_DetailProduk"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.SellerDetailProduk"
         android:label="fragment_seller__detail_produk"
@@ -111,5 +103,14 @@
         <action
             android:id="@+id/action_loginFragment_to_buyer_Notification"
             app:destination="@id/buyer_Notification" />
+    </fragment>
+    <fragment
+        android:id="@+id/buyerDetailProduk"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.BuyerDetailProduk"
+        android:label="fragment_buyer_detail_produk"
+        tools:layout="@layout/fragment_buyer_detail_produk" >
+        <argument
+            android:name="idProdukDetail"
+            app:argType="integer" />
     </fragment>
 </navigation>

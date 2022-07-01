@@ -9,26 +9,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.finalprojectbinaracademy_secondhandapp.R
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentHomeBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter2
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
-import com.example.finalprojectbinaracademy_secondhandapp.utils.imageSliderAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Home : Fragment(R.layout.fragment_home) {
 
-    private lateinit var adapter: imageSliderAdapter
+    private lateinit var adapter: ImageSliderAdapter2
     private val list = ArrayList<imageData>()
     private lateinit var dots: ArrayList<TextView>
     private lateinit var handler: Handler
@@ -68,10 +64,10 @@ class Home : Fragment(R.layout.fragment_home) {
 
         homeViewModel.productHome()
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            val data = arrayListOf<GetProductResponseItem>(it)
-            setBuyerProduct(data)
-            Toast.makeText(requireContext(), it.name, Toast.LENGTH_SHORT).show()
+            setBuyerProduct(it)
         }
+//
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 
     }
 
@@ -80,14 +76,14 @@ class Home : Fragment(R.layout.fragment_home) {
         binding.apply {
             val homeAdapter = HomeAdapter(product)
             rvProductHome.setHasFixedSize(true)
-            rvProductHome.layoutManager = LinearLayoutManager(requireContext())
+//            rvProductHome.layoutManager = LinearLayoutManager(requireContext())
 //            rvProductHome.layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,true)
-//            rvProductHome.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            rvProductHome.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             rvProductHome.adapter = homeAdapter
             homeAdapter.setOnItemClickCallback(object :
                 HomeAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: GetProductResponseItem) {
-                    findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk())
+                    findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk(data.id))
                 }
             })
 
@@ -105,7 +101,7 @@ class Home : Fragment(R.layout.fragment_home) {
                 Log.e("Ini Runnable,", "$index")
                 binding.viewPager.setCurrentItem(index)
                 index++
-                handler.postDelayed(this, 3000)
+                handler.postDelayed(this, 5000)
             }
 
         }
@@ -132,7 +128,7 @@ class Home : Fragment(R.layout.fragment_home) {
                 R.drawable.aamiin
             )
         )
-        adapter = imageSliderAdapter(list)
+        adapter = ImageSliderAdapter2(list)
         binding.viewPager.adapter = adapter
 
         binding.viewPager.registerOnPageChangeCallback(
@@ -153,6 +149,9 @@ class Home : Fragment(R.layout.fragment_home) {
     override fun onStop() {
         super.onStop()
         handler.removeCallbacks(runnable)
+    }
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroy() {

@@ -8,13 +8,16 @@
     android:orientation="vertical"
     tools:context=".ui.view.fragment.Home">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
 
             <FrameLayout
                 android:id="@+id/Header"
@@ -189,32 +192,48 @@
             </FrameLayout>
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/haha"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="100dp"-->
-<!--                android:clickable="true"-->
-<!--                android:focusable="true"-->
-<!--                android:hint="HAHAHAHAHA"-->
-<!--                android:singleLine="true"-->
-<!--                android:textSize="40sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                app:layout_constraintRight_toRightOf="parent" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/haha"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="100dp"-->
+            <!--                android:clickable="true"-->
+            <!--                android:focusable="true"-->
+            <!--                android:hint="HAHAHAHAHA"-->
+            <!--                android:singleLine="true"-->
+            <!--                android:textSize="40sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--                app:layout_constraintRight_toRightOf="parent" />-->
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/rv_productHome"
+                app:layout_constraintStart_toStartOf="@id/rv_productHome"
+                app:layout_constraintTop_toTopOf="@id/rv_productHome"
+                app:trackCornerRadius="8dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_productHome"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_product_home"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/item_product_home" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
 

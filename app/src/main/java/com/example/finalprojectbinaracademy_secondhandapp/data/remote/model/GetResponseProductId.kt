@@ -3,8 +3,7 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-
-data class GetProductResponseItem(
+data class GetResponseProductId(
     @SerializedName("base_price")
     val basePrice: Int,
     @SerializedName("Categories")
@@ -27,7 +26,8 @@ data class GetProductResponseItem(
     val status: String,
     @SerializedName("updatedAt")
     val updatedAt: String,
+    @SerializedName("User")
+    val user: User,
     @SerializedName("user_id")
     val userId: Int
 )
-
