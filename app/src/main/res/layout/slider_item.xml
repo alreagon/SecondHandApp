@@ -11,14 +11,4 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="ANDA BELUM LOGIN"
-        android:textSize="16sp" />
-
-
 </FrameLayout>
