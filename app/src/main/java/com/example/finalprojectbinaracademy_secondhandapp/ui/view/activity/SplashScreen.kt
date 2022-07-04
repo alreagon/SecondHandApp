@@ -17,6 +17,7 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val handlerThread = HandlerThread("HandlerThread")
         handlerThread.start()
         val backgroundHandler = Handler(handlerThread.looper).postDelayed ({
@@ -24,6 +25,7 @@ class SplashScreen : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java);
             startActivity(intent);
+            finish()
             handlerThread.quitSafely();
         }, 3000)
 

@@ -13,6 +13,11 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Noti
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.utils.ConvertNumberTo
 import kotlinx.android.synthetic.main.notifikasi_item_buyer.view.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.Month
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NotifAdapter() : RecyclerView.Adapter<NotifAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -31,6 +36,11 @@ class NotifAdapter() : RecyclerView.Adapter<NotifAdapter.ViewHolder>() {
     private val differ = AsyncListDiffer(this,diffCallback)
 
     fun submitData(data: ArrayList<NotificationResponseItem>) {
+        differ.submitList(data)
+    }
+
+    fun clearData() {
+        val data = arrayListOf<NotificationResponseItem>()
         differ.submitList(data)
     }
 
@@ -61,4 +71,6 @@ class NotifAdapter() : RecyclerView.Adapter<NotifAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
+
 }

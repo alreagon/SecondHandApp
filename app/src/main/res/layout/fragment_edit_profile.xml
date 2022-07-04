@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -86,7 +86,7 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/nama_lengkap"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
         app:layout_constraintTop_toBottomOf="@+id/cardProfilePict"
         tools:ignore="MissingConstraints">
 
@@ -110,7 +110,7 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/city"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
         app:layout_constraintTop_toBottomOf="@+id/wrap_name"
         tools:ignore="MissingConstraints">
 
@@ -134,7 +134,7 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/address"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
         app:layout_constraintTop_toBottomOf="@+id/wrap_city"
         tools:ignore="MissingConstraints">
 
@@ -181,5 +181,15 @@
         app:layout_constraintEnd_toEndOf="@+id/wrap_phone"
         app:layout_constraintStart_toStartOf="@+id/wrap_phone"
         app:layout_constraintTop_toBottomOf="@+id/wrap_phone" />
+
+    <ProgressBar
+        android:id="@+id/pbProfile"
+        style="@android:style/Widget.Holo.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

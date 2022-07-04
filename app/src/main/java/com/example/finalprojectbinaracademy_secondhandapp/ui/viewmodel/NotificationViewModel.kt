@@ -19,6 +19,10 @@ class NotificationViewModel(
         return dataStore.getAccessToken().asLiveData()
     }
 
+    fun getStatusLogin() : LiveData<Boolean> {
+        return dataStore.getStatusLogin().asLiveData()
+    }
+
     fun getNotif(accessToken: String) {
         viewModelScope.launch {
             val response = remoteRepository.getNotification(accessToken)

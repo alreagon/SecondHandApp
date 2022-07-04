@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.UpdateProfileRequest
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentEditProfileBinding
@@ -57,6 +58,10 @@ class EditProfileFragment : Fragment() {
         binding.cardProfilePict.setOnClickListener {
             checkingPermission()
         }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun getUser() {
@@ -67,10 +72,15 @@ class EditProfileFragment : Fragment() {
         editProfileViewModel.detailUser.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
                 binding.etName.setText(user.fullName)
-                binding.etAddress.setText(user.address)
-                binding.etPhone.setText(user.phoneNumber)
 
-                if (user.city != "jakarta") {
+                if (user.address != "DEFAULT_ADDRESS") {
+                    binding.etAddress.setText(user.address)
+                }
+                if (user.phoneNumber != "000") {
+                    binding.etPhone.setText(user.phoneNumber)
+                }
+
+                if (user.city != "DEFAULT_CITY") {
                     binding.etCity.setText(user.city)
                 }
 
@@ -81,7 +91,10 @@ class EditProfileFragment : Fragment() {
                         .into(binding.ivProfilePict)
 
                     binding.ivProfilePict.alpha = 1F
+
                 }
+                binding.pbProfile.visibility = View.GONE
+
             }
         })
     }

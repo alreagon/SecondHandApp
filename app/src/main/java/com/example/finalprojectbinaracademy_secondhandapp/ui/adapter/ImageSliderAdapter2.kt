@@ -1,12 +1,13 @@
-package com.example.finalprojectbinaracademy_secondhandapp.utils
+package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.SliderItemBinding
+import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
 
-class imageSliderAdapter(private val items: List<imageData>) : RecyclerView.Adapter<imageSliderAdapter.ImageViewHolder>() {
+class ImageSliderAdapter2(private val items: List<imageData>) : RecyclerView.Adapter<ImageSliderAdapter2.ImageViewHolder>() {
 
     inner class ImageViewHolder(itemView: SliderItemBinding) : RecyclerView.ViewHolder(itemView.root){
         private val binding = itemView

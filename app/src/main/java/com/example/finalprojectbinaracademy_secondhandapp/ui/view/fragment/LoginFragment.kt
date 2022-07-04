@@ -16,6 +16,8 @@ import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewM
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
+import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 class LoginFragment : Fragment() {
@@ -42,6 +44,11 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        BottomNavigationView navBar = getActivity().findViewById(R.id.bottomBar);
+        val buttomNav = activity?.findViewById<BottomNavigationView>(R.id.botomnav)
+
+        
+
         binding.tvGoToRegis.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToRegister()
             findNavController().navigate(action)
@@ -64,9 +71,10 @@ class LoginFragment : Fragment() {
             loginUser()
         }
 
-//        binding.btnGotoRegister.setOnClickListener {
-//            Navigation.findNavController(view).navigate(R.id.action_login_to_register)
-//        }
+
+        binding.ivBackButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun loginUser() {
@@ -84,8 +92,13 @@ class LoginFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 } else {
 //                    val action = LoginFragmentDirections.actionLoginFragmentToEditProfile()
-                    val action = LoginFragmentDirections.actionLoginFragmentToBuyerNotification()
+//                    val action = LoginFragmentDirections.actionLoginFragmentToBuyerNotification()
+//                    findNavController().navigate(action)
+
+                    val action = LoginFragmentDirections.actionLoginFragmentToHome2()
                     findNavController().navigate(action)
+
+//                    Toast.makeText(requireContext(),"${findNavController().previousBackStackEntry?.destination?.id}",Toast.LENGTH_SHORT).show()
                     Toast.makeText(requireContext(),"Login Successfully", Toast.LENGTH_SHORT).show()
                 }
             })
@@ -115,67 +128,5 @@ class LoginFragment : Fragment() {
         return !(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || !PasswordUtils().validate(pass)
                 || !Patterns.EMAIL_ADDRESS.matcher(email).matches() )
     }
-
-//    private fun loginUser(email : String, password : String){
-//        ApiClient.instance.postUser(email,password)
-//            .enqueue(object : retrofit2.Callback<LoginResponse>{
-//
-//                override fun onResponse(
-//                    call: Call<LoginResponse>,
-//                    response: Response<LoginResponse>
-//                ) {
-//                    if (response.isSuccessful){
-//                        when(response.code()){
-//                            201 -> {
-//                                GlobalScope.launch {
-//                                    dataStoreManager.loginUserData(
-//                                        response.body()!!.email,
-//                                        password,
-//                                        response.body()!!.accessToken
-//                                    )
-//                                }
-//                                Navigation.findNavController(view!!).navigate(R.id.action_login_to_home2)
-//                            }
-//
-//                            401 -> {
-//                                Toast.makeText(requireContext(), response.message(), Toast.LENGTH_LONG).show()
-//                            }
-//
-//                            500 -> {
-//                                Toast.makeText(requireContext(), response.message(), Toast.LENGTH_LONG).show()
-//                            }
-//
-//                            else -> {
-//                                Toast.makeText(requireContext(), "Uknown Error", Toast.LENGTH_SHORT).show()
-//                            }
-//                        }
-//
-//                    }else{
-//                        Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_LONG).show()
-//                    }
-//
-//                }
-//
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    Toast.makeText(requireContext(), "No response", Toast.LENGTH_LONG).show()
-//                }
-//
-//            })
-//
-//
-//    }
-//
-//    fun showPassword(editText: EditText, imageView: ImageView) {
-//        val hidden = PasswordTransformationMethod.getInstance()
-//        val show = HideReturnsTransformationMethod.getInstance()
-//
-//        if (editText.transformationMethod == hidden) {
-//            editText.transformationMethod = show
-//            imageView.setImageResource(R.drawable.ic_eye_off)
-//        } else {
-//            editText.transformationMethod = hidden
-//            imageView.setImageResource(R.drawable.ic_eye)
-//        }
-//    }
 
 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterRequest
@@ -17,11 +18,11 @@ import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewM
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegisterFragment : Fragment(R.layout.fragment_register) {
+class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val registerViewModel: AuthViewModel by viewModel()
-
+//testtttttt
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,24 +37,29 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
+            binding.pbRegister.visibility = View.VISIBLE
             registerUser()
         }
 
         binding.tvGoToLogin.setOnClickListener {
-            val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
-            findNavController().navigate(action)
+//            val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
+//            findNavController().navigate(action)
+            findNavController().navigateUp()
+        }
+
+        binding.btnBackToLogin.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 
     private fun registerUser() {
         val name = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
-        val phoneNumber = binding.etPhone.text.toString()
-        val address = binding.etAddress.text.toString()
         val pass = binding.etPassword.text.toString()
+        val confirmpass = binding.etConfirmPass.text.toString()
 
-        if (inputCheck(name,email,phoneNumber,address,pass)) {
-            val request = RegisterRequest(address,"jakarta",email,name,null,pass,phoneNumber.toLong())
+        if (inputCheck(name,email,pass,confirmpass)) {
+            val request = RegisterRequest("DEFAULT_ADDRESS","DEFAULT_CITY",email,name,null,pass,"000")
 
             registerViewModel.userRegister(request)
 
@@ -61,35 +67,42 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
                 if (user != null) {
                     val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
-                    findNavController().navigate(action)
+                    findNavController().navigate(action,
+                        NavOptions.Builder().setPopUpTo(R.id.register, true).build())
                     Toast.makeText(requireContext(),"register successfully",Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(requireContext(),"register failed", Toast.LENGTH_SHORT).show()
+                    binding.pbRegister.visibility = View.GONE
                 }
             })
 
         } else {
-            validateErrorInput(name,email,phoneNumber,address,pass)
+            validateErrorInput(name,email,pass,confirmpass)
+            binding.pbRegister.visibility = View.GONE
         }
     }
 
-    private fun validateErrorInput(name:String,email:String,phone:String,address:String,password:String) {
+    private fun validateErrorInput(name:String,email:String,password:String,confirmpass: String) {
         if (TextUtils.isEmpty(name)) {
             binding.wrapName.error = "Masukkan nama anda"
         } else {
             binding.wrapName.error = null
         }
 
+        if (TextUtils.isEmpty(confirmpass)) {
+            binding.wrapConfirmPass.error = "Konfirmasi password tidak boleh kosong"
+        } else {
+            binding.wrapConfirmPass.error = null
+        }
+
+        if (confirmpass != password) {
+            Toast.makeText(requireContext(),"Konfirmasi password salah",Toast.LENGTH_SHORT).show()
+        }
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.wrapEmail.error = "Format email salah"
         } else {
             binding.wrapEmail.error = null
-        }
-
-        if (TextUtils.isEmpty(address)) {
-            binding.wrapAddress.error = "Masukkan alamat anda"
-        } else {
-            binding.wrapAddress.error = null
         }
 
         if (TextUtils.isEmpty(password)) {
@@ -104,16 +117,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             binding.wrapPassword.error = null
         }
 
-        if (TextUtils.isEmpty(phone)) {
-            binding.wrapPhone.error = "Masukkan nomor telepon anda"
-        } else {
-            binding.wrapPhone.error = null
-        }
+
     }
 
-    private fun inputCheck(name: String, email:String, phone: String, address: String, pass: String): Boolean {
+    private fun inputCheck(name: String, email:String, pass: String, confirmpass: String): Boolean {
         return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(pass) || !PasswordUtils().validate(pass) ||
-                TextUtils.isEmpty(phone) || TextUtils.isEmpty(address) || !Patterns.EMAIL_ADDRESS.matcher(email).matches() )
+                TextUtils.isEmpty(confirmpass) || !Patterns.EMAIL_ADDRESS.matcher(email).matches() || pass != confirmpass)
     }
 
 }
