@@ -7,15 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.finalprojectbinaracademy_secondhandapp.R
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginResponse
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationItemResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponse
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentBuyerNotificationBinding
-import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentEditProfileBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.NotifAdapter
-import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.EditProfileViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.NotificationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -64,7 +61,21 @@ class BuyerNotification : Fragment() {
 
     private fun setupView(data: NotificationResponse) {
         binding.pbNotif.visibility = View.GONE
-        val adapter = NotifAdapter()
+        val adapter = NotifAdapter(object : NotifAdapter.OnClickListener {
+            override fun onClickItem(data: NotificationItemResponse) {
+                notificationViewModel.readNotification(data.id)
+                when(data.status) {
+                    "create" -> {
+                        if (data.product != null) {
+                            val action = BuyerNotificationDirections.actionBuyerNotificationToBuyerDetailProduk(data.productId)
+                            findNavController().navigate(action)
+                        } else {
+                            Toast.makeText(requireContext(),"product tidak ada...", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        })
 
         notificationViewModel.getStatusLogin().observe(viewLifecycleOwner, Observer {
             if (!it) {

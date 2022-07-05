@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.daftarJual -> showBottomNav()
                 R.id.profile_user -> showBottomNav()
                 R.id.buyer_Notification -> showBottomNav()
-                R.id.seller_DetailProduk -> showBottomNav()
                 else -> hideBottomNav()
             }
         }

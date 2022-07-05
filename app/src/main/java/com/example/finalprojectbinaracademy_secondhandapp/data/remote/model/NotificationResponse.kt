@@ -1,6 +1,3 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
-
-import com.google.gson.annotations.SerializedName
-
-class NotificationResponse : ArrayList<NotificationResponseItem>()
+class NotificationResponse : ArrayList<NotificationItemResponse>()
