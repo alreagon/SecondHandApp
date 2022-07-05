@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notifItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,11 +10,11 @@
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         app:cardCornerRadius="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/divider4">
 
         <ImageView
             android:id="@+id/ivProductImg"
@@ -23,12 +24,12 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/tvNotifType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Penawaran Produk"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/cardView2"
         app:layout_constraintTop_toTopOf="@+id/cardView2" />
 
@@ -39,8 +40,8 @@
         android:text="Name Product"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintStart_toStartOf="@+id/tvNotifType"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotifType" />
 
     <TextView
         android:id="@+id/tvPriceProduct"
@@ -52,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNameProduct" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/tvNotifBidPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ditawar"
@@ -61,27 +62,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPriceProduct" />
 
     <TextView
-        android:id="@+id/tvBidPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="Rp 200.000"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-    <TextView
         android:id="@+id/tvDateOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="42dp"
         android:text="20 Apr, 14:04"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNotifType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNotifType" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/ivReadFalse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -96,8 +88,8 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/ivReadFalse"
         app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/tvBidPrice" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

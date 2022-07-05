@@ -10,7 +10,10 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Regi
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
 import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
+import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class AuthViewModel(
     private val remoteRepository: RemoteRepository,
@@ -21,8 +24,8 @@ class AuthViewModel(
     val userRegis : LiveData<RegisterResponse>
         get() = _userRegis
 
-    private val _userlogin = MutableLiveData<LoginResponse>()
-    val userLogin : LiveData<LoginResponse>
+    private val _userlogin = MutableLiveData<Resource<LoginResponse>>()
+    val userLogin : LiveData<Resource<LoginResponse>>
         get() = _userlogin
 
     fun userRegister(request: RegisterRequest) {
@@ -38,17 +41,17 @@ class AuthViewModel(
 
     fun userLogin(request: LoginRequest) {
         viewModelScope.launch {
-            val login = remoteRepository.loginUser(request)
-            val body = login.body()
-            if (login.code() == 201) {
-                body?.let {
-                    _userlogin.postValue(login.body())
+            _userlogin.postValue(Resource.loading(null))
+            remoteRepository.loginUser(request).let {
+                if (it.isSuccessful) {
+                    _userlogin.postValue(Resource.success(it.body()))
                     setLogin()
-                    setAccessToken(body.accessToken)
+                    it.body()?.let { body ->
+                        setAccessToken(body.accessToken)
+                    }
+                } else {
+                    _userlogin.postValue(Resource.error("Please check your credentials..",null))
                 }
-            } else {
-                _userlogin.postValue(LoginResponse("null","null",0,"null"))
-                Log.d("response error", "failed user login")
             }
         }
     }

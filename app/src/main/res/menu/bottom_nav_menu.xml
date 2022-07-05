@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_fi_notification"
         android:title="@string/notifikasi" />
     <item
-        android:id="@+id/seller_DetailProduk"
+        android:id="@+id/seller_post_product"
         android:icon="@drawable/ic_fi_plus_circle"
         android:title="@string/jual" />
     <item

@@ -1,6 +1,7 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.service
 
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -22,9 +23,9 @@ class ApiHelperImpl(private val apiService: ApiService) {
     suspend fun updateProfile(
         accessToken: String,
         name: RequestBody,
-        phone: RequestBody,
-        address: RequestBody,
-        city: RequestBody,
+        phone:RequestBody,
+        address:RequestBody,
+        city:RequestBody,
         image: MultipartBody.Part
     ): Response<RegisterResponse> {
         return apiService.updateUserProfile(accessToken, image, name, phone, address, city)
@@ -32,6 +33,10 @@ class ApiHelperImpl(private val apiService: ApiService) {
 
     suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
         return apiService.getNotification(accessToken)
+    }
+
+    suspend fun readNotification(accessToken: String, id: Int): Response<ReadNotificationResponse> {
+        return apiService.readNotification(accessToken, id)
     }
 
     suspend fun getBuyerProduct(): Response<GetProductResponse> {
@@ -44,5 +49,25 @@ class ApiHelperImpl(private val apiService: ApiService) {
 
     suspend fun getBuyerProductId(buyerId: Int): Response<GetResponseProductId> {
         return apiService.getBuyerProductId(buyerId)
+    }
+
+    suspend fun getCategory() : Response<CategoryResponse> {
+        return apiService.getCategory()
+    }
+
+    suspend fun getCategoryById(id :Int) : Response<CategoryResponseItem> {
+        return apiService.getCategoryById(id)
+    }
+
+    suspend fun postProduct(
+        accessToken: String,
+        name: RequestBody,
+        description: RequestBody,
+        basePrice: RequestBody,
+        categoryId: RequestBody,
+        location: RequestBody,
+        productImage: MultipartBody.Part
+    ): Response<PostProductResponse> {
+        return apiService.sellerPostProduct(accessToken,name, description, basePrice, categoryId, location, productImage)
     }
 }
