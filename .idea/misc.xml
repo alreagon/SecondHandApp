@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
 
+
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.195" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/ic_eye.xml" value="0.1" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/ic_eye_off.xml" value="0.194" />
@@ -14,13 +15,37 @@
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_edit_detail_produk.xml" value="0.25" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_edit_profile.xml" value="0.371875" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home.xml" value="0.371875" />
+
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable-v24/kotakbiru.xml" value="0.142" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable-v24/kotakputihDetail.xml" value="0.1675" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable-v24/kotakputihDetailBuyer.xml" value="0.16" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable-v24/kotakputihbuyerdetailproduk.xml" value="0.16" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/custom_input.xml" value="0.1425" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/dialog_bg.xml" value="0.1425" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/ic_fi_home.xml" value="0.1425" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/ic_search.xml" value="0.1425" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/kotakputih.xml" value="0.1675" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout-v26/fragment_home.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/bottomsheet.xml" value="0.2234375" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_buyer__detail_produk.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_buyer__notification.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_buyer_detail_produk.xml" value="0.25" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_buyer_notification.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_edit_detail_produk.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_home_activity.xml" value="0.22447916666666667" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_info_penawar.xml" value="0.371875" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_login.xml" value="0.18085106382978725" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_profile.xml" value="0.371875" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_register.xml" value="0.25" />
-        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_seller__detail_produk.xml" value="0.371875" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_info_penawar.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_login.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_profile.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_register.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_scrolling.xml" value="0.22447916666666667" />
+        <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_seller__detail_produk.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.22447916666666667" />
+
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/item_produck.xml" value="0.5" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable-v24/kotakbiru.xml" value="0.194" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/drawable/kotakputih.xml" value="0.194" />
@@ -63,6 +88,7 @@
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_scrolling.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_seller__detail_produk.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/fragment_splash_screen.xml" value="0.22447916666666667" />
+
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/include_list_viewpager.xml" value="0.16" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/item_product_home.xml" value="0.25" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/notifikasi_item_buyer.xml" value="0.1" />
@@ -70,7 +96,32 @@
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1425" />
 
+
         <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
+
+        <entry key="..\:/Users/Goldly Heryanto/AndroidStudioProjects/SecondHandApp/app/src/main/res/layout/fragment_daftar_jual.xml" value="0.22" />
+        <entry key="..\:/Users/Goldly Heryanto/AndroidStudioProjects/SecondHandApp/app/src/main/res/layout/fragment_diminati.xml" value="0.1" />
+        <entry key="..\:/Users/Goldly Heryanto/AndroidStudioProjects/SecondHandApp/app/src/main/res/layout/fragment_home.xml" value="0.14673913043478262" />
+        <entry key="..\:/Users/Goldly Heryanto/AndroidStudioProjects/SecondHandApp/app/src/main/res/layout/fragment_produk.xml" value="0.1" />
+        <entry key="..\:/Users/Goldly Heryanto/AndroidStudioProjects/SecondHandApp/app/src/main/res/layout/fragment_terjual.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_rect_add_photo.xml" value="0.1655" />
+        <entry key="app/src/main/res/drawable/ic_textfield_background.xml" value="0.243" />
+        <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/fragment_buyer__detail_produk.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/fragment_buyer_notification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_daftar_jual.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_edit_detail_produk.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.340036563071298" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.21041666666666667" />
+        <entry key="app/src/main/res/layout/fragment_preview_post_product.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_seller__detail_produk.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/fragment_seller_post_product.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_product_home.xml" value="0.23697916666666666" />
+        <entry key="app/src/main/res/layout/notifikasi_item_buyer.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/spinner_list_category_item.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.31743589743589745" />
       </map>
     </option>
   </component>
