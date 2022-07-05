@@ -64,7 +64,7 @@ class Home : Fragment(R.layout.fragment_home) {
 
         homeViewModel.productHome()
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            setBuyerProduct(it)
+            setBuyerProduct(it.take(20))
         }
 //
         homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }

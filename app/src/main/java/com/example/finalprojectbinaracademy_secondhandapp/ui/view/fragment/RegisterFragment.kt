@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.finalprojectbinaracademy_secondhandapp.R
@@ -22,11 +21,11 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val registerViewModel: AuthViewModel by viewModel()
-//testtttttt
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_register, container, false)
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
@@ -63,7 +62,7 @@ class RegisterFragment : Fragment() {
 
             registerViewModel.userRegister(request)
 
-            registerViewModel.userRegis.observe(requireActivity(), Observer { user ->
+            registerViewModel.userRegis.observe(viewLifecycleOwner) { user ->
 
                 if (user != null) {
                     val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
@@ -74,7 +73,7 @@ class RegisterFragment : Fragment() {
                     Toast.makeText(requireContext(),"register failed", Toast.LENGTH_SHORT).show()
                     binding.pbRegister.visibility = View.GONE
                 }
-            })
+            }
 
         } else {
             validateErrorInput(name,email,pass,confirmpass)

@@ -9,13 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.BannerResponse
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponseItem
-import com.example.finalprojectbinaracademy_secondhandapp.databinding.ItemProductHomeBinding
-import com.example.finalprojectbinaracademy_secondhandapp.databinding.SliderItemBinding
-import com.example.finalprojectbinaracademy_secondhandapp.utils.ConvertNumberTo
-import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
-import kotlinx.android.synthetic.main.notifikasi_item_buyer.view.*
 import kotlinx.android.synthetic.main.slider_item.view.*
 
 class ImageSliderAdapter() : RecyclerView.Adapter<ImageSliderAdapter.ViewHolder>() {
