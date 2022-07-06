@@ -27,6 +27,7 @@ class DaftarJual : Fragment(R.layout.fragment_daftar_jual) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vp_1.adapter = MyPagerAdapter(childFragmentManager)
+        tabs_main.setupWithViewPager(vp_1)
     }
 
 }
