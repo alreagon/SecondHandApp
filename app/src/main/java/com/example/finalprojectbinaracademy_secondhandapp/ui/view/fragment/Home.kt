@@ -62,7 +62,6 @@ class Home : Fragment(R.layout.fragment_home) {
 
         imageSlider()
 
-        homeViewModel.productHome()
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
             setBuyerProduct(it.take(20))
         }

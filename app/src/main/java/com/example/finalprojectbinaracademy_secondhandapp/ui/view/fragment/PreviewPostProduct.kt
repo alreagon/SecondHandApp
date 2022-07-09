@@ -64,7 +64,6 @@ class PreviewPostProduct : Fragment() {
                     Toast.makeText(requireContext(),"Posting product successfully..", Toast.LENGTH_SHORT).show()
                     binding.loadingPreviewPost.visibility = View.GONE
                     val action = PreviewPostProductDirections.actionPreviewPostProductToDaftarJual()
-                    parentFragmentManager.beginTransaction().remove(this).commitAllowingStateLoss()
                     findNavController().navigate(action,NavOptions.Builder().setPopUpTo(R.id.seller_post_product, true).build())
                 }
                 Status.ERROR -> {

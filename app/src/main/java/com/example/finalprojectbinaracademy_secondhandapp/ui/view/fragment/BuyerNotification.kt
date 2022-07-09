@@ -43,8 +43,9 @@ class BuyerNotification : Fragment() {
             if (it) {
                 binding.pbNotif.visibility = View.VISIBLE
                 getNotification()
-
                 binding.notLogin.visibility = View.GONE
+            } else {
+                binding.pbNotif.visibility = View.GONE
             }
         })
     }

@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/iv_cardView"
-    android:layout_width="156dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="4dp"
     android:orientation="vertical"
     android:paddingHorizontal="8dp"
     app:cardCornerRadius="10dp"
@@ -18,10 +19,10 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_gambar"
-            android:layout_width="140dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_margin="8dp"
             android:adjustViewBounds="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,15 +32,15 @@
 
         <TextView
             android:id="@+id/iv_judul"
-            style="@style/TextTitle.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/poppins"
-            android:gravity="center_horizontal"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:ellipsize="end"
             android:hint="judulnya aamiin"
-            android:maxLines="2" />
+            android:maxLines="2"
+            android:textAlignment="textStart" />
 
         <TextView
             android:id="@+id/iv_kategori"
@@ -59,7 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins"
             android:gravity="start"
             android:maxLines="2"

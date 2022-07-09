@@ -3,7 +3,7 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserNotification(
+data class UserX(
     @SerializedName("address")
     val address: String,
     @SerializedName("city")
@@ -14,8 +14,6 @@ data class UserNotification(
     val fullName: String,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("image_url")
-    val imageUrl: String,
     @SerializedName("phone_number")
     val phoneNumber: String
 )

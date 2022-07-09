@@ -24,6 +24,9 @@ class HomeViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    init {
+        productHome()
+    }
 
     fun getAccessToken() : LiveData<String> {
         return dataStore.getAccessToken().asLiveData()

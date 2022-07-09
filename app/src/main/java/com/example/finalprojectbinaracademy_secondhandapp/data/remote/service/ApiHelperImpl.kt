@@ -31,6 +31,15 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.updateUserProfile(accessToken, image, name, phone, address, city)
     }
 
+    suspend fun changePassword(
+        accessToken: String,
+        currentPass : RequestBody,
+        newPass : RequestBody,
+        confirmPass: RequestBody
+    ) : Response<ChangePasswordResponse> {
+        return apiService.changePassword(accessToken, currentPass, newPass, confirmPass)
+    }
+
     suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
         return apiService.getNotification(accessToken)
     }
@@ -69,5 +78,21 @@ class ApiHelperImpl(private val apiService: ApiService) {
         productImage: MultipartBody.Part
     ): Response<PostProductResponse> {
         return apiService.sellerPostProduct(accessToken,name, description, basePrice, categoryId, location, productImage)
+    }
+
+    suspend fun sellerGetProduct(accessToken: String): Response<GetProductResponse> {
+        return apiService.getSellerProduct(accessToken)
+    }
+
+    suspend fun getSellerOrder(accessToken: String, status: String?): Response<GetSellerOrderResponse> {
+        return apiService.getSellerOrder(accessToken,status)
+    }
+
+    suspend fun getSellerOrderId(accessToken: String,idOrder: Int): Response<GetSellerOrderResponseItem> {
+        return apiService.getSellerOrderId(accessToken,idOrder)
+    }
+
+    suspend fun patchOrder(accessToken: String,idOrder: Int,status: RequestBody): Response<PatchOrderResponse> {
+        return apiService.patchOrder(accessToken, idOrder, status)
     }
 }

@@ -208,10 +208,12 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressBar"
-                android:layout_width="48dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
-                app:indicatorColor="@color/secondary"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                app:indicatorColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/rv_productHome"
                 app:layout_constraintStart_toStartOf="@id/rv_productHome"
@@ -222,6 +224,7 @@
                 android:id="@+id/rv_productHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
                 android:scrollbars="none"
                 tools:listitem="@layout/item_product_home"
                 app:layout_constraintBottom_toBottomOf="parent"
