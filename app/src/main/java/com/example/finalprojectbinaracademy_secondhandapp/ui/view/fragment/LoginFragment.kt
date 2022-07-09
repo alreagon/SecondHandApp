@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(),"Hello ${userLogin.data?.name}...", Toast.LENGTH_SHORT).show()
                 }
                 Status.ERROR -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), userLogin.message, Toast.LENGTH_SHORT).show()
                 }
             }

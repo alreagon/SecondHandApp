@@ -126,4 +126,6 @@
     <string name="price_product">Harga Produk</string>
     <string name="category">Category</string>
     <string name="description_product">Deskripsi Produk</string>
+    <string name="curentPass">Password</string>
+    <string name="newPass">Password Baru</string>
 </resources>

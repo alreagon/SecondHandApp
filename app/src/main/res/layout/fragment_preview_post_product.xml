@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/btnBackPreview"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:src="@drawable/ic_fi_arrow_left" />
             </androidx.cardview.widget.CardView>
 

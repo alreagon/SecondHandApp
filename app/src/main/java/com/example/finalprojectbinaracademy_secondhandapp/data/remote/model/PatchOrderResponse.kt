@@ -3,31 +3,29 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GetResponseProductId(
+data class PatchOrderResponse(
     @SerializedName("base_price")
     val basePrice: Int,
-    @SerializedName("Categories")
-    val categories: List<Category>,
+    @SerializedName("buyer_id")
+    val buyerId: Int,
     @SerializedName("createdAt")
     val createdAt: String,
-    @SerializedName("description")
-    val description: String,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("image_name")
-    val imageName: String,
-    @SerializedName("image_url")
-    val imageUrl: String,
-    @SerializedName("location")
-    val location: String,
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("image_product")
+    val imageProduct: String,
+    @SerializedName("price")
+    val price: Int,
+    @SerializedName("product_id")
+    val productId: Int,
+    @SerializedName("product_name")
+    val productName: String,
     @SerializedName("status")
     val status: String,
+    @SerializedName("transcaction_date")
+    val transcactionDate: String,
     @SerializedName("updatedAt")
     val updatedAt: String,
-    @SerializedName("User")
-    val user: User,
     @SerializedName("user_id")
     val userId: Int
 )

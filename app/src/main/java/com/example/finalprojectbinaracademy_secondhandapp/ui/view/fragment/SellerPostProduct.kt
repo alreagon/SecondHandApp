@@ -11,9 +11,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.R
@@ -146,6 +144,14 @@ class SellerPostProduct : Fragment() {
                 val action = SellerPostProductDirections.actionSellerDetailProdukToLoginFragment()
                 findNavController().navigate(action, NavOptions.Builder().setPopUpTo(R.id.seller_post_product, true).build())
                 Toast.makeText(requireContext(),"Anda belum login, silahkan login...", Toast.LENGTH_SHORT).show()
+            } else {
+                sellViewModel.user.observe(viewLifecycleOwner) {
+                    if (it.city == "DEFAULT_CITY") {
+                        val action = SellerPostProductDirections.actionSellerPostProductToEditProfile()
+                        findNavController().navigate(action, NavOptions.Builder().setPopUpTo(R.id.seller_post_product, true).build())
+                        Toast.makeText(requireContext(),"Lengkapi info akun anda...", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

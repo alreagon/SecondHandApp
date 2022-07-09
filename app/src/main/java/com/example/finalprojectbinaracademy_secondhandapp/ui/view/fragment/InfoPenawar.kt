@@ -1,60 +1,210 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 
+import android.app.AlertDialog
+import android.content.ComponentName
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Paint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.finalprojectbinaracademy_secondhandapp.R
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetSellerOrderResponseItem
+import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentInfoPenawarBinding
+import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.bottomsheet.BottomSheetAcceptBid
+import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.bottomsheet.UpdateStatusBottomSheet
+import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.SaleListViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
+import com.example.finalprojectbinaracademy_secondhandapp.utils.convertISOTimeToDate
+import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [InfoPenawar.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InfoPenawar : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentInfoPenawarBinding? = null
+    private val binding get() = _binding!!
+    private val saleListViewModel: SaleListViewModel by viewModel()
+    private var idOrder: Int = 0
+    private val args: InfoPenawarArgs by navArgs()
+    private var phoneNumber: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info_penawar, container, false)
+        _binding = FragmentInfoPenawarBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InfoPenawar.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InfoPenawar().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        getInfoPenawar()
+        checkUpdateOrder()
+
+        binding.btnAcc.setOnClickListener {
+            accDialog()
+        }
+        binding.btnTolak.setOnClickListener {
+            declineDialog()
+        }
+        binding.ivBackPenawar.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.btnStatus.setOnClickListener {
+            bottomSheetChangeSatus()
+        }
+        binding.btnHubungi.setOnClickListener {
+            intentToWasap(phoneNumber.toString(),"")
+        }
+    }
+
+    private fun getInfoPenawar() {
+        saleListViewModel.getSellerOrderById(args.idOrder)
+        saleListViewModel.diminatiById.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { data ->
+                        setupView(data)
+                        idOrder = data.id
+                        phoneNumber = data.user.phoneNumber.toLong()
+                    }
+                }
+                Status.ERROR -> {
+
                 }
             }
+        }
     }
+
+    private fun setupView(data: GetSellerOrderResponseItem?) {
+        data?.let {
+            binding.tvNameProductDiminati.text = data.productName
+            binding.tvPriceProductDiminati.text = rupiah(data.basePrice.toDouble())
+            binding.tvBidPriceDIminati.text = "Ditawar ${rupiah(data.price.toDouble())}"
+            binding.tvDateOrderDiminati.text = convertISOTimeToDate(data.createdAt)
+
+            Glide.with(requireContext())
+                .load(data.product.imageUrl)
+                .centerCrop()
+                .into(binding.ivProductDiminati)
+
+            binding.tvBuyerName.text = data.user.fullName
+            binding.tvBuyerCity.text = data.user.city
+
+            if (it.status == "accepted") {
+                binding.bidAcc.visibility = View.VISIBLE
+                binding.accOrDecline.visibility = View.GONE
+            } else if (it.status == "declined") {
+                binding.accOrDecline.visibility = View.GONE
+                binding.tvBidPriceDIminati.paintFlags = binding.tvBidPriceDIminati.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+        }
+    }
+
+    private fun bottomSheetSuccessAcc() {
+        val bottomSheet = BottomSheetAcceptBid()
+        val bundle = Bundle()
+        bundle.putInt(BottomSheetAcceptBid.ID_ORDER, idOrder)
+        bottomSheet.arguments = bundle
+        bottomSheet.show(parentFragmentManager, BottomSheetAcceptBid.TAG)
+    }
+
+    private fun bottomSheetChangeSatus() {
+        val bottomSheet = UpdateStatusBottomSheet()
+        bottomSheet.show(parentFragmentManager, UpdateStatusBottomSheet.TAG)
+    }
+
+    private fun accDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Terima")
+        dialog.setMessage("Apakah anda yakin ingin menerima tawaran ini?")
+
+        dialog.setCancelable(true)
+        dialog.setPositiveButton("YES"){dialogInterface, p1 ->
+            if (idOrder != 0) {
+                val status = "accepted"
+                saleListViewModel.patchOrder(idOrder,status)
+            }
+        }
+
+        dialog.setNegativeButton("NO"){dialogInterface, p1->
+            dialogInterface.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun declineDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Tolak")
+        dialog.setMessage("Apakah anda yakin ingin menolak tawaran ini?")
+
+        dialog.setCancelable(true)
+        dialog.setPositiveButton("YES"){dialogInterface, p1 ->
+            if (idOrder != 0) {
+                val status = "declined"
+                saleListViewModel.patchOrder(idOrder,status)
+            }
+        }
+
+        dialog.setNegativeButton("NO"){dialogInterface, p1->
+            dialogInterface.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun checkUpdateOrder() {
+        saleListViewModel.patchOrder.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    if (it.data?.status == "accepted") {
+                        bottomSheetSuccessAcc()
+                        binding.accOrDecline.visibility = View.GONE
+                        binding.bidAcc.visibility = View.VISIBLE
+                    } else {
+                        binding.accOrDecline.visibility = View.GONE
+                        binding.tvBidPriceDIminati.paintFlags = binding.tvBidPriceDIminati.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    }
+                }
+                Status.ERROR -> {}
+            }
+        }
+    }
+
+    private fun intentToWasap(phone: String, message: String) {
+//        if (appInstalledOrNot("com.whatsapp")) {
+        val sendIntent = Intent("android.intent.action.MAIN")
+        sendIntent.component = ComponentName("com.whatsapp", "com.whatsapp.Conversation")
+        sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators("62$phone") + "@s.whatsapp.net" ) //phone number without "+" prefix
+        startActivity(sendIntent)
+//        } else {
+//            Toast.makeText(requireContext(), "Whats app not installed on your device", Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+    private fun appInstalledOrNot(url: String): Boolean {
+        val packageManager = activity?.packageManager
+        val app_installed: Boolean
+        app_installed = try {
+            packageManager?.getPackageInfo(url, PackageManager.GET_ACTIVITIES)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
+        return app_installed
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }

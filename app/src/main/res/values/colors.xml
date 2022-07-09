@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--        <color name="primary">#042541</color>-->
-    <color name="primary">#e50914</color>
+    <color name="primary">#7126B5</color>
     <color name="primary_2">#221f1f</color>
     <color name="primary_dark">#00000a</color>
     <color name="primary_light">#4c525b</color>
@@ -10,9 +10,10 @@
     <color name="secondary_light">#ED313A</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="abuabuabu">#A1A3A6</color>
+    <color name="abuabuabu">#E8EAEE</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:ignore="PrivateResource">#e50914
     </color>
+    <color name="sucess_alert">#73CA5C</color>
     <color name="birubiru">#317CEC</color>
     <color name="ungu">#CA31EC</color>
     <!--    4fcca3, 4fcca3, 009a74, 85ffd4-->
