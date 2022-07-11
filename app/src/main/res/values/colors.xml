@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--        <color name="primary">#042541</color>-->
     <color name="primary">#7126B5</color>
+    <color name="primaryDark">#540B95</color>
     <color name="primary_2">#221f1f</color>
     <color name="primary_dark">#00000a</color>
     <color name="primary_light">#4c525b</color>

@@ -48,8 +48,8 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.readNotification(accessToken, id)
     }
 
-    suspend fun getBuyerProduct(): Response<GetProductResponse> {
-        return apiService.getBuyerProduct()
+    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<GetProductResponse> {
+        return apiService.getBuyerProduct(parameters)
     }
 
     suspend fun getBanner(accessToken: String): Response<BannerResponse> {
@@ -80,7 +80,7 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.sellerPostProduct(accessToken,name, description, basePrice, categoryId, location, productImage)
     }
 
-    suspend fun sellerGetProduct(accessToken: String): Response<GetProductResponse> {
+    suspend fun sellerGetProduct(accessToken: String): Response<List<GetProductResponseItem>> {
         return apiService.getSellerProduct(accessToken)
     }
 

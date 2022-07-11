@@ -3,6 +3,9 @@ package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -16,8 +19,8 @@ import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
 import kotlinx.android.synthetic.main.item_product_home.view.*
 
 
-class HomeAdapter(private val productBuyerHome: List<GetProductResponseItem>) :
-    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+    private var list = ArrayList<GetProductResponseItem>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -29,6 +32,11 @@ class HomeAdapter(private val productBuyerHome: List<GetProductResponseItem>) :
     }
     class ViewHolder(var binding: ItemProductHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
+    fun submitData(data: List<GetProductResponseItem>) {
+        list.addAll(data)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemProductHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,7 +44,7 @@ class HomeAdapter(private val productBuyerHome: List<GetProductResponseItem>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val productResponse = productBuyerHome[position]
+        val productResponse = list[position]
         val name = productResponse.name
         val kategori = productResponse.categories
         val base_price = productResponse.basePrice.toDouble()
@@ -75,14 +83,14 @@ class HomeAdapter(private val productBuyerHome: List<GetProductResponseItem>) :
             }
             ivBasePrice.text = rupiah(base_price)
             ivCardView.setOnClickListener {
-                onItemClickCallback.onItemClicked(productBuyerHome[holder.adapterPosition])
+                onItemClickCallback.onItemClicked(list[holder.adapterPosition])
             }
 
         }
     }
 
 
-    override fun getItemCount() = productBuyerHome.size
+    override fun getItemCount() = list.size
 
 
 }

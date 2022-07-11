@@ -11,13 +11,13 @@ class ImageSliderAdapter2(private val items: List<imageData>) : RecyclerView.Ada
 
     inner class ImageViewHolder(itemView: SliderItemBinding) : RecyclerView.ViewHolder(itemView.root){
         private val binding = itemView
-        fun bind(data:imageData){
-            with(binding){
-                Glide.with(itemView)
-                    .load((data.imageDrawable))
-                    .into(ivSlider)
-            }
-        }
+//        fun bind(data:imageData){
+//            with(binding){
+//                Glide.with(itemView)
+//                    .load((data.imageDrawable))
+//                    .into(ivSlider)
+//            }
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -25,7 +25,11 @@ class ImageSliderAdapter2(private val items: List<imageData>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(items[position])
+//        holder.bind(items[position])
+//        val items = items[position]
+//        Glide.with(holder.itemView.context)
+//            .load(items.imageDrawable)
+//            .into(bindi)
 
     }
 
