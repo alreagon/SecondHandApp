@@ -177,6 +177,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button_primary"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="@+id/wrap_phone"
         app:layout_constraintStart_toStartOf="@+id/wrap_phone"

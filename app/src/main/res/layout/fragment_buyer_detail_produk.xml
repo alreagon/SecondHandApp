@@ -199,11 +199,12 @@
     </ScrollView>
 
     <Button
-        android:layout_marginBottom="24dp"
-        android:layout_marginHorizontal="16dp"
         android:id="@+id/butonNegoDetailProdukBuyer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/rounded_button_primary"
         android:text="Saya Tertarik dan Ingin Nego"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"

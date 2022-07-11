@@ -185,7 +185,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBidPriceDIminati">
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnTolak"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -196,10 +196,8 @@
             android:layout_marginBottom="12dp"
             android:layout_weight="1"
             android:text="Tolak"
-            android:textColor="@color/primary"
-            app:backgroundTint="@color/white"
-            app:strokeColor="@color/primary"
-            app:strokeWidth="1dp" />
+            android:background="@drawable/rounded_button_secondary"
+            android:textColor="@color/primary"/>
 
 
         <Button
@@ -212,23 +210,24 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button_primary"
             android:text="Terima" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bid_acc"
-        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBidPriceDIminati">
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -240,9 +239,7 @@
             android:layout_weight="1"
             android:text="Status"
             android:textColor="@color/primary"
-            app:backgroundTint="@color/white"
-            app:strokeColor="@color/primary"
-            app:strokeWidth="1dp" />
+            android:background="@drawable/rounded_button_secondary"/>
 
 
         <Button
@@ -256,6 +253,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button_primary"
             android:text="Hubungi" />
     </LinearLayout>
 

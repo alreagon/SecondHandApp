@@ -64,7 +64,7 @@ class Produk : Fragment() {
         }
     }
 
-    private fun setupListProduct(data: GetProductResponse?) {
+    private fun setupListProduct(data: List<GetProductResponseItem>?) {
         val recycler = binding.recylcerProduct
         data?.let {
             val adapter = SaleListAdapter(object : HomeAdapter.OnItemClickCallback{

@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.finalprojectbinaracademy_secondhandapp.R
@@ -24,10 +27,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Home : Fragment(R.layout.fragment_home) {
 
-    private var adapterSlider: ImageSliderAdapter? = null
-    private val listImageSliderAdapter = ArrayList<BannerResponse>()
+    private lateinit var adapter: ImageSliderAdapter2
+    private val list = ArrayList<imageData>()
+    private lateinit var dots: ArrayList<TextView>
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
+    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var rvProduct: RecyclerView
+    private var page = 1
+    private var totalPage = 2
 
     private val homeViewModel: HomeViewModel by viewModel()
 
@@ -46,7 +54,6 @@ class Home : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
 //        binding.apply {
 //            haha.setOnClickListener {
 //
@@ -58,38 +65,105 @@ class Home : Fragment(R.layout.fragment_home) {
 //                dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
 //            }
 //        }
-        homeViewModel.BannerHome()
-        homeViewModel.getBannerHome.observe(viewLifecycleOwner){
-            imageSlider()
-        }
-        adapterSlider  = ImageSliderAdapter(listImageSliderAdapter)
+        setupRecycler()
 
-        homeViewModel.productHome()
-        homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            setBuyerProduct(it)
-        }
+        imageSlider()
 //
         homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 
+        scrollListener()
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun setBuyerProduct(product: List<GetProductResponseItem>) {
-        binding.apply {
-            val homeAdapter = HomeAdapter(product)
-            rvProductHome.setHasFixedSize(true)
-//            rvProductHome.layoutManager = LinearLayoutManager(requireContext())
-//            rvProductHome.layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,true)
-            rvProductHome.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            rvProductHome.adapter = homeAdapter
-            homeAdapter.setOnItemClickCallback(object :
-                HomeAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: GetProductResponseItem) {
-                    findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk(data.id))
-                }
-            })
+//    @SuppressLint("SetTextI18n")
+//    private fun setBuyerProduct(product: List<GetProductResponseItem>) {
+//        binding.apply {
+//            val homeAdapter = HomeAdapter()
+////            val layoutManager = LinearLayoutManager(requireContext())
+//            val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//            homeAdapter.submitData(product)
+//            homeAdapter.setOnItemClickCallback(object :
+//                HomeAdapter.OnItemClickCallback {
+//                    override fun onItemClicked(data: GetProductResponseItem) {
+//                        findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk(data.id))
+//                }
+//            })
+//            rvProductHome.setHasFixedSize(true)
+////            rvProductHome.layoutManager = LinearLayoutManager(requireContext())
+////            rvProductHome.layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,true)
+//            rvProductHome.layoutManager = layoutManager
+//            rvProductHome.adapter = homeAdapter
+//            rvProductHome.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                    val visibleItemCount = layoutManager.childCount
+//                    val total = adapter.itemCount
+//                    val arrayInt: IntArray? = null
+//                    val firstVisibleItems= layoutManager.findFirstVisibleItemPositions(arrayInt)
+//                    var pastVisibleItems = 0
+//                    if(firstVisibleItems != null && firstVisibleItems.size > 0) {
+//                        pastVisibleItems = firstVisibleItems[0];
+//                    }
+//
+//                    if (page < totalPage) {
+//                        if (visibleItemCount + pastVisibleItems >= total) {
+//                            loadMoreProduct()
+//                            homeViewModel.getproduct.observe(viewLifecycleOwner) { newPage ->
+//                                homeAdapter.submitData(newPage.data)
+//                            }
+//                        }
+//                    }
+//
+//                    super.onScrolled(recyclerView, dx, dy)
+//                }
+//            })
+//
+//        }
+//    }
 
+    private fun scrollListener() {
+        binding.nestedScroll.setOnScrollChangeListener(object :NestedScrollView.OnScrollChangeListener{
+            override fun onScrollChange(
+                v: NestedScrollView,
+                scrollX: Int,
+                scrollY: Int,
+                oldScrollX: Int,
+                oldScrollY: Int
+            ) {
+                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+                    loadMoreProduct()
+                    binding.progressBar2.visibility = View.VISIBLE
+                }
+            }
+        })
+    }
+
+    private fun loadMoreProduct() {
+        page ++
+        val params = HashMap<String,String>()
+        params["page"] = page.toString()
+        params["per_page"] = "20"
+
+        homeViewModel.getProductHome(params)
+        homeViewModel.getproduct.observe(viewLifecycleOwner) {
+            homeAdapter.submitData(it.data)
+            binding.progressBar2.visibility = View.GONE
         }
+    }
+
+    private fun setupRecycler() {
+        homeAdapter = HomeAdapter()
+        rvProduct = binding.rvProductHome
+        rvProduct.setHasFixedSize(true)
+        rvProduct.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        homeAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: GetProductResponseItem) {
+                findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk(data.id))
+            }
+        })
+        homeViewModel.getproduct.observe(viewLifecycleOwner) {
+            homeAdapter.submitData(it.data)
+            binding.progressBar2.visibility = View.GONE
+        }
+        rvProduct.adapter = homeAdapter
     }
 
     private fun imageSlider() {
@@ -98,17 +172,41 @@ class Home : Fragment(R.layout.fragment_home) {
         runnable = object : Runnable {
             var index = 0
             override fun run() {
-                if (index == listImageSliderAdapter.size)
+                if (index == list.size)
                     index = 0
                 Log.e("Ini Runnable,", "$index")
-                binding.viewPager.currentItem = index
+                binding.viewPager.setCurrentItem(index)
                 index++
                 handler.postDelayed(this, 5000)
             }
 
         }
 
-        binding.viewPager.adapter = adapterSlider
+
+        list.add(
+            imageData(
+                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656828994178-lega_calcio.png?alt=media"
+//                R.drawable.aamiin
+//                R.layout.fragment_info_penawar
+            )
+        )
+//        list.add(
+//            imageData(
+//                R.drawable.aamiin
+//            )
+//        )
+//        list.add(
+//            imageData(
+//                R.drawable.aamiin
+//            )
+//        )
+//        list.add(
+//            imageData(
+//                R.drawable.aamiin
+//            )
+//        )
+        adapter = ImageSliderAdapter2(list)
+        binding.viewPager.adapter = adapter
 
         binding.viewPager.registerOnPageChangeCallback(
             object :
@@ -139,24 +237,3 @@ class Home : Fragment(R.layout.fragment_home) {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
