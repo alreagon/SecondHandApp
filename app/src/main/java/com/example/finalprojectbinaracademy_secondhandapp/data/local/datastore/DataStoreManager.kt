@@ -10,6 +10,39 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DataStoreManager(private val context: Context) {
+//    suspend fun loginUserData(
+//        email : String,
+//        password : String,
+//        access_token : String
+//    )
+//    {
+//        context.dataStore.edit {
+//            it[EMAIL] = email
+//            it[PASSWORD] = password
+//            it[ACCESS_TOKEN] = access_token
+//        }
+//    }
+//
+//    val email : Flow<String> = context.dataStore.data.map {
+//        it[EMAIL] ?: ""
+//    }
+//
+//    val password : Flow<String> = context.dataStore.data.map {
+//        it[PASSWORD] ?: ""
+//    }
+//
+//    val access_token : Flow<String> = context.dataStore.data.map {
+//        it[ACCESS_TOKEN] ?: ""
+//    }
+//
+//    suspend fun logoutUserData(){
+//        GlobalScope.launch {
+//            context.dataStore.edit {
+//                it.clear()
+//            }
+//        }
+//    }
+
     suspend fun setLoginStatus() {
         context.dataStore.edit { pref ->
             pref[LOGIN_KEY] = true
@@ -19,7 +52,6 @@ class DataStoreManager(private val context: Context) {
     suspend fun setLogoutStatus() {
         context.dataStore.edit { pref ->
             pref[LOGIN_KEY] = false
-            pref.clear()
         }
     }
 
@@ -37,7 +69,7 @@ class DataStoreManager(private val context: Context) {
 
     fun getAccessToken(): Flow<String> {
         return context.dataStore.data.map { pref ->
-            pref[ACCESS_TOKEN] ?: "null"
+            pref[ACCESS_TOKEN] ?: "accessToken null"
         }
     }
 
@@ -49,35 +81,8 @@ class DataStoreManager(private val context: Context) {
         private val PASSWORD = stringPreferencesKey("KEY_PASSWORD")
         private val ACCESS_TOKEN = stringPreferencesKey("KEY_ACCESS_TOKEN")
 
-        private val LOGIN_STATUS_KEY = booleanPreferencesKey("login_status_key")
-        private val ID_KEY = intPreferencesKey("username_key")
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
-    }
 
-//    suspend fun saveUser(id: Int, status: Boolean) {
-//        context.dataStore.edit {
-//            it[ID_KEY] = id
-//            it[LOGIN_STATUS_KEY] = status
-//        }
-//    }
-//
-//    fun getId(): Flow<Int> {
-//        return context.dataStore.data.map {
-//            it[ID_KEY] ?: 0
-//        }
-//    }
-//
-//    fun getLoginStatus(): Flow<Boolean> {
-//        return context.dataStore.data.map {
-//            it[LOGIN_STATUS_KEY] ?: false
-//        }
-//    }
-//
-//    suspend fun logoutUserData() {
-//        GlobalScope.launch {
-//            context.dataStore.edit {
-//                it.clear()
-//            }
-//        }
-//    }
+
+    }
 }
