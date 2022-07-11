@@ -37,7 +37,39 @@
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/layout/slider_item.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/.DATA GUE/Kuliah/Binar Academy/FINAL PROJECT/SecondHandApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1425" />
+        <entry key="app/src/main/res/drawable/ic_rect_add_photo.xml" value="0.1655" />
+        <entry key="app/src/main/res/drawable/ic_strip_bottom_sheet.xml" value="0.2035" />
+        <entry key="app/src/main/res/drawable/ic_textfield_background.xml" value="0.243" />
+        <entry key="app/src/main/res/drawable/kotakputih.xml" value="0.2035" />
+        <entry key="app/src/main/res/drawable/rounded_bottom_sheet.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_example.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.21041666666666667" />
+        <entry key="app/src/main/res/layout/fragment_bottom_sheet_accept_bid.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_buyer__detail_produk.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/fragment_buyer_detail_produk.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_buyer_notification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.26197916666666665" />
+        <entry key="app/src/main/res/layout/fragment_daftar_jual.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_diminati.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_edit_detail_produk.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16729596282311937" />
+        <entry key="app/src/main/res/layout/fragment_info_penawar.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.21041666666666667" />
+        <entry key="app/src/main/res/layout/fragment_preview_post_product.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_produk.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_seller__detail_produk.xml" value="0.3223958333333333" />
+        <entry key="app/src/main/res/layout/fragment_seller_post_product.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_terjual.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_update_status_bottom_sheet.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_product_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/notifikasi_item_buyer.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/sale_list_product_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/slider_item.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/spinner_list_category_item.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.31743589743589745" />
       </map>
     </option>
   </component>

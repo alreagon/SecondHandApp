@@ -15,6 +15,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val appModule = module {
     single { provideNetworkHelper(androidContext()) }
@@ -36,10 +37,16 @@ private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     val loggingInterceptor = HttpLoggingInterceptor()
     loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
     OkHttpClient.Builder()
+        .connectTimeout(1,TimeUnit.MINUTES)
+        .writeTimeout(1,TimeUnit.MINUTES)
+        .readTimeout(1,TimeUnit.MINUTES)
         .addInterceptor(loggingInterceptor)
         .build()
 } else OkHttpClient
     .Builder()
+    .connectTimeout(1,TimeUnit.MINUTES)
+    .writeTimeout(1,TimeUnit.MINUTES)
+    .readTimeout(1,TimeUnit.MINUTES)
     .build()
 
 private fun provideRetrofit (

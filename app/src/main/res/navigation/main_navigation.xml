@@ -18,7 +18,7 @@
             app:destination="@id/daftarJual" />
         <action
             android:id="@+id/action_home2_to_seller_DetailProduk"
-            app:destination="@id/seller_DetailProduk"
+            app:destination="@id/seller_post_product"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -57,12 +57,28 @@
         <action
             android:id="@+id/action_profile_user_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profile_user_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/daftarJual"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.DaftarJual"
         android:label="fragment_daftar_jual"
-        tools:layout="@layout/fragment_daftar_jual" />
+        tools:layout="@layout/fragment_daftar_jual" >
+        <action
+            android:id="@+id/action_daftarJual_to_seller_post_product"
+            app:destination="@id/seller_post_product" />
+        <action
+            android:id="@+id/action_daftarJual_to_editProfile"
+            app:destination="@id/editProfile" />
+        <action
+            android:id="@+id/action_daftarJual_to_infoPenawar"
+            app:destination="@id/infoPenawar" />
+        <action
+            android:id="@+id/action_daftarJual_to_buyerDetailProduk"
+            app:destination="@id/buyerDetailProduk" />
+    </fragment>
     <fragment
         android:id="@+id/register"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.RegisterFragment"
@@ -76,15 +92,28 @@
         android:id="@+id/buyer_Notification"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.BuyerNotification"
         android:label="fragment_buyer__notification"
-        tools:layout="@layout/fragment_buyer_notification" />
+        tools:layout="@layout/fragment_buyer_notification" >
+        <action
+            android:id="@+id/action_buyer_Notification_to_buyerDetailProduk"
+            app:destination="@id/buyerDetailProduk" />
+    </fragment>
     <fragment
-        android:id="@+id/seller_DetailProduk"
-        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.SellerDetailProduk"
+        android:id="@+id/seller_post_product"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.SellerPostProduct"
         android:label="fragment_seller__detail_produk"
-        tools:layout="@layout/fragment_seller__detail_produk" >
+        tools:layout="@layout/fragment_seller_post_product" >
         <action
             android:id="@+id/action_seller_DetailProduk_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_seller_post_product_to_previewPostProduct"
+            app:destination="@id/previewPostProduct" />
+        <action
+            android:id="@+id/action_seller_post_product_to_daftarJual"
+            app:destination="@id/daftarJual" />
+        <action
+            android:id="@+id/action_seller_post_product_to_editProfile"
+            app:destination="@id/editProfile" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -105,6 +134,20 @@
             app:destination="@id/buyer_Notification" />
     </fragment>
     <fragment
+        android:id="@+id/previewPostProduct"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.PreviewPostProduct"
+        android:label="fragment_preview_post_product"
+        tools:layout="@layout/fragment_preview_post_product" >
+        <argument
+            android:name="requestProduct"
+            app:argType="com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RequestPostProduct" />
+        <action
+            android:id="@+id/action_previewPostProduct_to_daftarJual"
+            app:destination="@id/daftarJual"
+            app:popUpTo="@id/daftarJual"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
         android:id="@+id/buyerDetailProduk"
         android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.BuyerDetailProduk"
         android:label="fragment_buyer_detail_produk"
@@ -112,5 +155,20 @@
         <argument
             android:name="idProdukDetail"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/infoPenawar"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.InfoPenawar"
+        android:label="fragment_info_penawar"
+        tools:layout="@layout/fragment_info_penawar" >
+        <argument
+            android:name="idOrder"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

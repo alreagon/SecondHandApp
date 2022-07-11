@@ -14,11 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.finalprojectbinaracademy_secondhandapp.R
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.BannerResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentHomeBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
-import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter2
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
@@ -68,7 +66,7 @@ class Home : Fragment(R.layout.fragment_home) {
 
         homeViewModel.productHome()
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            setBuyerProduct(it.take(10))
+            setBuyerProduct(it)
         }
 //
         homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }

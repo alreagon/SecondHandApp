@@ -14,23 +14,42 @@
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btnBackDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_fi_arrow_left" />
+            </androidx.cardview.widget.CardView>
+
             <ImageView
                 android:id="@+id/imageDetailBuyer"
                 style="@style/RoundedImageView"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@drawable/aamiin"
+                android:layout_height="360dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardViewDetailProduk"
@@ -38,13 +57,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="-32dp"
                 android:orientation="vertical"
                 android:paddingHorizontal="24dp"
                 android:paddingVertical="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageDetailBuyer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageDetailBuyer">
+                app:layout_constraintTop_toBottomOf="@+id/imageDetailBuyer">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,7 +124,7 @@
                         android:layout_height="48dp"
                         android:adjustViewBounds="true"
                         app:shapeAppearanceOverlay="@style/RoundedImageViewProfileDetailProduk"
-                        app:srcCompat="@drawable/pensive_clown" />
+                        app:srcCompat="@drawable/default_avatar" />
 
                     <LinearLayout
 
@@ -172,25 +191,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/CardViewDetailProdukDesk" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
-
 
     <Button
         android:layout_marginBottom="24dp"
         android:layout_marginHorizontal="16dp"
         android:id="@+id/butonNegoDetailProdukBuyer"
-        style="@style/ButtonPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Saya Tertarik dan Ingin Nego"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

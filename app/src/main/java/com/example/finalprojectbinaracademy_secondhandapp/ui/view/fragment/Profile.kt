@@ -32,6 +32,8 @@ class Profile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        checkUserLogin()
+
         binding.logoutLayout.setOnClickListener {
             logout()
         }
@@ -39,24 +41,34 @@ class Profile : Fragment() {
         binding.updateProfile.setOnClickListener {
             updateProfile()
         }
+
+        binding.setting.setOnClickListener {
+            changePassword()
+        }
+    }
+
+    private fun changePassword() {
+        val action = ProfileDirections.actionProfileUserToChangePasswordFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun checkUserLogin() {
+        authViewModel.checkUserLogin().observe(viewLifecycleOwner) {
+            if (!it) {
+                val action = ProfileDirections.actionProfileUserToLoginFragment()
+                findNavController().navigate(action,NavOptions.Builder().setPopUpTo(R.id.profile_user, true).build())
+                Toast.makeText(requireContext(),"Anda belum login, silahkan login atau register...",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun updateProfile() {
-        authViewModel.checkUserLogin().observe(viewLifecycleOwner, Observer {
-            if (it) {
-                val action = ProfileDirections.actionProfileToEditProfile()
-                findNavController().navigate(action)
-            } else {
-                val action = ProfileDirections.actionProfileUserToLoginFragment()
-                findNavController().navigate(action)
-                Toast.makeText(requireContext(),"Anda belum login, silahkan login atau register...",Toast.LENGTH_SHORT).show()
-            }
-        })
-
+        val action = ProfileDirections.actionProfileToEditProfile()
+        findNavController().navigate(action)
     }
 
     private fun logout() {
-        authViewModel.checkUserLogin().observe(viewLifecycleOwner, Observer {
+        authViewModel.checkUserLogin().observe(viewLifecycleOwner) {
             if (it) {
                 val dialog = AlertDialog.Builder(requireContext())
                 dialog.setTitle("Logout")
@@ -80,6 +92,6 @@ class Profile : Fragment() {
             } else {
                 Toast.makeText(requireContext(),"Anda belum login, silahkan login atau register...",Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 }

@@ -1,18 +1,11 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.finalprojectbinaracademy_secondhandapp.api.ApiClient
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiService
-import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeViewModel(
     private val remoteRepository: RemoteRepository,
@@ -31,6 +24,9 @@ class HomeViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    init {
+        productHome()
+    }
 
     fun getAccessToken() : LiveData<String> {
         return dataStore.getAccessToken().asLiveData()

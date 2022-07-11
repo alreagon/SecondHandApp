@@ -1,15 +1,22 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentBuyerDetailProdukBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.BuyerDetailViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
@@ -32,6 +39,9 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
 
         showDetailProdukBuyer()
 
+        binding.btnBackDetail.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun showDetailProdukBuyer() {
@@ -40,7 +50,34 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
             binding.apply {
                 Glide.with(requireView())
                     .load(it.imageUrl)
+                    .centerCrop()
+                    .listener(object : RequestListener<Drawable>{
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            imageDetailBuyer.setImageResource(R.drawable.default_photo)
+                            return true
+                        }
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+                    })
                     .into(imageDetailBuyer)
+                it.user.imageUrl?.let {
+                    Glide.with(requireContext())
+                        .load(it)
+                        .centerCrop()
+                        .into(imageProfileDetailBuyer)
+                }
                 JudulDetailBuyer.text = it.name
                 if (!it.categories.isEmpty()){
                     KategoriDetailBuyer.text = it.categories[0].name
@@ -48,7 +85,7 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
                     KategoriDetailBuyer.text = "Kategori kosong"
                 }
 
-                hargaDetailBuyer.text = it.basePrice.toString()
+                hargaDetailBuyer.text = rupiah(it.basePrice.toDouble())
                 namaPenjualDetailBuyer.text = it.user.fullName
                 namaKotaDetailBuyer.text = it.user.city
                 deskripsiDetailBuyer.text = it.description

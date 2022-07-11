@@ -1,15 +1,7 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository
 
-import androidx.room.withTransaction
-import com.example.finalprojectbinaracademy_secondhandapp.data.local.ProductDao
-import com.example.finalprojectbinaracademy_secondhandapp.data.local.ProductRoomDatabase
-import com.example.finalprojectbinaracademy_secondhandapp.data.local.Resource
-import com.example.finalprojectbinaracademy_secondhandapp.data.local.networkBoundResource
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiService
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -39,12 +31,24 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.updateProfile(accessToken, name, phone, address, city, image)
     }
 
+    suspend fun changePassword(
+        accessToken: String,
+        currentPass: RequestBody,
+        newPass: RequestBody,
+        confirmPass: RequestBody
+    ): Response<ChangePasswordResponse> {
+        return apiHelperImpl.changePassword(accessToken, currentPass, newPass, confirmPass)
+    }
+
     suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
         return apiHelperImpl.getNotification(accessToken)
     }
 
-    suspend fun getBuyerProduct(): Response<GetProductResponse> {
+    suspend fun readNotification(accessToken: String, id: Int): Response<ReadNotificationResponse> {
+        return apiHelperImpl.readNotification(accessToken, id)
+    }
 
+    suspend fun getBuyerProduct(): Response<GetProductResponse> {
         return apiHelperImpl.getBuyerProduct()
     }
 
@@ -54,6 +58,60 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
 
     suspend fun getBuyerProductId(buyerId: Int): Response<GetResponseProductId> {
         return apiHelperImpl.getBuyerProductId(buyerId)
+    }
+
+    suspend fun getCategory(): Response<CategoryResponse> {
+        return apiHelperImpl.getCategory()
+    }
+
+    suspend fun getCategoryById(id: Int): Response<CategoryResponseItem> {
+        return apiHelperImpl.getCategoryById(id)
+    }
+
+    suspend fun postProduct(
+        accessToken: String,
+        name: RequestBody,
+        description: RequestBody,
+        basePrice: RequestBody,
+        categoryId: RequestBody,
+        location: RequestBody,
+        productImage: MultipartBody.Part
+    ): Response<PostProductResponse> {
+        return apiHelperImpl.postProduct(
+            accessToken,
+            name,
+            description,
+            basePrice,
+            categoryId,
+            location,
+            productImage
+        )
+    }
+
+    suspend fun getSellerProduct(accessToken: String): Response<GetProductResponse> {
+        return apiHelperImpl.sellerGetProduct(accessToken)
+    }
+
+    suspend fun getSellerOrder(
+        accessToken: String,
+        status: String?
+    ): Response<GetSellerOrderResponse> {
+        return apiHelperImpl.getSellerOrder(accessToken, status)
+    }
+
+    suspend fun getSellerOrderId(
+        accessToken: String,
+        idOrder: Int
+    ): Response<GetSellerOrderResponseItem> {
+        return apiHelperImpl.getSellerOrderId(accessToken, idOrder)
+    }
+
+    suspend fun patchOrder(
+        accessToken: String,
+        idOrder: Int,
+        status: RequestBody
+    ): Response<PatchOrderResponse> {
+        return apiHelperImpl.patchOrder(accessToken, idOrder, status)
     }
 
 }
