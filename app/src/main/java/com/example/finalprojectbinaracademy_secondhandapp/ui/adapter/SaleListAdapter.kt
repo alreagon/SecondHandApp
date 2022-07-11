@@ -29,7 +29,7 @@ class SaleListAdapter(private val onCLickItem: HomeAdapter.OnItemClickCallback):
 
     private val differ = AsyncListDiffer(this,diffCallback)
 
-    fun submitData(data: ArrayList<GetProductResponseItem>) {
+    fun submitData(data: List<GetProductResponseItem>) {
         differ.submitList(data)
     }
 

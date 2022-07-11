@@ -59,13 +59,9 @@ interface ApiService {
 
     //Get product buyer
     @GET("buyer/product")
-    suspend fun getBuyerProduct(): Response<GetProductResponse>
-
-    //Get banner
-    @GET("seller/banner")
-    suspend fun getBanner(
-        @Header("access_token") accessToken: String
-    ): Response<BannerResponse>
+    suspend fun getBuyerProduct(
+        @QueryMap parameters: HashMap<String,String>
+    ): Response<GetProductResponse>
 
     //Get product buyer {id}
     @GET("buyer/product/{id}")
@@ -73,6 +69,12 @@ interface ApiService {
         @Path("id")
         buyerId: Int
     ): Response<GetResponseProductId>
+
+    //Get banner
+    @GET("seller/banner")
+    suspend fun getBanner(
+        @Header("access_token") accessToken: String
+    ): Response<BannerResponse>
 
     // get category
     @GET("seller/category")
@@ -101,7 +103,7 @@ interface ApiService {
     @GET("seller/product")
     suspend fun getSellerProduct(
         @Header("access_token") accessToken: String
-    ): Response<GetProductResponse>
+    ): Response<List<GetProductResponseItem>>
 
     //get seller order from user
     @GET("seller/order")

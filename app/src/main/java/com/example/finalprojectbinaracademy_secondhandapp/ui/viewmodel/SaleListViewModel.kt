@@ -24,8 +24,8 @@ class SaleListViewModel(
     private val _seller = MutableLiveData<Resource<RegisterResponse>>()
     val seller: LiveData<Resource<RegisterResponse>> get() = _seller
 
-    private val _listProduct = MutableLiveData<Resource<GetProductResponse>>()
-    val listProduct: LiveData<Resource<GetProductResponse>> get() = _listProduct
+    private val _listProduct = MutableLiveData<Resource<List<GetProductResponseItem>>>()
+    val listProduct: LiveData<Resource<List<GetProductResponseItem>>> get() = _listProduct
 
     private val _listDiminati = MutableLiveData<Resource<GetSellerOrderResponse>>()
     val listDiminati: LiveData<Resource<GetSellerOrderResponse>> get() = _listDiminati

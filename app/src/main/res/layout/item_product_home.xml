@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:layout_marginEnd="4dp"
     android:orientation="vertical"
     android:paddingHorizontal="8dp"
     app:cardCornerRadius="10dp"
-    app:cardElevation="8dp">
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/black"
             android:ellipsize="end"
-            android:hint="judulnya aamiin"
+            android:text="judulnya aamiin"
             android:maxLines="2"
             android:textAlignment="textStart" />
 
@@ -51,7 +52,7 @@
             android:layout_marginTop="1dp"
             android:fontFamily="@font/poppins"
             android:gravity="start"
-            android:hint="kategori aamiin"
+            android:text="kategori kosong"
             android:maxLines="2" />
 
         <TextView
