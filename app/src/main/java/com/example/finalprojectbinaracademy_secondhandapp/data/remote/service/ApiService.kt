@@ -47,9 +47,7 @@ interface ApiService {
 
     //Get banner
     @GET("seller/banner")
-    suspend fun getBanner(
-        @Header("access_token") accessToken: String
-    ): Response<BannerResponse>
+    suspend fun getBanner(): Response<BannerResponse>
 
     //Get product buyer {id}
     @GET("buyer/product/{id}")

@@ -40,17 +40,17 @@ class HomeViewModel(
         return dataStore.getStatusLogin().asLiveData()
     }
 
-    fun BannerHome(accessToken: String) {
+    fun BannerHome() {
         viewModelScope.launch {
-            val response = remoteRepository.getBanner(accessToken)
+            val response = remoteRepository.getBanner()
             val codeResponse = response.code()
 
-            if (codeResponse == 201 ) {
+            if (codeResponse == 200 ) {
                 if (response.body() != null) {
                     _getBannerHome.postValue(response.body())
                 }
             } else {
-                Log.d("code != 201", "failed get Banner response")
+                Log.d("code != 200", "failed get Banner response")
             }
         }
     }

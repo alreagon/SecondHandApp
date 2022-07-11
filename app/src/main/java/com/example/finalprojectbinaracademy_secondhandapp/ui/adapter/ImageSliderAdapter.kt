@@ -1,47 +1,26 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.BannerResponse
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponseItem
-import com.example.finalprojectbinaracademy_secondhandapp.databinding.ItemProductHomeBinding
-import com.example.finalprojectbinaracademy_secondhandapp.databinding.SliderItemBinding
-import com.example.finalprojectbinaracademy_secondhandapp.utils.ConvertNumberTo
-import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
 import kotlinx.android.synthetic.main.notifikasi_item_buyer.view.*
 import kotlinx.android.synthetic.main.slider_item.view.*
 
-class ImageSliderAdapter() : RecyclerView.Adapter<ImageSliderAdapter.ViewHolder>() {
+
+class ImageSliderAdapter(
+private val data: List<BannerResponse>
+) : RecyclerView.Adapter<ImageSliderAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<BannerResponse>() {
-        override fun areItemsTheSame(oldItem: BannerResponse, newItem: BannerResponse): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: BannerResponse, newItem: BannerResponse): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
-        }
-
-    }
-
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    fun submitData(data: ArrayList<BannerResponse>) {
-        differ.submitList(data)
-    }
-
-    fun clearData() {
-        val data = arrayListOf<BannerResponse>()
-        differ.submitList(data)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -52,16 +31,16 @@ class ImageSliderAdapter() : RecyclerView.Adapter<ImageSliderAdapter.ViewHolder>
 
 
 override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    val currentList = differ.currentList[position]
+    val currentList = data[position]
 
-    if (currentList.image == null) {
+    if (currentList.image_url == null) {
         Glide.with(holder.itemView.context)
-            .load(R.drawable.aamiin)
+            .load(R.drawable.shopeebanner1)
             .centerCrop()
             .into(holder.itemView.iv_slider)
     } else {
         Glide.with(holder.itemView.context)
-            .load(currentList.image)
+            .load(currentList.image_url)
             .centerCrop()
             .into(holder.itemView.iv_slider)
     }
@@ -69,7 +48,7 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 }
 
 override fun getItemCount(): Int {
-    return differ.currentList.size
+    return data.size
 }
 
 }

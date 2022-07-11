@@ -1,7 +1,15 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository
 
+import androidx.room.withTransaction
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.ProductDao
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.ProductRoomDatabase
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.Resource
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.networkBoundResource
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiService
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -36,11 +44,12 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
     }
 
     suspend fun getBuyerProduct(): Response<GetProductResponse> {
+
         return apiHelperImpl.getBuyerProduct()
     }
 
-    suspend fun getBanner(accessToken: String): Response<BannerResponse> {
-        return apiHelperImpl.getBanner(accessToken)
+    suspend fun getBanner(): Response<BannerResponse> {
+        return apiHelperImpl.getBanner()
     }
 
     suspend fun getBuyerProductId(buyerId: Int): Response<GetResponseProductId> {

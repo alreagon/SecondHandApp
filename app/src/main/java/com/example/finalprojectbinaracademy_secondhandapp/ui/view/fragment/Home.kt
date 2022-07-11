@@ -14,9 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.BannerResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentHomeBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter2
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
@@ -24,9 +26,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Home : Fragment(R.layout.fragment_home) {
 
-    private lateinit var adapter: ImageSliderAdapter2
-    private val list = ArrayList<imageData>()
-    private lateinit var dots: ArrayList<TextView>
+    private var adapterSlider: ImageSliderAdapter? = null
+    private val listImageSliderAdapter = ArrayList<BannerResponse>()
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
 
@@ -59,12 +60,15 @@ class Home : Fragment(R.layout.fragment_home) {
 //                dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
 //            }
 //        }
-
-        imageSlider()
+        homeViewModel.BannerHome()
+        homeViewModel.getBannerHome.observe(viewLifecycleOwner){
+            imageSlider()
+        }
+        adapterSlider  = ImageSliderAdapter(listImageSliderAdapter)
 
         homeViewModel.productHome()
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            setBuyerProduct(it)
+            setBuyerProduct(it.take(10))
         }
 //
         homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
@@ -96,40 +100,17 @@ class Home : Fragment(R.layout.fragment_home) {
         runnable = object : Runnable {
             var index = 0
             override fun run() {
-                if (index == list.size)
+                if (index == listImageSliderAdapter.size)
                     index = 0
                 Log.e("Ini Runnable,", "$index")
-                binding.viewPager.setCurrentItem(index)
+                binding.viewPager.currentItem = index
                 index++
                 handler.postDelayed(this, 5000)
             }
 
         }
 
-
-        list.add(
-            imageData(
-                R.drawable.aamiin
-//                R.layout.fragment_info_penawar
-            )
-        )
-        list.add(
-            imageData(
-                R.drawable.aamiin
-            )
-        )
-        list.add(
-            imageData(
-                R.drawable.aamiin
-            )
-        )
-        list.add(
-            imageData(
-                R.drawable.aamiin
-            )
-        )
-        adapter = ImageSliderAdapter2(list)
-        binding.viewPager.adapter = adapter
+        binding.viewPager.adapter = adapterSlider
 
         binding.viewPager.registerOnPageChangeCallback(
             object :

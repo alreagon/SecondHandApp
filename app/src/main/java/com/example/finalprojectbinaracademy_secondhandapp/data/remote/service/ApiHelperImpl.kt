@@ -38,8 +38,8 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.getBuyerProduct()
     }
 
-    suspend fun getBanner(accessToken: String): Response<BannerResponse> {
-        return apiService.getBanner(accessToken)
+    suspend fun getBanner(): Response<BannerResponse> {
+        return apiService.getBanner()
     }
 
     suspend fun getBuyerProductId(buyerId: Int): Response<GetResponseProductId> {
