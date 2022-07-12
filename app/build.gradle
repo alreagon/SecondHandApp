@@ -145,4 +145,7 @@ dependencies {
 
     implementation 'com.github.Dhaval2404:ImagePicker:2.1'
 
+    //dependency for slider view
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
 }

@@ -75,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:inputType="number"
             android:singleLine="true"
             tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
@@ -163,21 +164,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnToPreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
             android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_button_secondary"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1"
-            android:text="Preview"
             android:textColor="@color/primary"
-            app:backgroundTint="@color/white"
-            app:strokeColor="@color/primary"
-            app:strokeWidth="2dp" />
+            android:text="Preview"/>
 
 
         <Button
@@ -190,6 +189,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button_primary"
             android:text="Terbitkan" />
     </LinearLayout>
 

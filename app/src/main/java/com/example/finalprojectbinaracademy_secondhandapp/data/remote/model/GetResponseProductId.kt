@@ -7,7 +7,7 @@ data class GetResponseProductId(
     @SerializedName("base_price")
     val basePrice: Int,
     @SerializedName("Categories")
-    val categories: List<CategoryX>,
+    val categories: List<Category>,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("description")

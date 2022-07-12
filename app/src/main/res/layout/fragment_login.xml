@@ -87,6 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_button_primary"
         android:text="@string/masuk"
         app:layout_constraintEnd_toEndOf="@+id/wrap_password"
         app:layout_constraintStart_toStartOf="@+id/wrap_password"
@@ -128,11 +129,11 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@android:style/Widget.Holo.Light.ProgressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

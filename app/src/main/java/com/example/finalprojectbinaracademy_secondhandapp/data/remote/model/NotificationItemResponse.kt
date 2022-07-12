@@ -35,5 +35,5 @@ data class NotificationItemResponse(
     @SerializedName("updatedAt")
     val updatedAt: String,
     @SerializedName("User")
-    val user: UserNotification
+    val user: User
 )

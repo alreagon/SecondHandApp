@@ -28,8 +28,17 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         address: RequestBody,
         city: RequestBody,
         image: MultipartBody.Part
-    ) : Response<RegisterResponse> {
-        return apiHelperImpl.updateProfile(accessToken,name,phone,address,city,image)
+    ): Response<RegisterResponse> {
+        return apiHelperImpl.updateProfile(accessToken, name, phone, address, city, image)
+    }
+
+    suspend fun changePassword(
+        accessToken: String,
+        currentPass: RequestBody,
+        newPass: RequestBody,
+        confirmPass: RequestBody
+    ): Response<ChangePasswordResponse> {
+        return apiHelperImpl.changePassword(accessToken, currentPass, newPass, confirmPass)
     }
 
     suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
@@ -40,8 +49,8 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.readNotification(accessToken, id)
     }
 
-    suspend fun getBuyerProduct(): Response<GetProductResponse> {
-        return apiHelperImpl.getBuyerProduct()
+    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<GetProductResponse> {
+        return apiHelperImpl.getBuyerProduct(parameters)
     }
 
     suspend fun getBanner(accessToken: String): Response<BannerResponse> {
@@ -52,11 +61,11 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.getBuyerProductId(buyerId)
     }
 
-    suspend fun getCategory() : Response<CategoryResponse> {
+    suspend fun getCategory(): Response<CategoryResponse> {
         return apiHelperImpl.getCategory()
     }
 
-    suspend fun getCategoryById(id: Int) : Response<CategoryResponseItem> {
+    suspend fun getCategoryById(id: Int): Response<CategoryResponseItem> {
         return apiHelperImpl.getCategoryById(id)
     }
 
@@ -68,8 +77,42 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         categoryId: RequestBody,
         location: RequestBody,
         productImage: MultipartBody.Part
-    ) : Response<PostProductResponse> {
-        return apiHelperImpl.postProduct(accessToken, name, description, basePrice, categoryId, location, productImage)
+    ): Response<PostProductResponse> {
+        return apiHelperImpl.postProduct(
+            accessToken,
+            name,
+            description,
+            basePrice,
+            categoryId,
+            location,
+            productImage
+        )
+    }
+
+    suspend fun getSellerProduct(accessToken: String): Response<List<GetProductResponseItem>> {
+        return apiHelperImpl.sellerGetProduct(accessToken)
+    }
+
+    suspend fun getSellerOrder(
+        accessToken: String,
+        status: String?
+    ): Response<GetSellerOrderResponse> {
+        return apiHelperImpl.getSellerOrder(accessToken, status)
+    }
+
+    suspend fun getSellerOrderId(
+        accessToken: String,
+        idOrder: Int
+    ): Response<GetSellerOrderResponseItem> {
+        return apiHelperImpl.getSellerOrderId(accessToken, idOrder)
+    }
+
+    suspend fun patchOrder(
+        accessToken: String,
+        idOrder: Int,
+        status: RequestBody
+    ): Response<PatchOrderResponse> {
+        return apiHelperImpl.patchOrder(accessToken, idOrder, status)
     }
 
 }

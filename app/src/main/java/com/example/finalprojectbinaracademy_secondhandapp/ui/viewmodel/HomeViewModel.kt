@@ -24,6 +24,12 @@ class HomeViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    init {
+        val params = HashMap<String,String>()
+        params["page"] = "2"
+        params["per_page"] = "20"
+        getProductHome(params)
+    }
 
     fun getAccessToken() : LiveData<String> {
         return dataStore.getAccessToken().asLiveData()
@@ -60,10 +66,10 @@ class HomeViewModel(
         }
     }
 
-    fun productHome() {
+    fun getProductHome(parameters: HashMap<String,String>) {
         _isLoading.value = true
         viewModelScope.launch {
-            val product = remoteRepository.getBuyerProduct()
+            val product = remoteRepository.getBuyerProduct(parameters)
             if (product.code() == 200) {
                 _isLoading.value = false
                 _getProduct.postValue(product.body())

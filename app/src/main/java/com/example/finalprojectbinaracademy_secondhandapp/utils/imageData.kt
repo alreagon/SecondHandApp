@@ -4,6 +4,6 @@ import android.graphics.drawable.AnimatedImageDrawable
 
 data class imageData(
 //    val imageUrl:String
-    val imageDrawable: Int
+    val imageDrawable: String
 //    val layout : Int
 )

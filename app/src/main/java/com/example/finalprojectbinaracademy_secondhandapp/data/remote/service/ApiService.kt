@@ -34,6 +34,16 @@ interface ApiService {
         @Part("city") city: RequestBody
     ): Response<RegisterResponse>
 
+    //change password
+    @Multipart
+    @PUT("auth/change-password")
+    suspend fun changePassword(
+        @Header("access_token") accessToken: String,
+        @Part("current_password") currentPass: RequestBody,
+        @Part("new_password") newPass: RequestBody,
+        @Part("confirm_password") confirmPass: RequestBody
+    ) : Response<ChangePasswordResponse>
+
     //notification
     @GET("notification")
     suspend fun getNotification(
@@ -49,13 +59,9 @@ interface ApiService {
 
     //Get product buyer
     @GET("buyer/product")
-    suspend fun getBuyerProduct(): Response<GetProductResponse>
-
-    //Get banner
-    @GET("seller/banner")
-    suspend fun getBanner(
-        @Header("access_token") accessToken: String
-    ): Response<BannerResponse>
+    suspend fun getBuyerProduct(
+        @QueryMap parameters: HashMap<String,String>
+    ): Response<GetProductResponse>
 
     //Get product buyer {id}
     @GET("buyer/product/{id}")
@@ -63,6 +69,12 @@ interface ApiService {
         @Path("id")
         buyerId: Int
     ): Response<GetResponseProductId>
+
+    //Get banner
+    @GET("seller/banner")
+    suspend fun getBanner(
+        @Header("access_token") accessToken: String
+    ): Response<BannerResponse>
 
     // get category
     @GET("seller/category")
@@ -86,5 +98,34 @@ interface ApiService {
         @Part("location") location: RequestBody,
         @Part productImage: MultipartBody.Part
     ): Response<PostProductResponse>
+
+    //get seller product
+    @GET("seller/product")
+    suspend fun getSellerProduct(
+        @Header("access_token") accessToken: String
+    ): Response<List<GetProductResponseItem>>
+
+    //get seller order from user
+    @GET("seller/order")
+    suspend fun getSellerOrder(
+        @Header("access_token") accessToken: String,
+        @Query("status") status: String?
+    ): Response<GetSellerOrderResponse>
+
+    //get seller order by id
+    @GET("seller/order/{id}")
+    suspend fun getSellerOrderId(
+        @Header("access_token") accessToken: String,
+        @Path("id") idOrder: Int
+    ): Response<GetSellerOrderResponseItem>
+
+    //seller accept or delete
+    @Multipart
+    @PATCH("seller/order/{id}")
+    suspend fun patchOrder(
+        @Header("access_token") accessToken: String,
+        @Path("id") idOrder: Int,
+        @Part("status") status: RequestBody
+    ): Response<PatchOrderResponse>
 }
 
