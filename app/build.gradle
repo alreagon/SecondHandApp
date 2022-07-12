@@ -118,6 +118,13 @@ dependencies {
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    // Testing
+    testImplementation 'junit:junit:$jUnitVersion'
+    testImplementation 'androidx.test:core:$androidXTestVersion'
+    testImplementation 'org.mockito:mockito-core:$mockitoVersion'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion'
+    testImplementation 'io.mockk:mockk:$mockkVersion'
+
     // Mock
 //    testImplementation 'org.mockito:mockito-core:4.5.1'
 //    testImplementation 'io.mockk:mockk:2.28.2'
