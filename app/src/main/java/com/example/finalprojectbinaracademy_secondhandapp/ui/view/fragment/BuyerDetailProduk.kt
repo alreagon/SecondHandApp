@@ -17,6 +17,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentBuyerDetailProdukBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.BuyerDetailViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
@@ -45,6 +46,11 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
     }
 
     private fun showDetailProdukBuyer() {
+//        binding.apply {
+//            haha.setOnClickListener {
+//
+//            }
+//        }
         buyerDetailViewModel.BuyerDetailProdukId(args.idProdukDetail)
         buyerDetailViewModel.getproductId.observe(viewLifecycleOwner) {
             binding.apply {
@@ -89,6 +95,17 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
                 namaPenjualDetailBuyer.text = it.user.fullName
                 namaKotaDetailBuyer.text = it.user.city
                 deskripsiDetailBuyer.text = it.description
+
+                butonNegoDetailProdukBuyer.setOnClickListener {
+                    val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+                    val view1 = layoutInflater.inflate(R.layout.bottomsheet, null)
+                    dialog.setCancelable(true)
+                    dialog.setContentView(view1)
+                    dialog.show()
+                    dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
+                }
+
+
             }
         }
 

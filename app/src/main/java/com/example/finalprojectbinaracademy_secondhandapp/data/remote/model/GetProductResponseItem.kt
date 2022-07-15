@@ -2,15 +2,13 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.model
 
 
 import android.os.Parcelable
-import androidx.room.*
-import com.google.gson.Gson
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.parcel.Parcelize
-import java.util.*
 
 //@Entity(tableName = "getProductHome")
-@TypeConverters(CategoryTypeConverter::class)
+//@TypeConverters(CategoryTypeConverter::class)
 data class GetProductResponseItem(
 
     @SerializedName("base_price")
@@ -57,26 +55,26 @@ data class GetProductResponseItem(
 //    }
 //}
 
-class CategoryTypeConverter {
-    private val gson = Gson()
-    @TypeConverter
-    fun stringToList(data: String?): List<CategoryX> {
-        if (data == null) {
-            return Collections.emptyList()
-        }
-
-        val listType = object : TypeToken<List<CategoryX>>() {
-
-        }.type
-
-        return gson.fromJson<List<CategoryX>>(data, listType)
-    }
-
-    @TypeConverter
-    fun listToString(someObjects: List<CategoryX>): String {
-        return gson.toJson(someObjects)
-    }
-}
+//class CategoryTypeConverter {
+//    private val gson = Gson()
+//    @TypeConverter
+//    fun stringToList(data: String?): List<CategoryX> {
+//        if (data == null) {
+//            return Collections.emptyList()
+//        }
+//
+//        val listType = object : TypeToken<List<CategoryX>>() {
+//
+//        }.type
+//
+//        return gson.fromJson<List<CategoryX>>(data, listType)
+//    }
+//
+//    @TypeConverter
+//    fun listToString(someObjects: List<CategoryX>): String {
+//        return gson.toJson(someObjects)
+//    }
+//}
 
 @Parcelize
 data class CategoryX(

@@ -52,7 +52,7 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.getBuyerProduct(parameters)
     }
 
-    suspend fun getBanner(): Response<BannerResponse> {
+    suspend fun getBanner(): Response <List<BannerResponse>> {
         return apiService.getBanner()
     }
 
@@ -94,5 +94,9 @@ class ApiHelperImpl(private val apiService: ApiService) {
 
     suspend fun patchOrder(accessToken: String,idOrder: Int,status: RequestBody): Response<PatchOrderResponse> {
         return apiService.patchOrder(accessToken, idOrder, status)
+    }
+
+    suspend fun postBuyerOrder(accessToken: String, request: PostBuyerOrderRequest ) : Response<PostBuyerOrderResponse>{
+        return apiService.postBuyerOrder(accessToken, request )
     }
 }

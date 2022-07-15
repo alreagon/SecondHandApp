@@ -14,8 +14,8 @@ class ImageSliderAdapter2(private val items: List<imageData>) : RecyclerView.Ada
         fun bind(data:imageData){
             with(binding){
                 Glide.with(itemView)
-                    .load((data.imageDrawable))
-//                    .into(ivSlider)
+                    .load((data.imageUrl))
+                    .into(ivSlider)
             }
         }
     }

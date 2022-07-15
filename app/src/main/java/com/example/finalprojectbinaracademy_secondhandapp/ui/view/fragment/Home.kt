@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.BannerResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentHomeBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.ImageSliderAdapter2
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.imageData
@@ -27,9 +29,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class Home : Fragment(R.layout.fragment_home) {
 
-    private lateinit var adapter: ImageSliderAdapter2
-    private val list = ArrayList<imageData>()
-    private lateinit var dots: ArrayList<TextView>
+    private lateinit var adapterSlider: ImageSliderAdapter
+    private val listImageSliderAdapter = ArrayList<BannerResponse>()
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
     private lateinit var homeAdapter: HomeAdapter
@@ -54,21 +55,22 @@ class Home : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.apply {
-//            haha.setOnClickListener {
-//
-//                val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
-//                val view1 = layoutInflater.inflate(R.layout.bottomsheet, null)
-//                dialog.setCancelable(true)
-//                dialog.setContentView(view1)
-//                dialog.show()
-//                dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-//            }
-//        }
+
         setupRecycler()
 
-        imageSlider()
-//
+        handler = Handler(Looper.getMainLooper())
+        homeViewModel.BannerHome()
+//        adapterSlider = ImageSliderAdapter(listImageSliderAdapter)
+        homeViewModel.getBannerHome.observe(viewLifecycleOwner){
+            listImageSliderAdapter.addAll(it)
+
+            imageSlider()
+        }
+//        homeViewModel.getProductHome()
+//        homeViewModel.getproduct.observe(viewLifecycleOwner) {
+//            setBuyerProduct(it.take(10))
+//        }
+
         homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 
         scrollListener()
@@ -144,89 +146,111 @@ class Home : Fragment(R.layout.fragment_home) {
 
         homeViewModel.getProductHome(params)
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            homeAdapter.submitData(it.data)
+            homeAdapter.submitData(it)
             binding.progressBar2.visibility = View.GONE
         }
     }
 
     private fun setupRecycler() {
+
         homeAdapter = HomeAdapter()
         rvProduct = binding.rvProductHome
         rvProduct.setHasFixedSize(true)
         rvProduct.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        homeAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback{
+        homeAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
             override fun onItemClicked(data: GetProductResponseItem) {
                 findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk(data.id))
             }
         })
         homeViewModel.getproduct.observe(viewLifecycleOwner) {
-            homeAdapter.submitData(it.data)
+            homeAdapter.submitData(it)
             binding.progressBar2.visibility = View.GONE
         }
         rvProduct.adapter = homeAdapter
     }
+//    @SuppressLint("SetTextI18n")
+//    private fun setBuyerProduct(product: List<GetProductResponseItem>) {
+//        binding.apply {
+//            val homeAdapter = HomeAdapter(product)
+//            rvProductHome.setHasFixedSize(true)
+////            rvProductHome.layoutManager = LinearLayoutManager(requireContext())
+////            rvProductHome.layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,true)
+//            rvProductHome.layoutManager =
+//                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//            rvProductHome.adapter = homeAdapter
+//            homeAdapter.setOnItemClickCallback(object :
+//                HomeAdapter.OnItemClickCallback {
+//                override fun onItemClicked(data: GetProductResponseItem) {
+//                    findNavController().navigate(HomeDirections.actionHome2ToBuyerDetailProduk(data.id))
+//                }
+//            })
+//
+//        }
+//        rvProduct.adapter = homeAdapter
+//    }
 
     private fun imageSlider() {
 
-        handler = Handler(Looper.getMainLooper())
         runnable = object : Runnable {
             var index = 0
             override fun run() {
-                if (index == list.size)
+                if (index == listImageSliderAdapter.size)
                     index = 0
                 Log.e("Ini Runnable,", "$index")
-                binding.viewPager.setCurrentItem(index)
+                binding.viewPager.currentItem = index
                 index++
                 handler.postDelayed(this, 5000)
             }
 
         }
-
-
-        list.add(
-            imageData(
-                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656828994178-lega_calcio.png?alt=media"
-//                R.drawable.aamiin
-//                R.layout.fragment_info_penawar
-            )
-        )
 //        list.add(
 //            imageData(
-//                R.drawable.aamiin
+//                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656828994178-lega_calcio.png?alt=media"
 //            )
 //        )
 //        list.add(
 //            imageData(
-//                R.drawable.aamiin
+//                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656829026499-la_liga.jpg?alt=media"
 //            )
 //        )
 //        list.add(
 //            imageData(
-//                R.drawable.aamiin
+//                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656829041324-Premier_league.png?alt=media"
 //            )
 //        )
-        adapter = ImageSliderAdapter2(list)
-        binding.viewPager.adapter = adapter
+//        list.add(
+//            imageData(
+//                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656829065552-champions_league.jpg?alt=media"
+//            )
+//        )
+//        list.add(
+//            imageData(
+//                "https://firebasestorage.googleapis.com/v0/b/market-final-project.appspot.com/o/banner%2FBAN-1656829081250-europa_league.jpg?alt=media"
+//            )
+//        )
 
-        binding.viewPager.registerOnPageChangeCallback(
-            object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                }
-            })
+        adapterSlider = ImageSliderAdapter(listImageSliderAdapter)
+        binding.viewPager.adapter = adapterSlider
+
+//        binding.viewPager.registerOnPageChangeCallback(
+//            object :
+//                ViewPager2.OnPageChangeCallback() {
+//                override fun onPageSelected(position: Int) {
+//                    super.onPageSelected(position)
+//                }
+//            })
     }
 
-    override fun onStart() {
-        super.onStart()
-        handler.post(runnable)
-
+    override fun onResume() {
+        super.onResume()
+//        handler.post(runnable)
     }
 
     override fun onStop() {
         super.onStop()
         handler.removeCallbacks(runnable)
     }
+
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }

@@ -230,6 +230,7 @@
                 android:overScrollMode="never"
                 android:paddingBottom="60dp"
                 android:scrollbars="none"
+                tools:listitem="@layout/item_product_home"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

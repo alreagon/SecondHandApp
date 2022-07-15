@@ -52,7 +52,7 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.getBuyerProduct(parameters)
     }
 
-    suspend fun getBanner(): Response<BannerResponse> {
+    suspend fun getBanner(): Response <List<BannerResponse>> {
         return apiHelperImpl.getBanner()
     }
 
@@ -112,6 +112,12 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         status: RequestBody
     ): Response<PatchOrderResponse> {
         return apiHelperImpl.patchOrder(accessToken, idOrder, status)
+    }
+    suspend fun postBuyerOrder(
+        accessToken: String,
+        request: PostBuyerOrderRequest
+    ) : Response<PostBuyerOrderResponse>{
+        return apiHelperImpl.postBuyerOrder(accessToken, request)
     }
 
 }

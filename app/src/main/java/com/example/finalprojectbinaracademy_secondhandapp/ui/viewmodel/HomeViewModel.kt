@@ -13,12 +13,12 @@ class HomeViewModel(
 
 ) : ViewModel() {
 
-    private val _getProduct = MutableLiveData<GetProductResponse>()
-    val getproduct: LiveData<GetProductResponse>
+    private val _getProduct = MutableLiveData<List<GetProductResponseItem>>()
+    val getproduct: LiveData<List<GetProductResponseItem>>
         get() = _getProduct
 
-    private val _getBannerHome = MutableLiveData<BannerResponse>()
-    val getBannerHome: LiveData<BannerResponse>
+    private val _getBannerHome = MutableLiveData <List<BannerResponse>>()
+    val getBannerHome: LiveData <List<BannerResponse>>
         get() = _getBannerHome
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -31,11 +31,11 @@ class HomeViewModel(
         getProductHome(params)
     }
 
-    fun getAccessToken() : LiveData<String> {
+    fun getAccessToken(): LiveData<String> {
         return dataStore.getAccessToken().asLiveData()
     }
 
-    fun getStatusLogin() : LiveData<Boolean> {
+    fun getStatusLogin(): LiveData<Boolean> {
         return dataStore.getStatusLogin().asLiveData()
     }
 
@@ -44,7 +44,7 @@ class HomeViewModel(
             val response = remoteRepository.getBanner()
             val codeResponse = response.code()
 
-            if (codeResponse == 200 ) {
+            if (codeResponse == 200) {
                 if (response.body() != null) {
                     _getBannerHome.postValue(response.body())
                 }
@@ -72,7 +72,7 @@ class HomeViewModel(
             val product = remoteRepository.getBuyerProduct(parameters)
             if (product.code() == 200) {
                 _isLoading.value = false
-                _getProduct.postValue(product.body())
+                _getProduct.postValue(product.body()?.data)
             } else {
                 _isLoading.value = false
                 Log.d("response error", "get product error")
