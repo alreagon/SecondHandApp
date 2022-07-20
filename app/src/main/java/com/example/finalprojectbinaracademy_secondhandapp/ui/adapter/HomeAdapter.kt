@@ -30,6 +30,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     class ViewHolder(var binding: ItemProductHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun submitData(data: List<GetProductResponseItem>) {
+        list.clear()
         list.addAll(data)
         notifyDataSetChanged()
     }

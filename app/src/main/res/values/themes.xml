@@ -57,8 +57,12 @@
 
     <style name="TextTitle.Small">
         <item name="android:textSize">14sp</item>
-
         <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="TextTitle.SmallNoBold">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppins</item>
     </style>
 
     <style name="TextTitle.VerySmall">

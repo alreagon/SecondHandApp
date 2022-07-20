@@ -17,7 +17,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewM
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(R.layout.fragment_register) {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val registerViewModel: AuthViewModel by viewModel()
@@ -58,8 +58,9 @@ class RegisterFragment : Fragment() {
         val confirmpass = binding.etConfirmPass.text.toString()
 
         if (inputCheck(name,email,pass,confirmpass)) {
+                            //dataclass
             val request = RegisterRequest("DEFAULT_ADDRESS","DEFAULT_CITY",email,name,null,pass,"000")
-
+                            //vm
             registerViewModel.userRegister(request)
 
             registerViewModel.userRegis.observe(viewLifecycleOwner) { user ->

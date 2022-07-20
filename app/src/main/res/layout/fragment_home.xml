@@ -31,11 +31,10 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/aamiin" />
+                    android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/testes"
+                    android:id="@+id/textViewSearch"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_marginHorizontal="16dp"
@@ -230,11 +229,11 @@
                 android:overScrollMode="never"
                 android:paddingBottom="60dp"
                 android:scrollbars="none"
-                tools:listitem="@layout/item_product_home"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_product_home">
 
             </androidx.recyclerview.widget.RecyclerView>
 

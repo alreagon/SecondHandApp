@@ -61,7 +61,14 @@ interface ApiService {
     @GET("buyer/product")
     suspend fun getBuyerProduct(
         @QueryMap parameters: HashMap<String, String>
-    ): Response<GetProductResponse>
+    ): Response<List<GetProductResponseItem>>
+
+    //Get product buyer SEARCH
+    @GET("buyer/product")
+    suspend fun getBuyerProductSearch(
+        @QueryMap parameters: HashMap<String, String>,
+        @Query("search") productName : String
+    ): Response<List<GetProductResponseItem>>
 
     //Get product buyer {id}
     @GET("buyer/product/{id}")

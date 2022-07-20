@@ -48,8 +48,11 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.readNotification(accessToken, id)
     }
 
-    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<GetProductResponse> {
+    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<List<GetProductResponseItem>> {
         return apiHelperImpl.getBuyerProduct(parameters)
+    }
+    suspend fun getBuyerProductSearch(parameters: HashMap<String,String>, productName : String): Response<List<GetProductResponseItem>> {
+        return apiHelperImpl.getBuyerProductSearch(parameters, productName)
     }
 
     suspend fun getBanner(): Response <List<BannerResponse>> {

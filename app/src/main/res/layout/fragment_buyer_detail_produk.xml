@@ -198,7 +198,7 @@
 
     </ScrollView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/butonNegoDetailProdukBuyer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -207,6 +207,23 @@
         android:background="@drawable/rounded_button_primary"
         android:text="Saya Tertarik dan Ingin Nego"
         android:textAllCaps="false"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id="@+id/butonMenungguResponPenjual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="false"
+        android:background="@drawable/rounded_button_secondary"
+        android:text="Menunggu respon penjual"
+        android:textAllCaps="false"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

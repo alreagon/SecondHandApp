@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.LoginRequest
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentLoginBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewModel
@@ -16,7 +17,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModel()
