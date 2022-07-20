@@ -14,28 +14,27 @@
         android:layout_height="wrap_content"
         android:scrollbars="none">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
             <FrameLayout
                 android:id="@+id/Header"
                 android:layout_width="match_parent"
                 android:layout_height="398dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/aamiin" />
+                    android:layout_height="match_parent" />
 
                 <TextView
-                    android:id="@+id/testes"
+                    android:id="@+id/textViewSearch"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_marginHorizontal="16dp"
@@ -209,22 +208,22 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressBar"
-                android:layout_width="80dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                app:indicatorColor="@color/primary"
+                app:indicatorColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/rv_productHome"
                 app:layout_constraintStart_toStartOf="@id/rv_productHome"
                 app:layout_constraintTop_toTopOf="@id/rv_productHome"
-                app:trackCornerRadius="8dp" />
+                app:trackCornerRadius="8dp"
+                tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_productHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/Header"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="4dp"
                 android:overScrollMode="never"
@@ -233,7 +232,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_product_home">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -246,10 +246,11 @@
                 android:layout_height="wrap_content" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
 
-
+    <!--for RV-->
+    <!--    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"-->

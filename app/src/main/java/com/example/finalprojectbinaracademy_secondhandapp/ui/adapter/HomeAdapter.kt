@@ -3,9 +3,6 @@ package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -33,6 +30,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     class ViewHolder(var binding: ItemProductHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun submitData(data: List<GetProductResponseItem>) {
+        list.clear()
         list.addAll(data)
         notifyDataSetChanged()
     }

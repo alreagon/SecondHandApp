@@ -2,7 +2,6 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.remote.repositor
 
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
-import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -49,12 +48,15 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         return apiHelperImpl.readNotification(accessToken, id)
     }
 
-    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<GetProductResponse> {
+    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<List<GetProductResponseItem>> {
         return apiHelperImpl.getBuyerProduct(parameters)
     }
+    suspend fun getBuyerProductSearch(parameters: HashMap<String,String>, productName : String): Response<List<GetProductResponseItem>> {
+        return apiHelperImpl.getBuyerProductSearch(parameters, productName)
+    }
 
-    suspend fun getBanner(accessToken: String): Response<BannerResponse> {
-        return apiHelperImpl.getBanner(accessToken)
+    suspend fun getBanner(): Response <List<BannerResponse>> {
+        return apiHelperImpl.getBanner()
     }
 
     suspend fun getBuyerProductId(buyerId: Int): Response<GetResponseProductId> {
@@ -113,6 +115,12 @@ class RemoteRepository(private val apiHelperImpl: ApiHelperImpl) {
         status: RequestBody
     ): Response<PatchOrderResponse> {
         return apiHelperImpl.patchOrder(accessToken, idOrder, status)
+    }
+    suspend fun postBuyerOrder(
+        accessToken: String,
+        request: PostBuyerOrderRequest
+    ) : Response<PostBuyerOrderResponse>{
+        return apiHelperImpl.postBuyerOrder(accessToken, request)
     }
 
 }

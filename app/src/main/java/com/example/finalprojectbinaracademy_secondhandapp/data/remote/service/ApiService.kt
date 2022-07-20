@@ -42,7 +42,7 @@ interface ApiService {
         @Part("current_password") currentPass: RequestBody,
         @Part("new_password") newPass: RequestBody,
         @Part("confirm_password") confirmPass: RequestBody
-    ) : Response<ChangePasswordResponse>
+    ): Response<ChangePasswordResponse>
 
     //notification
     @GET("notification")
@@ -60,8 +60,15 @@ interface ApiService {
     //Get product buyer
     @GET("buyer/product")
     suspend fun getBuyerProduct(
-        @QueryMap parameters: HashMap<String,String>
-    ): Response<GetProductResponse>
+        @QueryMap parameters: HashMap<String, String>
+    ): Response<List<GetProductResponseItem>>
+
+    //Get product buyer SEARCH
+    @GET("buyer/product")
+    suspend fun getBuyerProductSearch(
+        @QueryMap parameters: HashMap<String, String>,
+        @Query("search") productName : String
+    ): Response<List<GetProductResponseItem>>
 
     //Get product buyer {id}
     @GET("buyer/product/{id}")
@@ -72,19 +79,17 @@ interface ApiService {
 
     //Get banner
     @GET("seller/banner")
-    suspend fun getBanner(
-        @Header("access_token") accessToken: String
-    ): Response<BannerResponse>
+    suspend fun getBanner(): Response<List<BannerResponse>>
 
     // get category
     @GET("seller/category")
-    suspend fun getCategory() : Response<CategoryResponse>
+    suspend fun getCategory(): Response<CategoryResponse>
 
     //get category by id
     @GET("seller/category/{id}")
     suspend fun getCategoryById(
         @Path("id") id: Int
-    ) : Response<CategoryResponseItem>
+    ): Response<CategoryResponseItem>
 
     //post product
     @Multipart
@@ -127,5 +132,13 @@ interface ApiService {
         @Path("id") idOrder: Int,
         @Part("status") status: RequestBody
     ): Response<PatchOrderResponse>
+
+    //Post buyer order
+    @POST("buyer/order")
+    suspend fun postBuyerOrder(
+        @Header("access_token") accessToken: String,
+        @Body request: PostBuyerOrderRequest
+    ): Response<PostBuyerOrderResponse>
+
 }
 

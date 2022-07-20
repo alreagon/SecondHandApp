@@ -10,6 +10,6 @@ val viewModelModule = module {
     viewModel { NotificationViewModel(get(),get()) }
     viewModel { SellViewModel(get(),get()) }
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { BuyerDetailViewModel(get()) }
+    viewModel { BuyerDetailViewModel(get(), get()) }
     viewModel { SaleListViewModel(get(),get()) }
 }

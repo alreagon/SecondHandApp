@@ -24,7 +24,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
-class SellerPostProduct : Fragment() {
+class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
     private var _binding: FragmentSellerPostProductBinding? = null
     private val binding get() = _binding!!
     private val sellViewModel: SellViewModel by viewModel()
