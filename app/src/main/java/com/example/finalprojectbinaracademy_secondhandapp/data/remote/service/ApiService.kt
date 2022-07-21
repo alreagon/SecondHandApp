@@ -1,5 +1,7 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.service
 
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.*
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -48,7 +50,7 @@ interface ApiService {
     @GET("notification")
     suspend fun getNotification(
         @Header("access_token") accessToken: String,
-    ): Response<NotificationResponse>
+    ): List<Notification>
 
     //read notification
     @PATCH("notification/{id}")
@@ -60,15 +62,14 @@ interface ApiService {
     //Get product buyer
     @GET("buyer/product")
     suspend fun getBuyerProduct(
-        @QueryMap parameters: HashMap<String, String>
+        @QueryMap parameters: HashMap<String,String>
     ): Response<List<GetProductResponseItem>>
 
-    //Get product buyer SEARCH
+    //Get product buyer
     @GET("buyer/product")
-    suspend fun getBuyerProductSearch(
-        @QueryMap parameters: HashMap<String, String>,
-        @Query("search") productName : String
-    ): Response<List<GetProductResponseItem>>
+    suspend fun getProductBoundResource(
+        @QueryMap parameters: HashMap<String,String>
+    ): List<Product>
 
     //Get product buyer {id}
     @GET("buyer/product/{id}")
@@ -79,7 +80,7 @@ interface ApiService {
 
     //Get banner
     @GET("seller/banner")
-    suspend fun getBanner(): Response<List<BannerResponse>>
+    suspend fun getBanner(): Response<List<Banner>>
 
     // get category
     @GET("seller/category")
@@ -108,14 +109,23 @@ interface ApiService {
     @GET("seller/product")
     suspend fun getSellerProduct(
         @Header("access_token") accessToken: String
-    ): Response<List<GetProductResponseItem>>
+    ): Response<List<SellerProduct>>
+
+    //seller put status product
+    @Multipart
+    @PATCH("seller/product/{id}")
+    suspend fun patchStatusProduct(
+        @Header("access_token") accessToken: String,
+        @Path("id") idOrder: Int,
+        @Part("status") status: RequestBody
+    ): Response<PostProductResponse>
 
     //get seller order from user
     @GET("seller/order")
     suspend fun getSellerOrder(
         @Header("access_token") accessToken: String,
-        @Query("status") status: String?
-    ): Response<GetSellerOrderResponse>
+        @Query("status") status: String
+    ): Response<List<SellerOrder>>
 
     //get seller order by id
     @GET("seller/order/{id}")

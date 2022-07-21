@@ -162,7 +162,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnToWasap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -173,6 +173,7 @@
         android:drawableEnd="@drawable/ic_whatsapp"
         android:paddingEnd="24dp"
         android:text="Hubungi via whatsapp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardView13"
         app:layout_constraintStart_toStartOf="@+id/cardView13"

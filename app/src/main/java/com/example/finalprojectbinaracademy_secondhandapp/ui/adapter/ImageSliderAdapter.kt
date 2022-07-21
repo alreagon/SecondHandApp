@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Banner
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.BannerResponse
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.SliderItemBinding
 import kotlinx.android.synthetic.main.slider_item.view.*
 
 
 class ImageSliderAdapter(
-    private val data: List<BannerResponse>
+    private val data: List<Banner>
 ) : RecyclerView.Adapter<ImageSliderAdapter.ViewHolder>() {
 
 

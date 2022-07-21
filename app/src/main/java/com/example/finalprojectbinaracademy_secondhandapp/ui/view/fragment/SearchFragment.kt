@@ -12,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentSearchBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,11 +25,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var rvProduct: RecyclerView
-    private var page = 1
     private val searchViewModel: HomeViewModel by viewModel()
     private lateinit var searchProductResultAdapter: HomeAdapter
-
-    private lateinit var searchArrayList: ArrayList<GetProductResponseItem>
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -43,62 +42,48 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val params = HashMap<String, String>()
-        params["page"] = page.toString()
-        params["per_page"] = "20"
+        observeSearchProduct()
+        setupRecycler()
 
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search_bar.clearFocus()
-                searchViewModel.getSearchProduct(params, query!!)
+                searchViewModel.getSearchProduct(query!!)
 
-                searchViewModel.getproduct.observe(viewLifecycleOwner) {
-                    searchProductResultAdapter.submitData(it)
-                    binding.PBSearch.visibility = View.GONE
-                }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
-
-
         })
-
-        setupRecycler()
-
-        searchViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
-
-        scrollListener()
     }
 
-    private fun scrollListener() {
-        binding.nestedScroll.setOnScrollChangeListener(object :
-            NestedScrollView.OnScrollChangeListener {
-            override fun onScrollChange(
-                v: NestedScrollView,
-                scrollX: Int,
-                scrollY: Int,
-                oldScrollX: Int,
-                oldScrollY: Int
-            ) {
-                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
-//                    loadMoreProduct()
+    private fun observeSearchProduct() {
+        searchViewModel.getproduct.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.LOADING -> {
                     binding.PBSearch.visibility = View.VISIBLE
                 }
+                Status.SUCCESS -> {
+                    it.data?.let {
+                        searchProductResultAdapter.submitData(it)
+                        binding.PBSearch.visibility = View.GONE
+                    }
+                    if (it.data.isNullOrEmpty()) {
+                        binding.displayDefault.visibility = View.VISIBLE
+                    } else {
+                        binding.displayDefault.visibility = View.GONE
+                    }
+                    binding.PBSearch.visibility = View.GONE
+                }
+                Status.ERROR -> {
+                    binding.PBSearch.visibility = View.GONE
+                    binding.displayDefault.visibility = View.GONE
+                }
             }
-        })
+        }
     }
-
-//    private fun loadMoreProduct() {
-//        page++
-//        val params = HashMap<String, String>()
-//        params["page"] = page.toString()
-//        params["per_page"] = "20"
-//
-//    }
-
 
     private fun setupRecycler() {
 
@@ -107,15 +92,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         rvProduct.setHasFixedSize(true)
         rvProduct.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         searchProductResultAdapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: GetProductResponseItem) {
+            override fun onItemClicked(data: Product) {
                 findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToBuyerDetailProduk(data.id))
             }
         })
         rvProduct.adapter = searchProductResultAdapter
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.PBSearch.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroy() {
@@ -123,16 +104,3 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         _binding = null
     }
 }
-
-
-//    class SearchFragment : Fragment() {
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_search, container, false)
-//    }
-//
-//
-//}

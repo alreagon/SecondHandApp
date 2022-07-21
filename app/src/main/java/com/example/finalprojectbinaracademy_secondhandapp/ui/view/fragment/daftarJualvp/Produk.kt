@@ -5,20 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.finalprojectbinaracademy_secondhandapp.R
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponse
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.SellerProduct
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentProdukBinding
-import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
-import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.SaleListAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.SellerProductAdapter
+import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.SellerProductOnClick
 import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.DaftarJualDirections
-import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.Home
-import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.HomeDirections
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.SaleListViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,15 +33,12 @@ class Produk : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getSellerProduct()
 
-        binding.ivAddProductListSell.setOnClickListener {
-            val action = DaftarJualDirections.actionDaftarJualToSellerPostProduct()
-            findNavController().navigate(action)
-        }
+        getSellerProduct()
     }
 
     private fun getSellerProduct() {
+        saleListViewModel.getSellerProduct()
         saleListViewModel.listProduct.observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
@@ -64,16 +54,20 @@ class Produk : Fragment() {
         }
     }
 
-    private fun setupListProduct(data: List<GetProductResponseItem>?) {
+    private fun setupListProduct(data: List<SellerProduct>?) {
         val recycler = binding.recylcerProduct
         data?.let {
-            val adapter = SaleListAdapter(object : HomeAdapter.OnItemClickCallback{
-                override fun onItemClicked(data: GetProductResponseItem) {
+            val adapter = SellerProductAdapter(object : SellerProductOnClick{
+                override fun onItemClick(data: SellerProduct) {
                     val action = DaftarJualDirections.actionDaftarJualToBuyerDetailProduk(data.id)
                     findNavController().navigate(action)
                 }
+                override fun onHeaderClick() {
+                    val action = DaftarJualDirections.actionDaftarJualToSellerPostProduct()
+                    findNavController().navigate(action)
+                }
             })
-            adapter.submitData(data)
+            adapter.SubmitListWithHeader(data)
             recycler.layoutManager = GridLayoutManager(requireContext(),2)
             recycler.adapter = adapter
         }

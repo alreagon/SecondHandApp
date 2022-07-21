@@ -3,6 +3,9 @@ package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -10,6 +13,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.ItemProductHomeBinding
 import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
@@ -17,7 +21,7 @@ import kotlinx.android.synthetic.main.item_product_home.view.*
 
 
 class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
-    private var list = ArrayList<GetProductResponseItem>()
+    private var list = ArrayList<Product>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -25,11 +29,11 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: GetProductResponseItem)
+        fun onItemClicked(data: Product)
     }
     class ViewHolder(var binding: ItemProductHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun submitData(data: List<GetProductResponseItem>) {
+    fun submitData(data: List<Product>) {
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()
@@ -81,14 +85,12 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
             }
             ivBasePrice.text = rupiah(base_price)
             ivCardView.setOnClickListener {
-                onItemClickCallback.onItemClicked(list[holder.adapterPosition])
+                onItemClickCallback.onItemClicked(productResponse)
             }
 
         }
     }
 
-
     override fun getItemCount() = list.size
-
 
 }

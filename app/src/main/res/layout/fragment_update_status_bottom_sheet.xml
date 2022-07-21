@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnUpdateStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -43,10 +43,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/rgUpdateStatus" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/rgUpdateStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -58,14 +58,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView20">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/rbAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/primary"
             android:text="Berhasil transaksi" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/rbDeclined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

@@ -59,6 +59,7 @@ class DaftarJual : Fragment(R.layout.fragment_daftar_jual) {
     }
 
     private fun getSeller() {
+        saleListViewModel.getSeller()
         saleListViewModel.seller.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -71,10 +72,12 @@ class DaftarJual : Fragment(R.layout.fragment_daftar_jual) {
     private fun setupView(data: RegisterResponse?) {
         binding.tvUserName.text = data?.fullName
         binding.tvCity.text = data?.city
-        Glide.with(this)
-            .load(data?.imageUrl)
-            .centerCrop()
-            .into(binding.ivProfil)
+        if (data?.imageUrl != null) {
+            Glide.with(this)
+                .load(data?.imageUrl)
+                .centerCrop()
+                .into(binding.ivProfil)
+        }
     }
 
     override fun onDestroy() {

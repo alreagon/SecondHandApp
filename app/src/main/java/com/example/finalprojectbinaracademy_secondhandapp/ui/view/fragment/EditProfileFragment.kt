@@ -14,6 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentEditProfileBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.EditProfileViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
+import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
+import com.example.finalprojectbinaracademy_secondhandapp.utils.successToast
 import com.github.dhaval2404.imagepicker.ImagePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -37,6 +40,7 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getUser()
+        checkProfile()
 
         binding.btnSave.setOnClickListener {
             updateProfile()
@@ -52,36 +56,71 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun getUser() {
-        editProfileViewModel.getAccessToken().observe(viewLifecycleOwner) { accessToken ->
-            editProfileViewModel.getUserByAccessToken(accessToken)
-        }
+        editProfileViewModel.getUserByAccessToken()
+        editProfileViewModel.detailUser.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { user ->
+                        binding.etName.setText(user.fullName)
 
-        editProfileViewModel.detailUser.observe(viewLifecycleOwner) { user ->
-            if (user != null) {
-                binding.etName.setText(user.fullName)
+                        if (user.address != "DEFAULT_ADDRESS") {
+                            binding.etAddress.setText(user.address)
+                        }
+                        if (user.phoneNumber != "000") {
+                            binding.etPhone.setText(user.phoneNumber)
+                        }
 
-                if (user.address != "DEFAULT_ADDRESS") {
-                    binding.etAddress.setText(user.address)
+                        if (user.city != "DEFAULT_CITY") {
+                            binding.etCity.setText(user.city)
+                        }
+
+                        user.imageUrl?.let {
+                            Glide.with(requireContext())
+                                .load(user.imageUrl)
+                                .centerCrop()
+                                .into(binding.ivProfilePict)
+
+                            binding.ivProfilePict.alpha = 1F
+                        }
+                        binding.pbProfile.visibility = View.GONE
+                    }
                 }
-                if (user.phoneNumber != "000") {
-                    binding.etPhone.setText(user.phoneNumber)
+                Status.ERROR -> {
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                    binding.pbProfile.visibility = View.GONE
                 }
-
-                if (user.city != "DEFAULT_CITY") {
-                    binding.etCity.setText(user.city)
+                Status.LOADING -> {
+                    binding.pbProfile.visibility = View.VISIBLE
                 }
-
-                user.imageUrl?.let {
-                    Glide.with(requireContext())
-                        .load(user.imageUrl)
-                        .centerCrop()
-                        .into(binding.ivProfilePict)
-
-                    binding.ivProfilePict.alpha = 1F
-                }
-                binding.pbProfile.visibility = View.GONE
             }
         }
+
+//        editProfileViewModel.detailUser.observe(viewLifecycleOwner) { user ->
+//            if (user != null) {
+//                binding.etName.setText(user.fullName)
+//
+//                if (user.address != "DEFAULT_ADDRESS") {
+//                    binding.etAddress.setText(user.address)
+//                }
+//                if (user.phoneNumber != "000") {
+//                    binding.etPhone.setText(user.phoneNumber)
+//                }
+//
+//                if (user.city != "DEFAULT_CITY") {
+//                    binding.etCity.setText(user.city)
+//                }
+//
+//                user.imageUrl?.let {
+//                    Glide.with(requireContext())
+//                        .load(user.imageUrl)
+//                        .centerCrop()
+//                        .into(binding.ivProfilePict)
+//
+//                    binding.ivProfilePict.alpha = 1F
+//                }
+//                binding.pbProfile.visibility = View.GONE
+//            }
+//        }
     }
 
     private fun choseImage() {
@@ -114,6 +153,24 @@ class EditProfileFragment : Fragment() {
             }
         }
 
+    private fun checkProfile() {
+        editProfileViewModel.updateProfile.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    Toast(requireContext()).successToast("update profile successfully..",requireContext())
+                    binding.pbProfile.visibility = View.GONE
+                }
+                Status.ERROR -> {
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                    binding.pbProfile.visibility = View.GONE
+                }
+                Status.LOADING -> {
+                    binding.pbProfile.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
     private fun updateProfile() {
         val name = binding.etName.text.toString()
         val address = binding.etAddress.text.toString()
@@ -124,15 +181,7 @@ class EditProfileFragment : Fragment() {
             if (!::imageProfile.isInitialized) {
                 Toast.makeText(requireContext(),"Photo profile tidak boleh kosong",Toast.LENGTH_SHORT).show()
             } else {
-                editProfileViewModel.getAccessToken().observe(viewLifecycleOwner) {
-                    editProfileViewModel.updateProfile(it,imageProfile,name,phone, address, city)
-                }
-
-                editProfileViewModel.updateProfile.observe(viewLifecycleOwner) {
-                    it?.let {
-                        Toast.makeText(requireContext(),"update profile successfully..",Toast.LENGTH_SHORT).show()
-                    }
-                }
+                editProfileViewModel.updateProfile(imageProfile,name,phone, address, city)
             }
         } else {
             validateErrorInput(name, address, city, phone)

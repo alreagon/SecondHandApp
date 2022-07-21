@@ -1,5 +1,7 @@
 package com.example.finalprojectbinaracademy_secondhandapp.data.remote.service
 
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.*
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
 import okhttp3.MultipartBody
@@ -40,7 +42,7 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.changePassword(accessToken, currentPass, newPass, confirmPass)
     }
 
-    suspend fun getNotification(accessToken: String): Response<NotificationResponse> {
+    suspend fun getNotification(accessToken: String): List<Notification> {
         return apiService.getNotification(accessToken)
     }
 
@@ -48,15 +50,15 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.readNotification(accessToken, id)
     }
 
-    suspend fun getBuyerProduct(parameters: HashMap<String,String>,): Response<List<GetProductResponseItem>> {
+    suspend fun getBuyerProduct(parameters: HashMap<String,String>): Response<List<GetProductResponseItem>> {
         return apiService.getBuyerProduct(parameters)
     }
 
-    suspend fun getBuyerProductSearch(parameters: HashMap<String,String>, productName : String): Response<List<GetProductResponseItem>> {
-        return apiService.getBuyerProductSearch(parameters, productName)
+    suspend fun getProducBoundResource(parameters: HashMap<String, String>) : List<Product> {
+        return apiService.getProductBoundResource(parameters)
     }
 
-    suspend fun getBanner(): Response <List<BannerResponse>> {
+    suspend fun getBanner(): Response<List<Banner>> {
         return apiService.getBanner()
     }
 
@@ -84,11 +86,19 @@ class ApiHelperImpl(private val apiService: ApiService) {
         return apiService.sellerPostProduct(accessToken,name, description, basePrice, categoryId, location, productImage)
     }
 
-    suspend fun sellerGetProduct(accessToken: String): Response<List<GetProductResponseItem>> {
+    suspend fun patchStatusProduct(
+        accessToken: String,
+        idOrder: Int,
+        status: RequestBody
+    ): Response<PostProductResponse> {
+        return apiService.patchStatusProduct(accessToken, idOrder, status)
+    }
+
+    suspend fun sellerGetProduct(accessToken: String): Response<List<SellerProduct>> {
         return apiService.getSellerProduct(accessToken)
     }
 
-    suspend fun getSellerOrder(accessToken: String, status: String?): Response<GetSellerOrderResponse> {
+    suspend fun getSellerOrder(accessToken: String, status: String): Response<List<SellerOrder>> {
         return apiService.getSellerOrder(accessToken,status)
     }
 

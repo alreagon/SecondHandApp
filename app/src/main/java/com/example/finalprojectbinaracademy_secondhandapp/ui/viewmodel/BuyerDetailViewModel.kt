@@ -11,16 +11,19 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetR
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.PostBuyerOrderRequest
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.PostBuyerOrderResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
+import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class BuyerDetailViewModel(
     private val remoteRepository: RemoteRepository,
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
+    private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
-    private val _getProductId = MutableLiveData<GetResponseProductId>()
-    val getproductId: LiveData<GetResponseProductId>
+    private val _getProductId = MutableLiveData<Resource<GetResponseProductId>>()
+    val getproductId: LiveData<Resource<GetResponseProductId>>
         get() = _getProductId
 
     private val _postBuyerOrder = MutableLiveData<Resource<PostBuyerOrderResponse>>()
@@ -29,29 +32,41 @@ class BuyerDetailViewModel(
 
     fun BuyerDetailProdukId(buyerId: Int) {
         viewModelScope.launch {
-            val productId = remoteRepository.getBuyerProductId(buyerId)
-            if (productId.code() == 200) {
-                _getProductId.postValue(productId.body())
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val productId = remoteRepository.getBuyerProductId(buyerId)
+                    if (productId.code() == 200) {
+                        _getProductId.postValue(Resource.success(productId.body()))
+                    } else {
+                        _getProductId.postValue(Resource.error("Failed to get detail product",null))
+                    }
+                } catch (e: Exception) {
+                    _getProductId.postValue(Resource.error(e.message.toString(),null))
+                }
             } else {
-                Log.d("response error", "get product error")
+              _getProductId.postValue(Resource.error("please check your internet connection...",null))
             }
         }
-
     }
+
     fun PostBuyerOrder(request: PostBuyerOrderRequest){
         viewModelScope.launch {
-            dataStore.getAccessToken().collect{
-                val postBuyerOrder = remoteRepository.postBuyerOrder(it,request)
-
-            if (postBuyerOrder.isSuccessful){
-                _postBuyerOrder.postValue(Resource.success(postBuyerOrder.body()))
-            }else   {
-                _postBuyerOrder.postValue(Resource.error("error PostBuyerOrder", null))
-            }
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    dataStore.getAccessToken().collectLatest {
+                        val postBuyerOrder = remoteRepository.postBuyerOrder(it,request)
+                        if (postBuyerOrder.isSuccessful){
+                            _postBuyerOrder.postValue(Resource.success(postBuyerOrder.body()))
+                        }else   {
+                            _postBuyerOrder.postValue(Resource.error("error PostBuyerOrder", null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getProductId.postValue(Resource.error(e.message.toString(),null))
+                }
+            } else {
+                _postBuyerOrder.postValue(Resource.error("please check your internet connection...", null))
             }
         }
     }
-
-
-
 }

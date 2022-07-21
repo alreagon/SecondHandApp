@@ -4,5 +4,5 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository
 import org.koin.dsl.module
 
 val repoModule = module {
-    single { RemoteRepository(get()) }
+    single { RemoteRepository(get(),get()) }
 }

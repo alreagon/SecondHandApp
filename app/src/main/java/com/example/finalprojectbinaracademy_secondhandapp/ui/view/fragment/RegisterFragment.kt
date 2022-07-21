@@ -15,6 +15,9 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Regi
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentRegisterBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
+import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
+import com.example.finalprojectbinaracademy_secondhandapp.utils.successToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -35,19 +38,48 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        checkingRegister()
+
         binding.button.setOnClickListener {
-            binding.pbRegister.visibility = View.VISIBLE
             registerUser()
         }
 
         binding.tvGoToLogin.setOnClickListener {
-//            val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
-//            findNavController().navigate(action)
             findNavController().navigateUp()
         }
 
         binding.btnBackToLogin.setOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+    private fun checkingRegister() {
+        registerViewModel.userRegis.observe(viewLifecycleOwner) { user ->
+            when(user.status) {
+                Status.LOADING -> {
+                    binding.progressBarRegister.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
+                    findNavController().navigate(action,
+                    NavOptions.Builder().setPopUpTo(R.id.register, true).build())
+                    binding.progressBarRegister.visibility = View.GONE
+                    Toast(requireContext()).successToast("Registration successfully",requireContext())
+                }
+                Status.ERROR -> {
+                    binding.progressBarRegister.visibility = View.GONE
+                    Toast(requireContext()).errorToast("Registration failed",requireContext())
+                }
+            }
+//            if (user != null) {
+//                val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
+//                findNavController().navigate(action,
+//                    NavOptions.Builder().setPopUpTo(R.id.register, true).build())
+//                Toast.makeText(requireContext(),"register successfully",Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(requireContext(),"register failed", Toast.LENGTH_SHORT).show()
+//                binding.pbRegister.visibility = View.GONE
+//            }
         }
     }
 
@@ -63,22 +95,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             //vm
             registerViewModel.userRegister(request)
 
-            registerViewModel.userRegis.observe(viewLifecycleOwner) { user ->
-
-                if (user != null) {
-                    val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
-                    findNavController().navigate(action,
-                        NavOptions.Builder().setPopUpTo(R.id.register, true).build())
-                    Toast.makeText(requireContext(),"register successfully",Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(),"register failed", Toast.LENGTH_SHORT).show()
-                    binding.pbRegister.visibility = View.GONE
-                }
-            }
-
         } else {
             validateErrorInput(name,email,pass,confirmpass)
-            binding.pbRegister.visibility = View.GONE
         }
     }
 
@@ -116,8 +134,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         } else {
             binding.wrapPassword.error = null
         }
-
-
     }
 
     private fun inputCheck(name: String, email:String, pass: String, confirmpass: String): Boolean {

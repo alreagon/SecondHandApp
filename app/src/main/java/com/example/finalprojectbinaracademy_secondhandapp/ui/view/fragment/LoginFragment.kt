@@ -15,6 +15,8 @@ import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentLo
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.AuthViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.PasswordUtils
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
+import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
+import com.example.finalprojectbinaracademy_secondhandapp.utils.successToast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -53,17 +55,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             when(userLogin.status) {
                 Status.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    Toast.makeText(requireContext(),"loading to login",Toast.LENGTH_SHORT).show()
                 }
                 Status.SUCCESS -> {
                     val action = LoginFragmentDirections.actionLoginFragmentToHome2()
                     findNavController().navigate(action)
 
-                    Toast.makeText(requireContext(),"Hello ${userLogin.data?.name}...", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(),"Hello ${userLogin.data?.name}...", Toast.LENGTH_SHORT).show()
+                    Toast(requireContext()).successToast("Hello ${userLogin.data?.name}...",requireContext())
                 }
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), userLogin.message, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(), userLogin.message, Toast.LENGTH_SHORT).show()
+                    Toast(requireContext()).errorToast(userLogin.message.toString(),requireContext())
                 }
             }
         }

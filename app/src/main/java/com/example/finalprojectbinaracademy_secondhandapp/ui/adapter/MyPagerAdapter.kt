@@ -1,15 +1,12 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.daftarJualvp.Diminati
 import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.daftarJualvp.Produk
-import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.daftarJualvp.terjual
+import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.daftarJualvp.Terjual
 
 class MyPagerAdapter(fm: FragmentManager,lifecycle: Lifecycle) : FragmentStateAdapter(fm,lifecycle) {
 
@@ -17,7 +14,7 @@ class MyPagerAdapter(fm: FragmentManager,lifecycle: Lifecycle) : FragmentStateAd
     private val pages = listOf(
         Produk(),
         Diminati(),
-        terjual()
+        Terjual()
     )
 
     //menentukan fragment yang akan dibuka pertama
@@ -46,7 +43,7 @@ class MyPagerAdapter(fm: FragmentManager,lifecycle: Lifecycle) : FragmentStateAd
         return when(position) {
             0 -> Produk()
             1 -> Diminati()
-            2 -> terjual()
+            2 -> Terjual()
             else -> Produk()
         }
     }

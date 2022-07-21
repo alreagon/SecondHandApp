@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <FrameLayout
                 android:id="@+id/Header"
                 android:layout_width="match_parent"
@@ -208,10 +207,13 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressBar"
-                android:layout_width="48dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/Header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
                 android:indeterminate="true"
-                app:indicatorColor="@color/secondary"
+                app:indicatorColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/rv_productHome"
                 app:layout_constraintStart_toStartOf="@id/rv_productHome"
@@ -223,28 +225,28 @@
                 android:id="@+id/rv_productHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Header"
+                android:layout_below="@id/progressBar"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="4dp"
+                android:nestedScrollingEnabled="true"
                 android:overScrollMode="never"
-                android:paddingBottom="60dp"
                 android:scrollbars="none"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_product_home">
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="?android:attr/progressBarStyle"
-                android:layout_gravity="center"
+            <TextView
+                android:id="@+id/goToALlProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rv_productHome"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
                 android:paddingBottom="60dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+                android:text="see more"
+                android:textColor="@color/primary"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -252,5 +254,4 @@
 
 </LinearLayout>
 
-    <!--for RV-->
-    <!--    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"-->
+

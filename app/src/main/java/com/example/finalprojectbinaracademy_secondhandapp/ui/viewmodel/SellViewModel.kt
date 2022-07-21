@@ -9,6 +9,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Cate
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.PostProductResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.RegisterResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
+import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -22,17 +23,18 @@ import java.io.File
 
 class SellViewModel(
     private val remoteRepository: RemoteRepository,
-    private val dataStoreManager: DataStoreManager
+    private val dataStoreManager: DataStoreManager,
+    private val networkHelper: NetworkHelper
 ): ViewModel() {
 
-    private val _listCategory = MutableLiveData<CategoryResponse>()
-    val listCategory: LiveData<CategoryResponse> get() = _listCategory
+    private val _listCategory = MutableLiveData<Resource<CategoryResponse>>()
+    val listCategory: LiveData<Resource<CategoryResponse>> get() = _listCategory
 
-    private val _category = MutableLiveData<CategoryResponseItem>()
-    val category : LiveData<CategoryResponseItem> get() = _category
+    private val _category = MutableLiveData<Resource<CategoryResponseItem>>()
+    val category : LiveData<Resource<CategoryResponseItem>> get() = _category
 
-    private val _user = MutableLiveData<RegisterResponse>()
-    val user: LiveData<RegisterResponse> get() = _user
+    private val _user = MutableLiveData<Resource<RegisterResponse>>()
+    val user: LiveData<Resource<RegisterResponse>> get() = _user
 
     private val _postProduct = MutableLiveData<Resource<PostProductResponse>>()
     val postProduct: LiveData<Resource<PostProductResponse>> get() = _postProduct
@@ -43,49 +45,73 @@ class SellViewModel(
 
     fun getCategory() {
         viewModelScope.launch {
-            val response = remoteRepository.getCategory()
-            val codeResponse = response.code()
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = remoteRepository.getCategory()
+                    val codeResponse = response.code()
 
-            if (codeResponse == 200 ) {
-                if (response.body() != null) {
-                    _listCategory.postValue(response.body())
+                    if (codeResponse == 200 ) {
+                        if (response.body() != null) {
+                            _listCategory.postValue(Resource.success(response.body()))
+                        }
+                    } else {
+                        _listCategory.postValue(Resource.error("failed to get category",null))
+                    }
+                } catch (e:Exception) {
+                    _listCategory.postValue(Resource.error(e.message.toString(),null))
                 }
             } else {
-                Log.d("code != 200", "failed get notification")
+                _listCategory.postValue(Resource.error("please check your internet connection...",null))
             }
         }
     }
 
     fun getCategoryById(id: Int) {
         viewModelScope.launch {
-            val response = remoteRepository.getCategoryById(id)
-            val codeResponse = response.code()
-            val body = response.body()
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = remoteRepository.getCategoryById(id)
+                    val codeResponse = response.code()
+                    val body = response.body()
 
-            if (codeResponse == 200) {
-                body?.let { data ->
-                    _category.postValue(data)
+                    if (codeResponse == 200) {
+                        body?.let { data ->
+                            _category.postValue(Resource.success(data))
+                        }
+                    } else {
+                        _category.postValue(Resource.error("failed to get category",null))
+                    }
+                } catch (e:Exception) {
+                    _category.postValue(Resource.error(e.message.toString(),null))
                 }
             } else {
-                Log.d("code != 200", "failed get notification")
+                _category.postValue(Resource.error("please check your internet connection...",null))
             }
         }
     }
 
     fun getUserByAccessToken() {
         viewModelScope.launch {
-            dataStoreManager.getAccessToken().collect { accessToken ->
-                val getUser = remoteRepository.getUser(accessToken)
-                val code = getUser.code()
-                val body = getUser.body()
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    dataStoreManager.getAccessToken().collect { accessToken ->
+                        val getUser = remoteRepository.getUser(accessToken)
+                        val code = getUser.code()
+                        val body = getUser.body()
 
-                if (code == 200) {
-                    body?.let {
-                        _user.postValue(it)
+                        if (code == 200) {
+                            body?.let {
+                                _user.postValue(Resource.success(it))
+                            }
+                        } else {
+                            _user.postValue(Resource.error("failed to get user",null))
+                        }
                     }
-                } else {
-                    Log.d("response error", "user register error")
+                } catch (e:Exception) {
+                    _user.postValue(Resource.error(e.message.toString(),null))
                 }
+            } else {
+                _user.postValue(Resource.error("please check your internet connection...",null))
             }
         }
     }
@@ -99,24 +125,31 @@ class SellViewModel(
         productImage: File
     ) {
         viewModelScope.launch {
-            val requestFile = productImage.asRequestBody("image/jpeg".toMediaTypeOrNull())
-            val requestImage = MultipartBody.Part.createFormData("image",productImage.name,requestFile)
-            val name = name.toRequestBody("text/plain".toMediaTypeOrNull())
-            val desc = description.toRequestBody("text/plain".toMediaTypeOrNull())
-            val basePrice = basePrice.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-            val location = location.toRequestBody("text/plain".toMediaTypeOrNull())
-            val category = categoryIds[0].toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val requestFile = productImage.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                    val requestImage = MultipartBody.Part.createFormData("image",productImage.name,requestFile)
+                    val name = name.toRequestBody("text/plain".toMediaTypeOrNull())
+                    val desc = description.toRequestBody("text/plain".toMediaTypeOrNull())
+                    val basePrice = basePrice.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+                    val location = location.toRequestBody("text/plain".toMediaTypeOrNull())
+                    val category = categoryIds[0].toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
-            dataStoreManager.getAccessToken().collect { acstkn ->
-                val postProduct = remoteRepository.postProduct(acstkn,name,desc,basePrice,category,location,requestImage)
+                    dataStoreManager.getAccessToken().collect { acstkn ->
+                        val postProduct = remoteRepository.postProduct(acstkn,name,desc,basePrice,category,location,requestImage)
 
-                if (postProduct.isSuccessful) {
-                    _postProduct.postValue(Resource.success(postProduct.body()))
-                } else {
-                    _postProduct.postValue(Resource.error("Failed to post product",null))
+                        if (postProduct.isSuccessful) {
+                            _postProduct.postValue(Resource.success(postProduct.body()))
+                        } else {
+                            _postProduct.postValue(Resource.error("Failed to post product",null))
+                        }
+                    }
+                } catch (e:Exception) {
+                    _postProduct.postValue(Resource.error(e.message.toString(),null))
                 }
+            } else {
+                _postProduct.postValue(Resource.error("please check your internet connection...",null))
             }
-
         }
     }
 }
