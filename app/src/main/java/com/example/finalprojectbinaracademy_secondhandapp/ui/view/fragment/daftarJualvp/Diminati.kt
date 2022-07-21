@@ -9,6 +9,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.SellerOrder
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetSellerOrderResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetSellerOrderResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentDiminatiBinding
@@ -39,21 +40,24 @@ class Diminati : Fragment() {
     }
 
     private fun getSellerOrder() {
+        saleListViewModel.getSellerOrder()
         saleListViewModel.listDiminati.observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
-                    binding.displayDefault.visibility = View.GONE
-                    setupView(it.data)
+                    if (!it.data.isNullOrEmpty()) {
+                        binding.displayDefault.visibility = View.GONE
+                        setupView(it.data)
+                    }
                 }
             }
         }
     }
 
-    private fun setupView(data : GetSellerOrderResponse?) {
+    private fun setupView(data : List<SellerOrder>?) {
         data?.let {
             val recycler = binding.recyclerDiminati
             val adapter = SaleListDiminatiAdapter(object : SaleListDiminatiAdapter.OnCLickItem{
-                override fun onClickItemListener(data: GetSellerOrderResponseItem) {
+                override fun onClickItemListener(data: SellerOrder) {
                     val action = DaftarJualDirections.actionDaftarJualToInfoPenawar(data.id)
                     findNavController().navigate(action)
                 }

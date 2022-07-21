@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/saleListDimitaniItem"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="216dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -23,25 +23,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/cardView7"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                app:cardCornerRadius="8dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:id="@+id/cardView7"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="8dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="8dp"-->
+            <!--                app:cardCornerRadius="8dp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent">-->
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/ivProductSaleList"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="120dp"-->
-<!--                    android:scaleType="centerCrop"-->
-<!--                    tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
-<!--            </androidx.cardview.widget.CardView>-->
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/ivProductSaleList"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="120dp"-->
+            <!--                    android:scaleType="centerCrop"-->
+            <!--                    tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
+            <!--            </androidx.cardview.widget.CardView>-->
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivProductSaleList"
@@ -74,7 +74,6 @@
                 android:id="@+id/tvPriceSaleList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="Rp 250.000"
                 android:textColor="@color/black"

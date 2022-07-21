@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_home2_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_home2_to_allProductFragment"
+            app:destination="@id/allProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfile"
@@ -181,6 +184,15 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_buyerDetailProduk"
+            app:destination="@id/buyerDetailProduk" />
+    </fragment>
+    <fragment
+        android:id="@+id/allProductFragment"
+        android:name="com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.AllProductFragment"
+        android:label="fragment_all_product"
+        tools:layout="@layout/fragment_all_product" >
+        <action
+            android:id="@+id/action_allProductFragment_to_buyerDetailProduk"
             app:destination="@id/buyerDetailProduk" />
     </fragment>
 </navigation>

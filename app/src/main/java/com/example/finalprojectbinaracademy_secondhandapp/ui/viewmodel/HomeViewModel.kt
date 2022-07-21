@@ -1,198 +1,107 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.cachedIn
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.*
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Banner
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.repository.RemoteRepository
+import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Resource
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val remoteRepository: RemoteRepository,
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
+    private val networkHelper: NetworkHelper
 
 ) : ViewModel() {
 
-    private val _getProduct = MutableLiveData<List<GetProductResponseItem>>()
-    val getproduct: LiveData<List<GetProductResponseItem>>
+    private val _getProduct = MutableLiveData<Resource<List<Product>>>()
+    val getproduct: LiveData<Resource<List<Product>>>
         get() = _getProduct
 
-    private val _getBannerHome = MutableLiveData <List<BannerResponse>>()
-    val getBannerHome: LiveData <List<BannerResponse>>
+    private val _getProductOffline = MutableLiveData<Resource<List<Product>>>()
+    val gettProductOffline: LiveData<Resource<List<Product>>> get() = _getProductOffline
+
+    private val _getBannerHome = MutableLiveData<Resource<List<Banner>>>()
+    val getBannerHome: LiveData<Resource<List<Banner>>>
         get() = _getBannerHome
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        val params = HashMap<String,String>()
-        params["page"] = "2"
-        params["per_page"] = "20"
-        getProductHome(params)
+        bannerHome()
     }
 
-    fun getAccessToken(): LiveData<String> {
-        return dataStore.getAccessToken().asLiveData()
-    }
-
-    fun getStatusLogin(): LiveData<Boolean> {
-        return dataStore.getStatusLogin().asLiveData()
-    }
-
-    fun BannerHome() {
+    fun bannerHome() {
         viewModelScope.launch {
-            val response = remoteRepository.getBanner()
-            val codeResponse = response.code()
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val response = remoteRepository.getBanner()
+                    val codeResponse = response.code()
 
-            if (codeResponse == 200) {
-                if (response.body() != null) {
-                    _getBannerHome.postValue(response.body())
+                    if (codeResponse == 200) {
+                        if (response.body() != null) {
+                            _getBannerHome.postValue(Resource.success(response.body()))
+                        }
+                    } else {
+                        _getBannerHome.postValue(Resource.error("failed to get data",null))
+                    }
+                } catch (e: Exception) {
+                    _getBannerHome.postValue(Resource.error(e.message.toString(),null))
                 }
             } else {
-                Log.d("code != 200", "failed get Banner response")
+                val response = remoteRepository.getBannerOffline()
+                _getBannerHome.postValue(Resource.success(response))
             }
         }
     }
 
-    fun setAccessToken(accessToken: String) {
+    fun getProductPaging() = remoteRepository.getProductPaging().cachedIn(viewModelScope)
+
+    fun getProductOffline() {
         viewModelScope.launch {
-            dataStore.setAccessToken(accessToken)
+            _getProductOffline.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val params = HashMap<String,String>()
+                    params["page"] = "1"
+                    params["per_page"] = ""
+                    val response = remoteRepository.getProductBoundResource(params)
+                    _getProductOffline.postValue(Resource.success(response))
+                } catch (e: Exception) {
+                    _getProductOffline.postValue(Resource.error("failed to get data from server",null))
+                }
+            } else {
+                val response = remoteRepository.getProductOffline()
+                _getProductOffline.postValue(Resource.success(response))
+            }
         }
     }
 
-    fun setLogin() {
-        viewModelScope.launch {
-            dataStore.setLoginStatus()
-        }
-    }
-
-    fun getProductHome(parameters: HashMap<String,String>) {
+    fun getSearchProduct(productName : String) {
         _isLoading.value = true
+        _getProduct.postValue(Resource.loading(null))
         viewModelScope.launch {
-            val product = remoteRepository.getBuyerProduct(parameters)
-            if (product.code() == 200) {
-                _isLoading.value = false
-                _getProduct.postValue(product.body())
+            if (networkHelper.isNetworkConnected()) {
+                val params = HashMap<String,String>()
+                params["search"] = productName
+                try {
+                    val product = remoteRepository.getProductBoundResource(params)
+                    _isLoading.value = false
+                    _getProduct.postValue(Resource.success(product))
+                } catch (e: Exception) {
+                    _isLoading.value = false
+                    _getProduct.postValue(Resource.error("failed to get data",null))
+                }
             } else {
-                _isLoading.value = false
-                Log.d("response error", "get product error")
+                _getProduct.postValue(Resource.error("please check your internet connection...",null))
             }
         }
-
-    }
-    fun getSearchProduct(parameters: HashMap<String,String>, productName : String) {
-//        _isLoading.value = true
-        viewModelScope.launch {
-            val product = remoteRepository.getBuyerProductSearch(parameters, productName)
-            if (product.code() == 200) {
-                _isLoading.value = false
-                _getProduct.postValue(product.body())
-            } else {
-                _isLoading.value = false
-                Log.d("response error", "get product error")
-            }
-        }
-
     }
 
-
-//    fun getBuyerProductSearchResult(productName: String) {
-//        apiServices.getSearchBuyerProduct(productName)
-//            .enqueue(object: Callback<List<GetBuyerProductResponseItem>>{
-//                override fun onResponse(
-//                    call: Call<List<GetBuyerProductResponseItem>>,
-//                    response: Response<List<GetBuyerProductResponseItem>>
-//                ) {
-//                    if(response.isSuccessful){
-//                        liveDataBuyerProductSearchResult.value = response.body()
-//                    }
-//                }
-//
-//                override fun onFailure(
-//                    call: Call<List<GetBuyerProductResponseItem>>,
-//                    t: Throwable
-//                ) {
-//                    //
-//                }
-//
-//            })
-//    }
-
-//    private val liveDataBuyerProduct = MutableLiveData<List<GetBuyerProductResponseItem>>()
-//    val buyerProduct: LiveData<List<GetBuyerProductResponseItem>> = liveDataBuyerProduct
-//    private val apiServices = api
-//
-//    private val liveDataBuyerProductById = MutableLiveData<GetProductDetail>()
-//    val buyerProductById: LiveData<GetProductDetail> = liveDataBuyerProductById
-//
-//    private val liveDataBuyerProductSearchResult =
-//        MutableLiveData<List<GetBuyerProductResponseItem>>()
-//    val searchResult: LiveData<List<GetBuyerProductResponseItem>> =
-//        liveDataBuyerProductSearchResult
-//
-//    fun getAllBuyerProduct() {
-//        apiServices.getAllBuyerProduct()
-//            .enqueue(object : Callback<List<GetBuyerProductResponseItem>> {
-//                override fun onResponse(
-//                    call: Call<List<GetBuyerProductResponseItem>>,
-//                    response: Response<List<GetBuyerProductResponseItem>>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        liveDataBuyerProduct.value = response.body()
-//                    }
-//                }
-//
-//                override fun onFailure(
-//                    call: Call<List<GetBuyerProductResponseItem>>,
-//                    t: Throwable
-//                ) {
-//                    //
-//                }
-//
-//            })
-//    }
-//
-//    fun getBuyerProductById(idProduct: Int) {
-//        apiServices.getBuyerProductById(idProduct)
-//            .enqueue(object : Callback<GetProductDetail> {
-//                override fun onResponse(
-//                    call: Call<GetProductDetail>,
-//                    response: Response<GetProductDetail>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        liveDataBuyerProductById.value = response.body()
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<GetProductDetail>, t: Throwable) {
-//                    //
-//                }
-//
-//            })
-//    }
-//
-//    fun getBuyerProductSearchResult(productName: String) {
-//        apiServices.getSearchBuyerProduct(productName)
-//            .enqueue(object: Callback<List<GetBuyerProductResponseItem>>{
-//                override fun onResponse(
-//                    call: Call<List<GetBuyerProductResponseItem>>,
-//                    response: Response<List<GetBuyerProductResponseItem>>
-//                ) {
-//                    if(response.isSuccessful){
-//                        liveDataBuyerProductSearchResult.value = response.body()
-//                    }
-//                }
-//
-//                override fun onFailure(
-//                    call: Call<List<GetBuyerProductResponseItem>>,
-//                    t: Throwable
-//                ) {
-//                    //
-//                }
-//
-//            })
-//    }
-
-
+//    val products = remoteRepository.getProductBoundResource().asLiveData()
 
 }

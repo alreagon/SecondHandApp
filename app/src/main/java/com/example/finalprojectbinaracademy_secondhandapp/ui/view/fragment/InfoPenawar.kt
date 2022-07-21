@@ -10,6 +10,7 @@ import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -21,6 +22,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.botto
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.SaleListViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import com.example.finalprojectbinaracademy_secondhandapp.utils.convertISOTimeToDate
+import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
 import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,8 +31,9 @@ class InfoPenawar : Fragment() {
     private var _binding: FragmentInfoPenawarBinding? = null
     private val binding get() = _binding!!
     private val saleListViewModel: SaleListViewModel by viewModel()
-    private var idOrder: Int = 0
     private val args: InfoPenawarArgs by navArgs()
+    private var idOrder: Int = 0
+    private var productId: Int = 0
     private var phoneNumber: Long = 0L
 
     override fun onCreateView(
@@ -73,11 +76,12 @@ class InfoPenawar : Fragment() {
                     it.data?.let { data ->
                         setupView(data)
                         idOrder = data.id
+                        productId = data.productId
                         phoneNumber = data.user.phoneNumber.toLong()
                     }
                 }
                 Status.ERROR -> {
-
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
                 }
             }
         }
@@ -118,6 +122,10 @@ class InfoPenawar : Fragment() {
 
     private fun bottomSheetChangeSatus() {
         val bottomSheet = UpdateStatusBottomSheet()
+        val bundle = Bundle()
+        bundle.putInt(UpdateStatusBottomSheet.ID_PRODUCT,productId)
+        bundle.putInt(UpdateStatusBottomSheet.ID_ORDER,idOrder)
+        bottomSheet.arguments = bundle
         bottomSheet.show(parentFragmentManager, UpdateStatusBottomSheet.TAG)
     }
 
@@ -174,7 +182,9 @@ class InfoPenawar : Fragment() {
                         binding.tvBidPriceDIminati.paintFlags = binding.tvBidPriceDIminati.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     }
                 }
-                Status.ERROR -> {}
+                Status.ERROR -> {
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                }
             }
         }
     }

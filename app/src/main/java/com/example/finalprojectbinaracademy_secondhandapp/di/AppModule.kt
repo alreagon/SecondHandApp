@@ -1,11 +1,7 @@
 package com.example.finalprojectbinaracademy_secondhandapp.di
 
-import android.app.Application
 import android.content.Context
-import androidx.room.Room
 import com.example.finalprojectbinaracademy_secondhandapp.BuildConfig
-import com.example.finalprojectbinaracademy_secondhandapp.data.local.ProductRoomDatabase
-import com.example.finalprojectbinaracademy_secondhandapp.data.local.datastore.DataStoreManager
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiHelperImpl
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.service.ApiService
 import com.example.finalprojectbinaracademy_secondhandapp.utils.NetworkHelper
@@ -23,13 +19,7 @@ val appModule = module {
     single { provideRetrofit(get(),BuildConfig.BASE_URL) }
     single { provideApiService(get()) }
     single { ApiHelperImpl(get()) }
-    single { DataStoreManager(androidContext()) }
-    single { provideProductDatabase(get()) }
 }
-
-private fun provideProductDatabase(app :Application) : ProductRoomDatabase =
-    Room.databaseBuilder(app, ProductRoomDatabase::class.java, "product_database")
-        .build()
 
 private fun provideNetworkHelper(context: Context) = NetworkHelper(context)
 
@@ -60,5 +50,3 @@ private fun provideRetrofit (
         .build()
 
 private fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-
-

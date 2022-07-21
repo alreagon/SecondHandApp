@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Notification
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationItemResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponse
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentBuyerNotificationBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.NotifAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.NotificationViewModel
+import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BuyerNotification : Fragment() {
@@ -33,7 +35,7 @@ class BuyerNotification : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        notificationViewModel.getNotif()
         checkUserLogin()
         refreshNotif()
     }
@@ -42,7 +44,7 @@ class BuyerNotification : Fragment() {
         notificationViewModel.getStatusLogin().observe(viewLifecycleOwner, Observer {
             if (it) {
                 binding.pbNotif.visibility = View.VISIBLE
-                getNotification()
+                observeNotification()
                 binding.notLogin.visibility = View.GONE
             } else {
                 binding.pbNotif.visibility = View.GONE
@@ -50,20 +52,26 @@ class BuyerNotification : Fragment() {
         })
     }
 
-    private fun getNotification() {
-        notificationViewModel.getAccessToken().observe(viewLifecycleOwner, Observer {
-            notificationViewModel.getNotif(it)
-        })
-
+    private fun observeNotification() {
         notificationViewModel.listNotif.observe(viewLifecycleOwner, Observer {
-            setupView(it)
+            when(it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let {
+                        setupView(it)
+                    }
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireContext(),it.message,Toast.LENGTH_LONG).show()
+                }
+                Status.LOADING -> {}
+            }
         })
     }
 
-    private fun setupView(data: NotificationResponse) {
+    private fun setupView(data: List<Notification>) {
         binding.pbNotif.visibility = View.GONE
         val adapter = NotifAdapter(object : NotifAdapter.OnClickListener {
-            override fun onClickItem(data: NotificationItemResponse) {
+            override fun onClickItem(data: Notification) {
                 notificationViewModel.readNotification(data.id)
                 when(data.status) {
                     "create" -> {
@@ -93,7 +101,7 @@ class BuyerNotification : Fragment() {
 
     private fun refreshNotif() {
         binding.refreshLayout.setOnRefreshListener {
-            getNotification()
+            observeNotification()
 
             binding.refreshLayout.isRefreshing = false
         }

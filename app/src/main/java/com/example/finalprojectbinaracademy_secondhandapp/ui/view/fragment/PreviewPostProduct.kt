@@ -79,7 +79,7 @@ class PreviewPostProduct : Fragment() {
 
         sellViewModel.getCategoryById(productToPost.categoryIds[0])
         sellViewModel.category.observe(viewLifecycleOwner) { city ->
-            binding.tvCategoryPreview.text = city.name
+            binding.tvCategoryPreview.text = city.data?.name
         }
         binding.tvNameProductPreview.text = productToPost.name
         binding.tvCitySeller.text = productToPost.location
@@ -93,10 +93,10 @@ class PreviewPostProduct : Fragment() {
 
         sellViewModel.getUserByAccessToken()
         sellViewModel.user.observe(viewLifecycleOwner) {
-            binding.tvNameSellerPreview.text = it.fullName
+            binding.tvNameSellerPreview.text = it.data?.fullName
 
             Glide.with(this)
-                .load(it.imageUrl)
+                .load(it.data?.imageUrl)
                 .centerCrop()
                 .into(binding.ivSellerPreview)
         }

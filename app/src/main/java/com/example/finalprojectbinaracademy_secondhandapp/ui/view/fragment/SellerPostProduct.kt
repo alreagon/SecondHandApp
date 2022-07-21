@@ -20,7 +20,10 @@ import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentSe
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.SpinnerAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.SellViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
+import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
+import com.example.finalprojectbinaracademy_secondhandapp.utils.successToast
 import com.github.dhaval2404.imagepicker.ImagePicker
+import kotlinx.android.synthetic.main.toast_notification.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -55,6 +58,7 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
         binding.button5.setOnClickListener {
             binding.loadingPost.visibility = View.VISIBLE
             postProduct()
+//            Toast(requireContext()).successToast("dfasdfadsf",requireContext())
         }
         checkPostProduct()
         binding.btnBackPostProduct.setOnClickListener {
@@ -65,7 +69,11 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
     private fun getCity() {
         sellViewModel.getUserByAccessToken()
         sellViewModel.user.observe(viewLifecycleOwner) {
-            city = it.city
+            when(it.status) {
+                Status.SUCCESS -> {
+                    city = it.data?.city
+                }
+            }
         }
     }
 
@@ -86,6 +94,7 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
             }
         } else {
             Toast.makeText(requireContext(),"Oppss.. silahkan lengkapi input", Toast.LENGTH_SHORT).show()
+            binding.loadingPost.visibility = View.GONE
         }
     }
 
@@ -97,13 +106,9 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
                 }
                 Status.SUCCESS -> {
                     binding.loadingPost.visibility = View.GONE
-                    Toast.makeText(requireContext(),"Posting product successfully..", Toast.LENGTH_SHORT).show()
+                    Toast(requireContext()).successToast("Produk berhasil diteribitkan.",requireContext())
                     val action = SellerPostProductDirections.actionSellerPostProductToDaftarJual()
                     findNavController().navigate(action,NavOptions.Builder().setPopUpTo(R.id.seller_post_product, true).build())
-//                    binding.etNameProduct.text?.clear()
-//                    binding.etPriceProduct.text?.clear()
-//                    binding.ivAddPhoto.setImageResource(R.drawable.rect_add_image)
-//                    binding.etDescriptionProduct.text?.clear()
                 }
                 Status.ERROR -> {
                     binding.loadingPost.visibility = View.GONE
@@ -146,10 +151,14 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
                 Toast.makeText(requireContext(),"Anda belum login, silahkan login...", Toast.LENGTH_SHORT).show()
             } else {
                 sellViewModel.user.observe(viewLifecycleOwner) {
-                    if (it.city == "DEFAULT_CITY") {
-                        val action = SellerPostProductDirections.actionSellerPostProductToEditProfile()
-                        findNavController().navigate(action, NavOptions.Builder().setPopUpTo(R.id.seller_post_product, true).build())
-                        Toast.makeText(requireContext(),"Lengkapi info akun anda...", Toast.LENGTH_SHORT).show()
+                    when(it.status) {
+                        Status.SUCCESS -> {
+                            if (it.data?.city == "DEFAULT_CITY") {
+                                val action = SellerPostProductDirections.actionSellerPostProductToEditProfile()
+                                findNavController().navigate(action, NavOptions.Builder().setPopUpTo(R.id.seller_post_product, true).build())
+                                Toast.makeText(requireContext(),"Lengkapi info akun anda...", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                 }
             }
@@ -158,20 +167,32 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
 
     private fun setupView() {
         sellViewModel.getCategory()
-        sellViewModel.listCategory.observe(viewLifecycleOwner) { category ->
-            val spinner = binding.spinnerCategory
-            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    val selectedItem = p0?.getItemIdAtPosition(p2)?.toInt()
-                    selectedItem?.let {
-                        idCategory.clear()
-                        idCategory.add(category[it].id)
+        sellViewModel.listCategory.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { category ->
+                        val spinner = binding.spinnerCategory
+                        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                                val selectedItem = p0?.getItemIdAtPosition(p2)?.toInt()
+                                selectedItem?.let {
+                                    idCategory.clear()
+                                    idCategory.add(category[it].id)
+                                }
+                            }
+                            override fun onNothingSelected(p0: AdapterView<*>?) { }
+                        }
+                        val adapter = SpinnerAdapter(requireContext(),category)
+                        spinner.adapter = adapter
                     }
                 }
-                override fun onNothingSelected(p0: AdapterView<*>?) { }
+                Status.LOADING -> {
+
+                }
+                Status.ERROR -> {
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                }
             }
-            val adapter = SpinnerAdapter(requireContext(),category)
-            spinner.adapter = adapter
         }
 
         if (::productImage.isInitialized) {

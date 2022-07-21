@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalprojectbinaracademy_secondhandapp.R
+import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Notification
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationItemResponse
 import com.example.finalprojectbinaracademy_secondhandapp.utils.convertISOTimeToDate
 import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
@@ -17,12 +18,12 @@ import kotlin.collections.ArrayList
 class NotifAdapter(private val onItemClick: OnClickListener) : RecyclerView.Adapter<NotifAdapter.ViewHolder>() {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<NotificationItemResponse>() {
-        override fun areItemsTheSame(oldItem: NotificationItemResponse, newItem: NotificationItemResponse): Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<Notification>() {
+        override fun areItemsTheSame(oldItem: Notification, newItem: Notification): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: NotificationItemResponse, newItem: NotificationItemResponse): Boolean {
+        override fun areContentsTheSame(oldItem: Notification, newItem: Notification): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
@@ -30,12 +31,12 @@ class NotifAdapter(private val onItemClick: OnClickListener) : RecyclerView.Adap
 
     private val differ = AsyncListDiffer(this,diffCallback)
 
-    fun submitData(data: ArrayList<NotificationItemResponse>) {
+    fun submitData(data: List<Notification>) {
         differ.submitList(data)
     }
 
     fun clearData() {
-        val data = arrayListOf<NotificationItemResponse>()
+        val data = arrayListOf<Notification>()
         differ.submitList(data)
     }
 
@@ -57,7 +58,9 @@ class NotifAdapter(private val onItemClick: OnClickListener) : RecyclerView.Adap
             }
             "bid" -> {
                 holder.itemView.tvNotifType.text = "Penawaran produk"
-                holder.itemView.tvNotifBidPrice.text = "Ditawar ${rupiah(currentList.bidPrice.toDouble())}"
+                currentList.bidPrice?.let {
+                    holder.itemView.tvNotifBidPrice.text = "Ditawar ${rupiah(currentList.bidPrice.toDouble())}"
+                }
             }
         }
 
@@ -92,6 +95,6 @@ class NotifAdapter(private val onItemClick: OnClickListener) : RecyclerView.Adap
     }
 
     interface OnClickListener {
-        fun onClickItem(data: NotificationItemResponse)
+        fun onClickItem(data: Notification)
     }
 }
