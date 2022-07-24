@@ -11,9 +11,11 @@
     <color name="secondary_light">#ED313A</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="abuabuabu">#E8EAEE</color>
+    <color name="abuabuabu">#B3B4B5</color>
+    <color name="butonabu">#E2D4F0</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:ignore="PrivateResource">#e50914
     </color>
+    <color name="itembagus">#3C3C3C</color>
     <color name="sucess_alert">#73CA5C</color>
     <color name="birubiru">#317CEC</color>
     <color name="ungu">#CA31EC</color>

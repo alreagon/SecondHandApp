@@ -17,24 +17,6 @@ class MyPagerAdapter(fm: FragmentManager,lifecycle: Lifecycle) : FragmentStateAd
         Terjual()
     )
 
-    //menentukan fragment yang akan dibuka pertama
-//    override fun getItem(position: Int): Fragment {
-//        return pages[position]
-//    }
-//
-//    override fun getCount(): Int {
-//        return pages.size
-//    }
-//
-//    //judul untuk tabs
-//    override fun getPageTitle(position: Int): String {
-//        return when(position) {
-//            0 -> "produk"
-//            1 -> "Diminati"
-//            else -> "Terjual"
-//        }
-//    }
-
     override fun getItemCount(): Int {
         return pages.size
     }

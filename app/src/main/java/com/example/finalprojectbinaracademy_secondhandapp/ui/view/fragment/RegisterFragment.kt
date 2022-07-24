@@ -29,8 +29,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_register, container, false)
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -71,15 +69,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     Toast(requireContext()).errorToast("Registration failed",requireContext())
                 }
             }
-//            if (user != null) {
-//                val action = RegisterFragmentDirections.actionRegisterToLoginFragment()
-//                findNavController().navigate(action,
-//                    NavOptions.Builder().setPopUpTo(R.id.register, true).build())
-//                Toast.makeText(requireContext(),"register successfully",Toast.LENGTH_SHORT).show()
-//            } else {
-//                Toast.makeText(requireContext(),"register failed", Toast.LENGTH_SHORT).show()
-//                binding.pbRegister.visibility = View.GONE
-//            }
         }
     }
 

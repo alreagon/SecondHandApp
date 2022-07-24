@@ -2,7 +2,7 @@ package com.example.finalprojectbinaracademy_secondhandapp.utils
 
 class PasswordUtils {
 
-    fun validate(pass: String) : Boolean {
+    fun validate(pass: String): Boolean {
         //min 8 character
         if (pass.length < 8) {
             return false

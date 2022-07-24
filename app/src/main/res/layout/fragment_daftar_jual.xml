@@ -6,13 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.fragment.DaftarJual">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pbNotifDaftarJual"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="@color/secondary"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:trackCornerRadius="8dp"/>
+
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Daftar Jual Saya"
+        android:text="@string/daftar_jual_saya"
         android:textColor="@color/primary_dark"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -69,7 +82,7 @@
                     android:id="@+id/tv_userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Penjual"
+                    android:text="@string/nama_penjual"
                     android:textColor="@color/primary_dark"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -78,8 +91,9 @@
                     android:id="@+id/tv_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kota"
-                    android:textSize="10sp" />
+                    android:text="@string/kota"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
             </LinearLayout>
 
             <Button
@@ -87,7 +101,7 @@
                 android:layout_width="66dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:text="Edit"
+                android:text="@string/edit"
                 android:textColor="@color/primary"
                 app:backgroundTint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentEditProfileBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.EditProfileViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
@@ -21,7 +22,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
-class EditProfileFragment : Fragment() {
+class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
     private val editProfileViewModel: EditProfileViewModel by viewModel()
@@ -31,7 +32,6 @@ class EditProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentEditProfileBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -94,33 +94,6 @@ class EditProfileFragment : Fragment() {
                 }
             }
         }
-
-//        editProfileViewModel.detailUser.observe(viewLifecycleOwner) { user ->
-//            if (user != null) {
-//                binding.etName.setText(user.fullName)
-//
-//                if (user.address != "DEFAULT_ADDRESS") {
-//                    binding.etAddress.setText(user.address)
-//                }
-//                if (user.phoneNumber != "000") {
-//                    binding.etPhone.setText(user.phoneNumber)
-//                }
-//
-//                if (user.city != "DEFAULT_CITY") {
-//                    binding.etCity.setText(user.city)
-//                }
-//
-//                user.imageUrl?.let {
-//                    Glide.with(requireContext())
-//                        .load(user.imageUrl)
-//                        .centerCrop()
-//                        .into(binding.ivProfilePict)
-//
-//                    binding.ivProfilePict.alpha = 1F
-//                }
-//                binding.pbProfile.visibility = View.GONE
-//            }
-//        }
     }
 
     private fun choseImage() {
@@ -143,6 +116,7 @@ class EditProfileFragment : Fragment() {
                     val fileUri = data?.data!!
                     imageProfile = File(fileUri.path.toString())
                     binding.ivProfilePict.setImageURI(fileUri)
+                    binding.ivProfilePict.alpha = 1F
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

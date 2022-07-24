@@ -31,7 +31,7 @@ class ImageSliderAdapter(
         if (currentList.image_url == null) {
             Glide.with(holder.itemView.context)
                 .load(R.drawable.default_photo)
-                .centerCrop()
+                .fitCenter()
                 .into(holder.itemView.iv_slider)
         } else {
             Glide.with(holder.itemView.context)

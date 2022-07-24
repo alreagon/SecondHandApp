@@ -25,9 +25,8 @@ class Produk : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentProdukBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentProdukBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,7 +39,7 @@ class Produk : Fragment() {
     private fun getSellerProduct() {
         saleListViewModel.getSellerProduct()
         saleListViewModel.listProduct.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     setupListProduct(it.data)
                 }
@@ -57,18 +56,19 @@ class Produk : Fragment() {
     private fun setupListProduct(data: List<SellerProduct>?) {
         val recycler = binding.recylcerProduct
         data?.let {
-            val adapter = SellerProductAdapter(object : SellerProductOnClick{
+            val adapter = SellerProductAdapter(object : SellerProductOnClick {
                 override fun onItemClick(data: SellerProduct) {
                     val action = DaftarJualDirections.actionDaftarJualToBuyerDetailProduk(data.id)
                     findNavController().navigate(action)
                 }
+
                 override fun onHeaderClick() {
                     val action = DaftarJualDirections.actionDaftarJualToSellerPostProduct()
                     findNavController().navigate(action)
                 }
             })
             adapter.SubmitListWithHeader(data)
-            recycler.layoutManager = GridLayoutManager(requireContext(),2)
+            recycler.layoutManager = GridLayoutManager(requireContext(), 2)
             recycler.adapter = adapter
         }
     }

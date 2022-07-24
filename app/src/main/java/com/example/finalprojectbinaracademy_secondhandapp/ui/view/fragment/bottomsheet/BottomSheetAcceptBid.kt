@@ -26,9 +26,8 @@ class BottomSheetAcceptBid : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentBottomSheetAcceptBidBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentBottomSheetAcceptBidBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -38,17 +37,17 @@ class BottomSheetAcceptBid : BottomSheetDialogFragment() {
         getOrderId()
 
         binding.btnToWasap.setOnClickListener {
-            intentToWasap(phoneNumber.toString(),"")
+            intentToWasap(phoneNumber.toString(), "")
         }
     }
 
     private fun getOrderId() {
-        val idOrder =  arguments?.getInt(ID_ORDER)
+        val idOrder = arguments?.getInt(ID_ORDER)
         idOrder?.let {
             saleListViewModel.getSellerOrderById(idOrder)
         }
         saleListViewModel.diminatiById.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     setupView(it.data)
                     it.data?.let {
@@ -78,14 +77,13 @@ class BottomSheetAcceptBid : BottomSheetDialogFragment() {
     }
 
     private fun intentToWasap(phone: String, message: String) {
-//        if (appInstalledOrNot("com.whatsapp")) {
         val sendIntent = Intent("android.intent.action.MAIN")
         sendIntent.component = ComponentName("com.whatsapp", "com.whatsapp.Conversation")
-        sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators("62$phone") + "@s.whatsapp.net" ) //phone number without "+" prefix
+        sendIntent.putExtra(
+            "jid",
+            PhoneNumberUtils.stripSeparators("62$phone") + "@s.whatsapp.net"
+        )
         startActivity(sendIntent)
-//        } else {
-//            Toast.makeText(requireContext(), "Whats app not installed on your device", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     private fun appInstalledOrNot(url: String): Boolean {

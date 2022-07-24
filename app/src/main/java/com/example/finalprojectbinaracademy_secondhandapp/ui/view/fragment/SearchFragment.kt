@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentSearchBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.adapter.HomeAdapter
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.HomeViewModel
@@ -34,7 +31,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,7 +46,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 search_bar.clearFocus()
                 searchViewModel.getSearchProduct(query!!)
-
                 return true
             }
 
@@ -67,8 +63,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
                 Status.SUCCESS -> {
                     it.data?.let {
-                        searchProductResultAdapter.submitData(it)
                         binding.PBSearch.visibility = View.GONE
+                        searchProductResultAdapter.submitData(it)
                     }
                     if (it.data.isNullOrEmpty()) {
                         binding.displayDefault.visibility = View.VISIBLE

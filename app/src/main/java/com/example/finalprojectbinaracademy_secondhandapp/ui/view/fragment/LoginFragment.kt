@@ -28,7 +28,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -59,13 +58,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 Status.SUCCESS -> {
                     val action = LoginFragmentDirections.actionLoginFragmentToHome2()
                     findNavController().navigate(action)
-
-//                    Toast.makeText(requireContext(),"Hello ${userLogin.data?.name}...", Toast.LENGTH_SHORT).show()
                     Toast(requireContext()).successToast("Hello ${userLogin.data?.name}...",requireContext())
                 }
                 Status.ERROR -> {
                     binding.progressBar.visibility = View.GONE
-//                    Toast.makeText(requireContext(), userLogin.message, Toast.LENGTH_SHORT).show()
                     Toast(requireContext()).errorToast(userLogin.message.toString(),requireContext())
                 }
             }
@@ -86,7 +82,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun validateErrorInput(email:String,password:String) {
-
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.wrapEmail.error = "Format email salah"
         } else {

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="Perbarui status penjualan produkmu"
+        android:text="@string/text_perbarui_status"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/primary"
-        android:text="Kirim"
+        android:text="@string/kirim"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/primary"
-            android:text="Berhasil transaksi" />
+            android:text="@string/berhasil_transaksi" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_berhasil_transaksi"
+            android:layout_marginStart="33dp"
+            android:layout_marginEnd="33dp"
+            />
 
         <RadioButton
             android:id="@+id/rbDeclined"
@@ -70,7 +77,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:buttonTint="@color/primary"
-            android:text="Batalkan trasnsaksi" />
+            android:text="@string/batalkan_trasnsaksi" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_batalkan_transaksi"
+            android:layout_marginStart="33dp"
+            android:layout_marginEnd="33dp"
+            />
+
+
 
     </RadioGroup>
 

@@ -30,8 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/RoundedImageView"
-            android:src="@drawable/default_photo"
-            app:srcCompat="@drawable/aamiin" />
+            android:src="@drawable/default_photo"/>
 
         <TextView
             android:id="@+id/iv_judul"
