@@ -1,5 +1,6 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Intent
@@ -40,7 +41,6 @@ class InfoPenawar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentInfoPenawarBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -87,6 +87,7 @@ class InfoPenawar : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupView(data: GetSellerOrderResponseItem?) {
         data?.let {
             binding.tvNameProductDiminati.text = data.productName

@@ -23,7 +23,6 @@ import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
 import com.example.finalprojectbinaracademy_secondhandapp.utils.successToast
 import com.github.dhaval2404.imagepicker.ImagePicker
-import kotlinx.android.synthetic.main.toast_notification.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -58,7 +57,6 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
         binding.button5.setOnClickListener {
             binding.loadingPost.visibility = View.VISIBLE
             postProduct()
-//            Toast(requireContext()).successToast("dfasdfadsf",requireContext())
         }
         checkPostProduct()
         binding.btnBackPostProduct.setOnClickListener {
@@ -83,12 +81,6 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
         val descProduct = binding.etDescriptionProduct.text.toString()
 
         if (inputCheck(nameProduct,descProduct,basePrice,idCategory)) {
-//            sellViewModel.getAccessToken().observe(viewLifecycleOwner) { accessToken ->
-//                sellViewModel.getUserByAccessToken(accessToken)
-//            }
-//            sellViewModel.user.observe(viewLifecycleOwner) {
-//                sellViewModel.postProduct(accessToken,nameProduct, descProduct, basePrice.toInt(), idCategory,it.city,productImage)
-//            }
             city?.let { cty ->
                 sellViewModel.postProduct(nameProduct, descProduct, basePrice.toInt(), idCategory,cty,productImage)
             }
@@ -124,20 +116,12 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
         val descProduct = binding.etDescriptionProduct.text.toString()
 
         if (inputCheck(nameProduct,descProduct,basePrice,idCategory)) {
-//            sellViewModel.getAccessToken().observe(viewLifecycleOwner){ sellViewModel.getUserByAccessToken(it) }
-//            sellViewModel.getUserByAccessToken()
             city?.let { cty ->
                 val request = RequestPostProduct(basePrice.toInt(),idCategory,descProduct,productImage,cty,nameProduct)
 
                 val action = SellerPostProductDirections.actionSellerPostProductToPreviewPostProduct(request)
                 findNavController().navigate(action)
             }
-//            sellViewModel.user.observe(viewLifecycleOwner) {
-//                val request = RequestPostProduct(basePrice.toInt(),idCategory,descProduct,productImage,it.city,nameProduct)
-//
-//                val action = SellerPostProductDirections.actionSellerPostProductToPreviewPostProduct(request)
-//                findNavController().navigate(action)
-//            }
         } else {
             Toast.makeText(requireContext(),"Oppss.. silahkan lengkapi input", Toast.LENGTH_SHORT).show()
         }

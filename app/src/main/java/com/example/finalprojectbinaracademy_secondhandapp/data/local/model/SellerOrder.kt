@@ -2,7 +2,6 @@ package com.example.finalprojectbinaracademy_secondhandapp.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Product
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.ProductNotification
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.UserX
 import com.google.gson.annotations.SerializedName

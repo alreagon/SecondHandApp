@@ -11,7 +11,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.databinding.ActivitySp
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySplashScreenBinding
+    private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class SplashScreen : AppCompatActivity() {
 
         val handlerThread = HandlerThread("HandlerThread")
         handlerThread.start()
-        val backgroundHandler = Handler(handlerThread.looper).postDelayed ({
+        val backgroundHandler = Handler(handlerThread.looper).postDelayed({
             println("Thread : " + Thread.currentThread().name)
 
             val intent = Intent(this, MainActivity::class.java);

@@ -2,8 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/abuabuabu">
     <item>
         <shape android:shape="rectangle" android:padding="10dp">
-            <solid android:color="@color/white"/> <!-- this one is ths color of the Rounded Button -->
-            <stroke android:width="1dp" android:color="@color/primary"/>
+            <solid android:color="@color/butonabu"/> <!-- this one is ths color of the Rounded Button -->
             <corners android:radius="16dp"/>
         </shape>
     </item>

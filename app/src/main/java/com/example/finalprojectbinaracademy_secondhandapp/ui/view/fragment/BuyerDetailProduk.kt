@@ -3,12 +3,9 @@ package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -30,8 +27,6 @@ import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
 import com.example.finalprojectbinaracademy_secondhandapp.utils.successToast
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.bottomsheet.*
-import kotlinx.android.synthetic.main.toast_notification.*
-import kotlinx.android.synthetic.main.toast_notification_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("InflateParams")
@@ -61,15 +56,16 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDetailProdukBuyer() {
         buyerDetailViewModel.BuyerDetailProdukId(args.idProdukDetail)
         buyerDetailViewModel.getproductId.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 Status.LOADING -> {
 
                 }
                 Status.ERROR -> {
-                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                    Toast(requireContext()).errorToast(it.message.toString(), requireContext())
                 }
                 Status.SUCCESS -> {
                     it.data?.let {
@@ -141,7 +137,7 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
         dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
 
         buyerDetailViewModel.getproductId.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let {
                         namaProduct.text = it.name
@@ -153,7 +149,7 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
                     }
                 }
                 Status.ERROR -> {
-                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                    Toast(requireContext()).errorToast(it.message.toString(), requireContext())
                 }
             }
         }
@@ -161,12 +157,14 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
         dialog.btnKirim.setOnClickListener {
             val inputanBid = dialog.etBidBuyerr.text.toString()
 
-            if (inputanBid.isEmpty()){
-                Toast.makeText(requireContext(), "Tawaranmu masih kosong", Toast.LENGTH_SHORT).show()
-            }else{
+            if (inputanBid.isEmpty()) {
+                Toast.makeText(requireContext(), "Tawaranmu masih kosong", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
 
                 val etBuyerBidBuyerr = dialog.etBidBuyerr.text.toString()
-                val request = PostBuyerOrderRequest(args.idProdukDetail.toString(), etBuyerBidBuyerr)
+                val request =
+                    PostBuyerOrderRequest(args.idProdukDetail.toString(), etBuyerBidBuyerr)
                 buyerDetailViewModel.PostBuyerOrder(request)
                 buyerDetailViewModel.postBuyerOrder.observe(viewLifecycleOwner) { input ->
 
@@ -174,7 +172,10 @@ class BuyerDetailProduk : Fragment(R.layout.fragment_buyer_detail_produk) {
                         dialog.dismiss()
                         dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
 
-                        Toast(requireContext()).successToast("Harga tawarmu berhasil dikirim\nke penjual",requireContext())
+                        Toast(requireContext()).successToast(
+                            "Harga tawarmu berhasil dikirim\nke penjual",
+                            requireContext()
+                        )
 
                         binding.butonNegoDetailProdukBuyer.visibility = View.GONE
                         binding.butonMenungguResponPenjual.visibility = View.VISIBLE

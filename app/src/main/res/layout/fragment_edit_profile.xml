@@ -24,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/lengkapi_info_akun"
         android:contentDescription="@string/title_info_akun"
+        android:text="@string/lengkapi_info_akun"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,6 +54,7 @@
                 android:alpha="0.4"
                 android:background="@color/primary"
                 android:contentDescription="@string/profile_picture"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,14 +184,17 @@
         app:layout_constraintStart_toStartOf="@+id/wrap_phone"
         app:layout_constraintTop_toBottomOf="@+id/wrap_phone" />
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/pbProfile"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="@color/secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSave"
+        app:trackCornerRadius="8dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

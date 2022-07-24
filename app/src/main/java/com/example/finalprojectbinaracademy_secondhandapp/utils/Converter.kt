@@ -11,8 +11,8 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun rupiah(number: Double): String{
-    val localeID =  Locale("in", "ID")
+fun rupiah(number: Double): String {
+    val localeID = Locale("in", "ID")
     val numberFormat = NumberFormat.getCurrencyInstance(localeID)
     return numberFormat.format(number).toString()
 }
@@ -31,16 +31,20 @@ fun convertISOTimeToDate(isoTime: String): String? {
     return formattedDate
 }
 
-fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String, activity: FragmentActivity): File? { // File name like "image.png"
+fun bitmapToFile(
+    bitmap: Bitmap,
+    fileNameToSave: String,
+    activity: FragmentActivity
+): File? { // File name like "image.png"
     //create a file to write bitmap data
     var file: File? = null
 
     return try {
         if (File(activity.filesDir.toString() + File.separator + fileNameToSave).exists()) {
             if (File(activity.filesDir.toString() + File.separator + fileNameToSave).delete()) {
-                Toast.makeText(activity,"berhasil hapus", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "berhasil hapus", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(activity,"gagal hapus", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "gagal hapus", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -60,7 +64,7 @@ fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String, activity: FragmentActiv
         file
     } catch (e: Exception) {
         e.printStackTrace()
-        Toast.makeText(activity,"gagalllll", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "gagalllll", Toast.LENGTH_SHORT).show()
         file // it will return null
     }
 

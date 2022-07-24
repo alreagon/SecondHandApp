@@ -128,6 +128,20 @@
     <string name="description_product">Deskripsi Produk</string>
     <string name="curentPass">Password</string>
     <string name="newPass">Password Baru</string>
+    <string name="batalkan_trasnsaksi">Batalkan trasnsaksi</string>
+    <string name="text_berhasil_transaksi">Kamu telah sepakat mejual produk ini kepada pembeli</string>
+    <string name="text_batalkan_transaksi">Kamu membatalkan transaksi produk ini dengan pembeli</string>
+    <string name="berhasil_transaksi">Berhasil transaksi</string>
+    <string name="kirim">Kirim</string>
+    <string name="text_perbarui_status">Perbarui status penjualan produkmu</string>
+    <string name="telusuri_kategori">Telusuri Kategori</string>
+    <string name="semua">Semua</string>
+    <string name="hobi">hobi</string>
+    <string name="kesehatan">kesehatan</string>
+    <string name="elektronik">elektronik</string>
+    <string name="daftar_jual_saya">Daftar Jual Saya</string>
+    <string name="nama_penjual">Nama Penjual</string>
+    <string name="kota">Kota</string>
 
     <string-array name="filter_terjual">
         <item>accepted</item>

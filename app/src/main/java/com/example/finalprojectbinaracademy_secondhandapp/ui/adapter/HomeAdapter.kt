@@ -1,5 +1,6 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Product
+import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.Category
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.GetProductResponseItem
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.ItemProductHomeBinding
 import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
@@ -33,6 +35,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     }
     class ViewHolder(var binding: ItemProductHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitData(data: List<Product>) {
         list.clear()
         list.addAll(data)

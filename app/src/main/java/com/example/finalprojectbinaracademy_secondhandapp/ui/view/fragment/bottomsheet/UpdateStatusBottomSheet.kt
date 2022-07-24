@@ -1,14 +1,12 @@
 package com.example.finalprojectbinaracademy_secondhandapp.ui.view.fragment.bottomsheet
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.finalprojectbinaracademy_secondhandapp.R
-import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentBottomSheetAcceptBidBinding
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentUpdateStatusBottomSheetBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.SaleListViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
@@ -25,9 +23,8 @@ class UpdateStatusBottomSheet : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentUpdateStatusBottomSheetBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentUpdateStatusBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,7 +41,7 @@ class UpdateStatusBottomSheet : BottomSheetDialogFragment() {
 
     private fun radioButtonCheck() {
         binding.rgUpdateStatus.setOnCheckedChangeListener { radioGroup, i ->
-            when(i) {
+            when (i) {
                 R.id.rbAcc -> {
                     status = "sold"
                 }
@@ -56,27 +53,27 @@ class UpdateStatusBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun updateStatusProduct() {
-        val productId=  arguments?.getInt(ID_PRODUCT)
+        val productId = arguments?.getInt(ID_PRODUCT)
         val idOrder = arguments?.getInt(ID_ORDER)
 
         if (productId != null && idOrder != null) {
-            saleListViewModel.patchStatusProduct(productId,status)
+            saleListViewModel.patchStatusProduct(productId, status)
             if (status == "available") {
-                saleListViewModel.patchOrder(idOrder,"declined")
+                saleListViewModel.patchOrder(idOrder, "declined")
             }
         }
     }
 
     private fun checkUpdateStatus() {
         saleListViewModel.patchStatusProduct.observe(viewLifecycleOwner) {
-            when(it.status) {
+            when (it.status) {
                 Status.SUCCESS -> {
-                    Toast.makeText(requireContext(),"update success",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "update success", Toast.LENGTH_SHORT).show()
                     dismiss()
                     findNavController().navigateUp()
                 }
                 Status.ERROR -> {
-                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
+                    Toast(requireContext()).errorToast(it.message.toString(), requireContext())
                 }
             }
         }

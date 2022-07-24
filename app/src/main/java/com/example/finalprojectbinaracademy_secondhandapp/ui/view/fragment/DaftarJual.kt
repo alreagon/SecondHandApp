@@ -29,17 +29,13 @@ class DaftarJual : Fragment(R.layout.fragment_daftar_jual) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentDaftarJualBinding.inflate(inflater,container,false)
+        _binding = FragmentDaftarJualBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getSeller()
-
-//        vp_1.adapter = MyPagerAdapter(childFragmentManager)
-//        tabs_main.setupWithViewPager(vp_1)
         setupViewPager()
 
         binding.btnEdit.setOnClickListener {
@@ -51,9 +47,9 @@ class DaftarJual : Fragment(R.layout.fragment_daftar_jual) {
     private fun setupViewPager() {
         val viewpager = binding.vpDaftarJual
         val tab = binding.tabsMain
-        viewpager.adapter = MyPagerAdapter(childFragmentManager,lifecycle)
+        viewpager.adapter = MyPagerAdapter(childFragmentManager, lifecycle)
 
-        TabLayoutMediator(tab,viewpager){ tab,position ->
+        TabLayoutMediator(tab, viewpager) { tab, position ->
             tab.text = MyPagerAdapter.tabTitle[position]
         }.attach()
     }
@@ -62,8 +58,15 @@ class DaftarJual : Fragment(R.layout.fragment_daftar_jual) {
         saleListViewModel.getSeller()
         saleListViewModel.seller.observe(viewLifecycleOwner) {
             when (it.status) {
+                Status.LOADING -> {
+                    binding.pbNotifDaftarJual.visibility = View.VISIBLE
+                }
                 Status.SUCCESS -> {
+                    binding.pbNotifDaftarJual.visibility = View.GONE
                     setupView(it.data)
+                }
+                Status.ERROR -> {
+                    binding.pbNotifDaftarJual.visibility = View.GONE
                 }
             }
         }

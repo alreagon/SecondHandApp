@@ -22,7 +22,8 @@ class HomeViewModel(
         get() = _getProduct
 
     private val _getProductOffline = MutableLiveData<Resource<List<Product>>>()
-    val gettProductOffline: LiveData<Resource<List<Product>>> get() = _getProductOffline
+    val gettProductOffline: LiveData<Resource<List<Product>>>
+        get() = _getProductOffline
 
     private val _getBannerHome = MutableLiveData<Resource<List<Banner>>>()
     val getBannerHome: LiveData<Resource<List<Banner>>>
@@ -47,7 +48,7 @@ class HomeViewModel(
                             _getBannerHome.postValue(Resource.success(response.body()))
                         }
                     } else {
-                        _getBannerHome.postValue(Resource.error("failed to get data",null))
+                        _getBannerHome.postValue(Resource.error("failed to get data banner",null))
                     }
                 } catch (e: Exception) {
                     _getBannerHome.postValue(Resource.error(e.message.toString(),null))
@@ -61,7 +62,7 @@ class HomeViewModel(
 
     fun getProductPaging() = remoteRepository.getProductPaging().cachedIn(viewModelScope)
 
-    fun getProductOffline() {
+    fun getProductOfflineAll() {
         viewModelScope.launch {
             _getProductOffline.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
@@ -69,6 +70,27 @@ class HomeViewModel(
                     val params = HashMap<String,String>()
                     params["page"] = "1"
                     params["per_page"] = ""
+                    val response = remoteRepository.getProductBoundResource(params)
+                    _getProductOffline.postValue(Resource.success(response))
+                } catch (e: Exception) {
+                    _getProductOffline.postValue(Resource.error("failed to get data from server",null))
+                }
+            } else {
+                val response = remoteRepository.getProductOffline()
+                _getProductOffline.postValue(Resource.success(response))
+            }
+        }
+    }
+
+    fun getProductOfflineCategory(categoryId : Int) {
+        viewModelScope.launch {
+            _getProductOffline.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    val params = HashMap<String,String>()
+                    params["page"] = "1"
+                    params["per_page"] = ""
+                    params["category_id"] = categoryId.toString()
                     val response = remoteRepository.getProductBoundResource(params)
                     _getProductOffline.postValue(Resource.success(response))
                 } catch (e: Exception) {

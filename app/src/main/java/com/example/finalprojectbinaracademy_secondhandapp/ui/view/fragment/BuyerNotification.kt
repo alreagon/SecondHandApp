@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.data.local.model.Notification
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationItemResponse
 import com.example.finalprojectbinaracademy_secondhandapp.data.remote.model.NotificationResponse
@@ -18,7 +19,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.Notificat
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class BuyerNotification : Fragment() {
+class BuyerNotification : Fragment(R.layout.fragment_buyer_notification) {
     private var _binding: FragmentBuyerNotificationBinding? = null
     private val binding get() = _binding!!
     private val notificationViewModel: NotificationViewModel by viewModel()
@@ -27,8 +28,6 @@ class BuyerNotification : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_buyer_notification, container, false)
         _binding = FragmentBuyerNotificationBinding.inflate(inflater,container,false)
         return binding.root
     }
