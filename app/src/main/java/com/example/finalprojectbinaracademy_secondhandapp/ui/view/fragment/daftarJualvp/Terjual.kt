@@ -48,9 +48,11 @@ class Terjual : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (!it.data.isNullOrEmpty()) {
-                        setupView(it.data)
                         binding.displayDefault.visibility = View.GONE
+                    } else {
+                        binding.displayDefault.visibility = View.VISIBLE
                     }
+                    setupView(it.data)
                 }
                 Status.ERROR -> {
                     Toast(requireContext()).errorToast(it.message.toString(), requireContext())

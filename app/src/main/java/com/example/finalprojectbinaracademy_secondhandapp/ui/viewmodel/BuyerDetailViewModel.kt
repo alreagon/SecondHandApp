@@ -35,7 +35,7 @@ class BuyerDetailViewModel(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     val productId = remoteRepository.getBuyerProductId(buyerId)
-                    if (productId.code() == 200) {
+                    if (productId.isSuccessful) {
                         _getProductId.postValue(Resource.success(productId.body()))
                     } else {
                         _getProductId.postValue(Resource.error("Failed to get detail product",null))
@@ -57,7 +57,7 @@ class BuyerDetailViewModel(
                         val postBuyerOrder = remoteRepository.postBuyerOrder(it,request)
                         if (postBuyerOrder.isSuccessful){
                             _postBuyerOrder.postValue(Resource.success(postBuyerOrder.body()))
-                        }else   {
+                        } else {
                             _postBuyerOrder.postValue(Resource.error("error PostBuyerOrder", null))
                         }
                     }

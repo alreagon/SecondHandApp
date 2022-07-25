@@ -14,6 +14,7 @@ import com.example.finalprojectbinaracademy_secondhandapp.R
 import com.example.finalprojectbinaracademy_secondhandapp.databinding.FragmentPreviewPostProductBinding
 import com.example.finalprojectbinaracademy_secondhandapp.ui.viewmodel.SellViewModel
 import com.example.finalprojectbinaracademy_secondhandapp.utils.Status
+import com.example.finalprojectbinaracademy_secondhandapp.utils.errorToast
 import com.example.finalprojectbinaracademy_secondhandapp.utils.rupiah
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -66,7 +67,7 @@ class PreviewPostProduct : Fragment() {
                 }
                 Status.ERROR -> {
                     binding.loadingPreviewPost.visibility = View.GONE
-                    Toast.makeText(requireContext(),"Oppss.. Failed posting product", Toast.LENGTH_SHORT).show()
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
                 }
             }
         }

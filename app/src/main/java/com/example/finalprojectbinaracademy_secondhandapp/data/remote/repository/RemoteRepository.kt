@@ -79,7 +79,7 @@ class RemoteRepository(
         response.body()?.let {
             localDaoHelperImpl.deleteInsertBanner(it)
         }
-        return apiHelperImpl.getBanner()
+        return response
     }
 
     fun getBannerOffline(): List<Banner> {

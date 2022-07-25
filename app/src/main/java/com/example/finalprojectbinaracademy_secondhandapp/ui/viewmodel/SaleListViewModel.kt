@@ -66,6 +66,8 @@ class SaleListViewModel(
                         _seller.postValue(Resource.error("error get seller",null))
                     }
                 }
+            } else {
+                _seller.postValue(Resource.error("error get seller",null))
             }
         }
     }
@@ -77,7 +79,11 @@ class SaleListViewModel(
                 try {
                     dataStore.getAccessToken().collectLatest {
                         val response = remoteRepository.getSellerProduct(it)
-                        _listProduct.postValue(Resource.success(response.body()))
+                        if (response.isSuccessful) {
+                            _listProduct.postValue(Resource.success(response.body()))
+                        } else {
+                            _listProduct.postValue(Resource.error("failed to get product",null))
+                        }
                     }
                 } catch (e: Exception) {
                     _listProduct.postValue(Resource.error(e.message.toString(),null))
@@ -180,7 +186,7 @@ class SaleListViewModel(
                 try {
                     val statusUpdate = status.toRequestBody("text/plain".toMediaTypeOrNull())
                     dataStore.getAccessToken().collectLatest {
-                        val patchStatusProd =remoteRepository.patchStatusProduct(it,idOrder,statusUpdate)
+                        val patchStatusProd = remoteRepository.patchStatusProduct(it,idOrder,statusUpdate)
 
                         if (patchStatusProd.isSuccessful) {
                             _patchStatusProduct.postValue(Resource.success(patchStatusProd.body()))

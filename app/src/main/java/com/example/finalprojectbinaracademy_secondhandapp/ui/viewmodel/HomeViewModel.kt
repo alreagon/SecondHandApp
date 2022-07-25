@@ -43,10 +43,8 @@ class HomeViewModel(
                     val response = remoteRepository.getBanner()
                     val codeResponse = response.code()
 
-                    if (codeResponse == 200) {
-                        if (response.body() != null) {
-                            _getBannerHome.postValue(Resource.success(response.body()))
-                        }
+                    if (response.isSuccessful) {
+                        _getBannerHome.postValue(Resource.success(response.body()))
                     } else {
                         _getBannerHome.postValue(Resource.error("failed to get data banner",null))
                     }
