@@ -54,6 +54,7 @@ class Home : Fragment(R.layout.fragment_home) {
         observeBanner()
         setupRecycler()
         observeProduct()
+//        throw RuntimeException("Test Crash")
         binding.goToALlProduct.setOnClickListener {
             val action = HomeDirections.actionHome2ToAllProductFragment()
             findNavController().navigate(action)

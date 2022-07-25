@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "648995134875",
+    "project_id": "secondhandapp-93112",
+    "storage_bucket": "secondhandapp-93112.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648995134875:android:19b0b03de3f96a2e43d53e",
+        "android_client_info": {
+          "package_name": "com.example.finalprojectbinaracademy_secondhandapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648995134875-4m04uud101ss5alqc42p8533k6nun7u4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5R8pjZjeeDfGtpillFum2OcYIWhr4_YY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648995134875-4m04uud101ss5alqc42p8533k6nun7u4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
