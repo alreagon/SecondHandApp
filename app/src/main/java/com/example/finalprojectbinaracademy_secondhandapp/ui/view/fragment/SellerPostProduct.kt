@@ -104,7 +104,7 @@ class SellerPostProduct : Fragment(R.layout.fragment_seller_post_product) {
                 }
                 Status.ERROR -> {
                     binding.loadingPost.visibility = View.GONE
-                    Toast.makeText(requireContext(),"Oppss.. Failed posting product", Toast.LENGTH_SHORT).show()
+                    Toast(requireContext()).errorToast(it.message.toString(),requireContext())
                 }
             }
         }

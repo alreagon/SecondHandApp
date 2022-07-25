@@ -50,7 +50,7 @@ class SellViewModel(
                     val response = remoteRepository.getCategory()
                     val codeResponse = response.code()
 
-                    if (codeResponse == 200 ) {
+                    if (response.isSuccessful) {
                         if (response.body() != null) {
                             _listCategory.postValue(Resource.success(response.body()))
                         }
@@ -71,10 +71,9 @@ class SellViewModel(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     val response = remoteRepository.getCategoryById(id)
-                    val codeResponse = response.code()
                     val body = response.body()
 
-                    if (codeResponse == 200) {
+                    if (response.isSuccessful) {
                         body?.let { data ->
                             _category.postValue(Resource.success(data))
                         }
@@ -96,10 +95,9 @@ class SellViewModel(
                 try {
                     dataStoreManager.getAccessToken().collect { accessToken ->
                         val getUser = remoteRepository.getUser(accessToken)
-                        val code = getUser.code()
                         val body = getUser.body()
 
-                        if (code == 200) {
+                        if (getUser.isSuccessful) {
                             body?.let {
                                 _user.postValue(Resource.success(it))
                             }
@@ -140,8 +138,10 @@ class SellViewModel(
 
                         if (postProduct.isSuccessful) {
                             _postProduct.postValue(Resource.success(postProduct.body()))
+                        } else if (postProduct.code() == 400) {
+                            _postProduct.postValue(Resource.error("Kamu sudah mencapai maksimal post product...",null))
                         } else {
-                            _postProduct.postValue(Resource.error("Failed to post product",null))
+                            _postProduct.postValue(Resource.error("failed to post product",null))
                         }
                     }
                 } catch (e:Exception) {

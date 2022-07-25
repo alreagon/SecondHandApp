@@ -33,6 +33,10 @@ class AllProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecycler()
+        
+        binding.btnBackALlProduct.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun setupRecycler() {

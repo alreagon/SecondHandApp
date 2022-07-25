@@ -50,6 +50,7 @@ class Home : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        homeViewModel.bannerHome()
         observeBanner()
         setupRecycler()
         observeProduct()
@@ -81,6 +82,7 @@ class Home : Fragment(R.layout.fragment_home) {
 
         binding.apply {
 
+            time.selectButton(btn1)
             btn1.setOnClickListener {
                 btn1.isSelected = true
                 buttonCategoryAll()

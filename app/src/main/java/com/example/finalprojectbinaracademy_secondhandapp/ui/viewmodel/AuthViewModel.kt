@@ -31,7 +31,7 @@ class AuthViewModel(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     val register = remoteRepository.registerUser(request)
-                    if (register.code() == 201) {
+                    if (register.isSuccessful) {
                         _userRegis.postValue(Resource.success(register.body()))
                     } else {
                         _userRegis.postValue(Resource.error("Failed to registration",null))
@@ -51,7 +51,7 @@ class AuthViewModel(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     val response = remoteRepository.loginUser(request)
-                    if (response.code() == 201) {
+                    if (response.isSuccessful) {
                         _userlogin.postValue(Resource.success(response.body()))
                         setLogin()
                         response.body()?.let {

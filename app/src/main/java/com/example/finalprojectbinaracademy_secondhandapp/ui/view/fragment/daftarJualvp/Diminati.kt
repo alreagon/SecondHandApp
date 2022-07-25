@@ -41,8 +41,10 @@ class Diminati : Fragment() {
                 Status.SUCCESS -> {
                     if (!it.data.isNullOrEmpty()) {
                         binding.displayDefault.visibility = View.GONE
-                        setupView(it.data)
+                    } else {
+                        binding.displayDefault.visibility = View.VISIBLE
                     }
+                    setupView(it.data)
                 }
             }
         }

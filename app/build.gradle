@@ -65,14 +65,19 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test:core-ktx:1.4.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation "android.arch.core:core-testing:1.1.1"
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
     // swipe refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
     //lottie
     def lottieVersion = "5.0.3"
     implementation "com.airbnb.android:lottie:$lottieVersion"
@@ -80,6 +85,11 @@ dependencies {
     // DI
     implementation 'io.insert-koin:koin-core:3.2.0'
     implementation 'io.insert-koin:koin-android:3.2.0'
+    // Koin testing tools
+    testImplementation "io.insert-koin:koin-test:3.2.0"
+    // Needed JUnit version
+    testImplementation "io.insert-koin:koin-test-junit4:3.2.0"
+
 
     // UI
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
@@ -107,7 +117,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp'
 
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Networking
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -122,20 +133,24 @@ dependencies {
     // refresh swiper
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    // Mock & Robolectric
+    androidTestImplementation 'org.mockito:mockito-android:2.24.5'
+    testImplementation "org.mockito:mockito-core:4.5.1"
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
+    testImplementation 'org.robolectric:robolectric:4.5.1'
 
     // image picker
     implementation 'com.github.Dhaval2404:ImagePicker:2.1'
 
-    // paging 3
+    //paging 3
     def paging_version = "3.1.1"
     implementation "androidx.paging:paging-runtime:$paging_version"
 
-    // third party libs
+    //third party libs
     implementation 'com.airbnb.android:lottie:5.0.3'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // Toogle button group
     implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
-
 }
